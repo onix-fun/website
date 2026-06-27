@@ -11,6 +11,10 @@ type Component struct {
 	cfg *core.Config
 }
 
+func (c *Component) Name() string {
+	return "test"
+}
+
 func (c *Component) Init(cfg *core.Config, mux *http.ServeMux) error {
 	c.cfg = cfg
 	mux.HandleFunc("/test", c.handle)
