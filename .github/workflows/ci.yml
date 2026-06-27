@@ -83,5 +83,5 @@ jobs:
             Automated build from commit `${{ github.sha }}`
 
             ## Artifacts
-            - `sparrow-website-${{ github.sha }}.zip` — Go binary + frontend dist
+            - `sparrow-website-${{ github.sha }}.zip` — frontend dist + Go binaries (amd64 + arm64)
           files: sparrow-website-${{ github.sha }}.zip
