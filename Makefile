@@ -27,9 +27,10 @@ run: build
 	./bin/sparrow-$(GOARCH)
 
 docker:
+	docker network rm sparrow-net 2>/dev/null || true
 	docker compose up -d
 	docker rm -f sparrow 2>/dev/null || true
-	docker run -d \
+	docker run -d --pull always \
 		--network sparrow-net \
 		--name sparrow \
 		-p $(PORT_BE):$(PORT_BE) \
