@@ -1,0 +1,135 @@
+<script setup lang="ts">
+import { inject, computed, onMounted, ref, type Ref } from 'vue'
+
+interface ContentData {
+  badge: string
+  heading: string
+}
+
+interface ProductData {
+  bg_color?: string
+  details?: { box_contents?: string[] }
+}
+
+const product = inject<Ref<ProductData | null>>('product')
+const boxContents = computed(() => product?.value?.details?.box_contents || [])
+const bgColor = computed(() => product?.value?.bg_color || '#f0edff')
+
+const content = ref<ContentData | null>(null)
+
+onMounted(async () => {
+  try {
+    const res = await fetch('/api/content/product_box_section')
+    if (res.ok) content.value = await res.json()
+  } catch {}
+})
+</script>
+
+<template>
+  <section v-if="boxContents.length" class="box">
+    <div class="box__inner">
+      <div class="box__left">
+        <span class="section-label">{{ content?.badge || 'КОМПЛЕКТАЦИЯ' }}</span>
+        <h2 class="section-title">{{ content?.heading || 'В коробке' }}</h2>
+        <ul class="box__list">
+          <li v-for="(item, i) in boxContents" :key="i" class="box__item">
+            <span class="box__dot" />
+            <span>{{ item }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="box__right">
+        <div class="box__image" :style="{ background: bgColor }">
+          <div class="box__placeholder" />
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.box {
+  background: var(--bg);
+  padding: 80px;
+}
+
+.box__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  gap: 80px;
+}
+
+.box__left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.box__right {
+  width: 600px;
+  flex-shrink: 0;
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-title {
+  font-family: var(--font-body);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.box__list {
+  list-style: none;
+  padding: 16px 0 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.box__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+.box__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.box__image {
+  width: 600px;
+  height: 320px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.box__placeholder {
+  width: 256px;
+  height: 144px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+}
+</style>
