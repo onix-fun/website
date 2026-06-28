@@ -10,6 +10,7 @@ import (
 	"onix.fun/m/v2/components/configurator"
 	"onix.fun/m/v2/components/content"
 	"onix.fun/m/v2/components/health"
+	"onix.fun/m/v2/components/preorder"
 	"onix.fun/m/v2/components/sections/catalog"
 	"onix.fun/m/v2/components/sections/digital_catalog"
 	"onix.fun/m/v2/components/test"
@@ -47,6 +48,7 @@ func main() {
 		&digital_catalog.Component{},
 		&content.Component{},
 		&configurator.Component{},
+		&preorder.Component{},
 	}
 
 	for _, c := range components {

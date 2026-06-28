@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, ref, type Ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 interface Spec {
   label: string
@@ -48,8 +49,15 @@ interface ContentData {
 
 defineProps<{ notFound: boolean }>()
 
+const router = useRouter()
 const product = inject<Ref<ProductData | null>>('product')
 const activeThumb = ref(0)
+
+function goToPreorder() {
+  if (product?.value?.slug) {
+    router.push(`/checkout?product=${product.value.slug}`)
+  }
+}
 
 const content = ref<ContentData | null>(null)
 
@@ -112,7 +120,7 @@ const mainImageBg = computed(() => {
         </div>
       </div>
       <div class="info__actions">
-        <button class="btn btn--orange">{{ content?.buttons?.order || 'ОФОРМИТЬ ПРЕДЗАКАЗ' }}</button>
+        <button class="btn btn--orange" @click="goToPreorder">{{ content?.buttons?.order || 'ОФОРМИТЬ ПРЕДЗАКАЗ' }}</button>
         <router-link to="/constructor" class="btn btn--green">{{ content?.buttons?.similar || 'СДЕЛАТЬ ПОХОЖИЙ' }}</router-link>
       </div>
     </div>

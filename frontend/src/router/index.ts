@@ -13,6 +13,7 @@ const router = createRouter({
     { path: '/digital-catalog/:slug', name: 'digital-product', component: () => import('../pages/DigitalProductDetail.vue') },
     { path: '/constructor', name: 'constructor', component: () => import('../pages/ConstructorPage.vue') },
     { path: '/checkout', name: 'checkout', component: () => import('../pages/CheckoutPage.vue') },
+    { path: '/checkout/:id/result', name: 'checkout-result', component: () => import('../pages/CheckoutResultPage.vue') },
   ],
 })
 

@@ -348,7 +348,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
         Отправляя заявку, вы оформляете предзаказ, а не покупаете готовый<br>
         товар. Стоимость и сроки согласовываются индивидуально.
       </p>
-      <button class="cf-submit-btn" @click="router.push('/checkout')">
+      <button class="cf-submit-btn" @click="router.push('/checkout?from=constructor')">
         ОТПРАВИТЬ ЗАЯВКУ
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M4 2L10 8L4 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

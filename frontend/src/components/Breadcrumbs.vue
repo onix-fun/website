@@ -24,6 +24,7 @@ const page = computed(() => {
   if (path === '/constructor') return 'constructor'
   if (path === '/process') return 'process'
   if (path === '/checkout') return 'checkout'
+  if (path.startsWith('/checkout/')) return 'checkout-result'
   return null
 })
 
@@ -85,11 +86,15 @@ const isDigital = computed(() =>
       </template>
 
       <template v-else-if="page === 'checkout'">
-        <router-link to="/constructor" class="bc-link">Конфигуратор</router-link>
+        <span class="bc-current">Предзаказ</span>
+      </template>
+
+      <template v-else-if="page === 'checkout-result'">
+        <router-link to="/checkout" class="bc-link">Предзаказ</router-link>
         <svg class="bc-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M5 3.5L8.5 7L5 10.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span class="bc-current">Проверка заявки</span>
+        <span class="bc-current">Результат</span>
       </template>
     </nav>
   </div>
