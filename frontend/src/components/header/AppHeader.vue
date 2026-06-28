@@ -1,65 +1,70 @@
 <template>
   <header
-      class="app-header"
-      :class="{
-            'is-collapsed': isCollapsed,
-            'is-mobile': isMobile,
-            'is-opened': menuOpen
-        }"
+    class="app-header"
+    :class="{
+      'is-collapsed': isCollapsed,
+      'is-mobile': isMobile,
+      'is-opened': menuOpen
+    }"
   >
-    <RouterLink
+    <div class="app-header__inner">
+      <RouterLink
         class="app-header__logo"
         to="/"
-        aria-label="Home"
-    >
-      <img
-          :src="logo"
-          alt="Logo"
+        aria-label="Главная"
       >
-    </RouterLink>
+        <LogoSvg />
+      </RouterLink>
 
-    <div
+      <div
         class="nav-capsule"
         ref="capsuleRef"
         :style="capsuleStyle"
         @transitionend="onTransitionEnd"
-    >
-      <button
+      >
+        <button
           class="nav-capsule__burger"
           :aria-expanded="menuOpen"
-          aria-label="Toggle menu"
+          aria-label="Открыть меню"
           @click="toggleMenu"
-      >
-        <span />
-        <span />
-        <span />
-      </button>
+        >
+          <span />
+          <span />
+          <span />
+        </button>
 
-      <RouterLink
+        <RouterLink
           v-for="item in items"
           :key="item.id"
           :to="item.to"
           class="nav-capsule__item"
           :class="{
-                        active: activeId === item.id,
-                        disabled: item.disabled
-                    }"
+            active: activeId === item.id,
+            disabled: item.disabled
+          }"
           @mouseenter="hoveredId = item.id"
           @mouseleave="hoveredId = null"
           @click="closeMenu"
-      >
-        <span class="nav-capsule__item-icon">
-          <component :is="item.icon" />
-        </span>
-        <span
+        >
+          <span class="nav-capsule__item-icon">
+            <component :is="item.icon" />
+          </span>
+          <span
             class="nav-capsule__item-label"
             :class="{ visible: hoveredId === item.id }"
-        >
-                      {{ item.title }}
-                  </span>
-      </RouterLink>
+          >
+            {{ item.title }}
+          </span>
+        </RouterLink>
+      </div>
     </div>
   </header>
+
+  <div
+    v-if="needsSpacer"
+    class="app-header-spacer"
+    aria-hidden="true"
+  />
 </template>
 
 <script setup lang="ts">
@@ -70,790 +75,479 @@ import {
   onMounted,
   ref,
   watch
-} from "vue";
+} from "vue"
 
-import { useRoute } from "vue-router";
+import { useRoute } from "vue-router"
 
-import type {
-  HeaderItem
-} from "./types";
+import LogoSvg from "@/assets/icons/logo.svg"
+
+import type { HeaderItem } from "./types"
 
 interface Props {
-  logo: string;
-  items: HeaderItem[];
-  collapseOffset?: number;
+  items: HeaderItem[]
+  collapseOffset?: number
 }
 
 const props = withDefaults(
-    defineProps<Props>(),
-    {
-      collapseOffset: 50
-    }
-);
+  defineProps<Props>(),
+  {
+    collapseOffset: 50
+  }
+)
 
 const emit = defineEmits<{
-  (e: "collapse", value: boolean): void;
-  (e: "menu", value: boolean): void;
-}>();
+  (e: "collapse", value: boolean): void
+  (e: "menu", value: boolean): void
+}>()
 
-const route = useRoute();
+const route = useRoute()
 
-const capsuleRef = ref<HTMLElement | null>(null);
+const capsuleRef = ref<HTMLElement | null>(null)
 
-const hoveredId = ref<string | null>(null);
+const hoveredId = ref<string | null>(null)
 
-const menuOpen = ref(false);
+const menuOpen = ref(false)
 
-const isCollapsed = ref(false);
+const isCollapsed = ref(false)
 
-const isMobile = ref(false);
+const isMobile = ref(false)
 
-const fullWidth = ref(0);
+const fullWidth = ref(0)
 
-const collapsedWidth = 72;
+const collapsedWidth = computed(() => isMobile.value ? 72 : 74)
 
-const capsuleWidth = ref<number | null>(null);
+const capsuleWidth = ref<number | null>(null)
 
 const capsuleStyle = computed(() => {
-  if (capsuleWidth.value === null) return {};
-  return { width: capsuleWidth.value + 'px' };
-});
+  if (capsuleWidth.value === null) return {}
+  return { width: capsuleWidth.value + 'px' }
+})
 
 const activeId = computed(() => {
+  const current = props.items.find(item => item.to === route.path)
+  return current?.id ?? null
+})
 
-  const current = props.items.find(item => item.to === route.path);
+const needsSpacer = computed(() => route.path !== '/')
 
-  return current?.id ?? null;
-
-});
-
-let collapseWatcherInitialized = false;
+let collapseWatcherInitialized = false
 
 watch([isCollapsed, menuOpen], ([collapsed, opened]) => {
-  if (!collapseWatcherInitialized) return;
-  const el = capsuleRef.value;
-  if (!el || !fullWidth.value) return;
+  if (!collapseWatcherInitialized) return
+  const el = capsuleRef.value
+  if (!el || !fullWidth.value) return
 
   if (collapsed && !opened) {
-    capsuleWidth.value = el.offsetWidth;
+    capsuleWidth.value = el.offsetWidth
     requestAnimationFrame(() => {
-      capsuleWidth.value = collapsedWidth;
-    });
+      capsuleWidth.value = collapsedWidth.value
+    })
   } else if (collapsed && opened) {
-    capsuleWidth.value = collapsedWidth;
+    capsuleWidth.value = collapsedWidth.value
     requestAnimationFrame(() => {
-      capsuleWidth.value = fullWidth.value;
-    });
+      capsuleWidth.value = fullWidth.value
+    })
   } else if (!collapsed) {
     if (capsuleWidth.value !== null) {
-      capsuleWidth.value = collapsedWidth;
+      capsuleWidth.value = collapsedWidth.value
       requestAnimationFrame(() => {
-        capsuleWidth.value = fullWidth.value;
-      });
+        capsuleWidth.value = fullWidth.value
+      })
     }
   }
-});
+})
 
 function measure() {
-
-  const el = capsuleRef.value;
-
-  if (!el)
-    return;
-
-  el.style.width = "";
-
-  fullWidth.value = el.offsetWidth;
-
+  const el = capsuleRef.value
+  if (!el) return
+  el.style.width = ""
+  fullWidth.value = el.offsetWidth
 }
 
 function onTransitionEnd(e: TransitionEvent) {
-  if (e.propertyName !== 'width') return;
+  if (e.propertyName !== 'width') return
   if (!isCollapsed.value || menuOpen.value) {
-    capsuleWidth.value = null;
+    capsuleWidth.value = null
   }
 }
 
 function updateMobile() {
-
-  isMobile.value = window.innerWidth <= 768;
-
+  isMobile.value = window.innerWidth <= 768
   if (isMobile.value) {
-
-    isCollapsed.value = true;
-
+    isCollapsed.value = true
   }
-
 }
 
 function updateScroll() {
-
-  if (isMobile.value)
-    return;
-
-  const collapsed = window.scrollY > props.collapseOffset;
-
+  if (isMobile.value) return
+  const collapsed = window.scrollY > props.collapseOffset
   if (collapsed !== isCollapsed.value) {
-
-    isCollapsed.value = collapsed;
-
+    isCollapsed.value = collapsed
     if (!collapsed)
-      menuOpen.value = false;
-
-    emit("collapse", collapsed);
-
+      menuOpen.value = false
+    emit("collapse", collapsed)
   }
-
 }
 
 function toggleMenu() {
-
-  menuOpen.value = !menuOpen.value;
-
-  emit("menu", menuOpen.value);
-
+  menuOpen.value = !menuOpen.value
+  emit("menu", menuOpen.value)
 }
 
 function closeMenu() {
-
-  menuOpen.value = false;
-
-  emit("menu", false);
-
+  menuOpen.value = false
+  emit("menu", false)
 }
 
 function onKeyDown(event: KeyboardEvent) {
-
   if (event.key === "Escape") {
-
-    closeMenu();
-
+    closeMenu()
   }
-
 }
 
 watch(
-    () => route.fullPath,
-    () => {
-
-      closeMenu();
-
-    }
-);
+  () => route.fullPath,
+  () => {
+    closeMenu()
+  }
+)
 
 onMounted(async () => {
-
-  updateMobile();
-
-  updateScroll();
-
-  await nextTick();
-
-  measure();
-
-  collapseWatcherInitialized = true;
+  updateMobile()
+  updateScroll()
+  await nextTick()
+  measure()
+  collapseWatcherInitialized = true
 
   if (isCollapsed.value && !menuOpen.value) {
-    capsuleWidth.value = collapsedWidth;
+    capsuleWidth.value = collapsedWidth.value
   }
 
-  window.addEventListener(
-      "resize",
-      updateMobile,
-      {
-        passive: true
-      }
-  );
-
-  window.addEventListener(
-      "scroll",
-      updateScroll,
-      {
-        passive: true
-      }
-  );
-
-  window.addEventListener(
-      "keydown",
-      onKeyDown
-  );
-
-});
+  window.addEventListener("resize", updateMobile, { passive: true })
+  window.addEventListener("scroll", updateScroll, { passive: true })
+  window.addEventListener("keydown", onKeyDown)
+})
 
 onBeforeUnmount(() => {
-
-  window.removeEventListener(
-      "resize",
-      updateMobile
-  );
-
-  window.removeEventListener(
-      "scroll",
-      updateScroll
-  );
-
-  window.removeEventListener(
-      "keydown",
-      onKeyDown
-  );
-
-});
+  window.removeEventListener("resize", updateMobile)
+  window.removeEventListener("scroll", updateScroll)
+  window.removeEventListener("keydown", onKeyDown)
+})
 </script>
 
 <style scoped>
-
-/* ===========================================================
-   VARIABLES
-=========================================================== */
-
 .app-header {
-
-  --header-height: 74px;
-
+  --header-height: 62px;
   --header-radius: 999px;
-
-  --header-bg:
-      rgba(255,255,255,.72);
-
-  --header-border:
-      rgba(255,255,255,.42);
-
+  --header-bg: rgba(245, 240, 232, 0.93);
+  --header-border: rgba(212, 208, 200, 0.5);
   --header-shadow:
-      0 18px 40px rgba(0,0,0,.08);
-
-  --hover-bg:
-      rgba(255,255,255,.82);
-
-  --active-bg:
-      rgba(255,255,255,.98);
-
-  --transition:
-      cubic-bezier(.22,1,.36,1);
+    0 12px 32px rgba(0,0,0,.08),
+    0 4px 0 rgba(212,208,200,0.35);
+  --hover-bg: rgba(245, 240, 232, 0.94);
+  --active-bg: rgba(245, 240, 232, 1);
+  --transition: cubic-bezier(.22,1,.36,1);
 
   position: fixed;
-
   inset-inline: 0;
-
-  top: 26px;
-
+  top: 25px;
   z-index: 1000;
-
   pointer-events: none;
-
 }
 
+.app-header__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+  height: var(--header-height);
+  position: relative;
+  pointer-events: none;
+}
 
-/* ===========================================================
-   LOGO — position:absolute, never moves
-=========================================================== */
-
-.app-header__logo{
-
-  position:absolute;
-
-  left:40px;
-
-  top:50%;
-
-  transform:translateY(-50%);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  width:72px;
-
-  height:72px;
-
-  text-decoration:none;
-
-  pointer-events:auto;
-
+.app-header__logo {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 31px;
+  text-decoration: none;
+  pointer-events: auto;
+  color: #ff4d00;
   transition:
-      transform .45s var(--transition),
-      opacity .35s;
-
+    transform .45s var(--transition),
+    opacity .35s;
 }
 
-/* Logo fades out on scroll (desktop only) */
-.is-collapsed:not(.is-mobile) .app-header__logo{
-
-  opacity:0;
-
-  pointer-events:none;
-
+.app-header__logo :deep(svg) {
+  width: 45px;
+  height: 31px;
+  display: block;
 }
 
-.app-header__logo:hover{
-
-  transform:translateY(-50%) scale(1.05);
-
+.is-collapsed:not(.is-mobile) .app-header__logo {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.app-header__logo img{
-
-  width:58px;
-
-  height:58px;
-
-  display:block;
-
+.app-header__logo:hover {
+  transform: translateY(-50%) scale(1.05);
 }
 
-
-/* ===========================================================
-   NAV CAPSULE — position:absolute, right edge stays fixed
-=========================================================== */
-
-.nav-capsule{
-
-  position:absolute;
-
-  right:40px;
-
-  top:50%;
-
-  transform:translateY(-50%);
-
-  display:flex;
-
-  align-items:center;
-
-  gap:8px;
-
-  padding:8px;
-
-  border-radius:999px;
-
-  backdrop-filter:blur(24px);
-
-  -webkit-backdrop-filter:blur(24px);
-
-  background:var(--header-bg);
-
-  border:1px solid var(--header-border);
-
-  box-shadow:var(--header-shadow);
-
-  pointer-events:auto;
-
-  overflow:hidden;
-
+.nav-capsule {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 999px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: var(--header-bg);
+  border: 1px solid var(--header-border);
+  box-shadow: var(--header-shadow);
+  pointer-events: auto;
+  overflow: hidden;
   transition:
-      width .45s var(--transition),
-      padding .35s var(--transition),
-      gap .35s var(--transition);
-
+    width .45s var(--transition),
+    padding .35s var(--transition),
+    gap .35s var(--transition);
 }
 
-
-/* ===========================================================
-   BURGER — inside capsule, hidden when expanded
-=========================================================== */
-
-.nav-capsule__burger{
-
-  flex-shrink:0;
-
-  width:0;
-
-  height:0;
-
-  padding:0;
-
-  border:none;
-
-  outline:none;
-
-  cursor:pointer;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
-
-  align-items:center;
-
-  gap:5px;
-
-  border-radius:999px;
-
-  opacity:0;
-
+.nav-capsule__burger {
+  flex-shrink: 0;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border-radius: 999px;
+  opacity: 0;
   transition:
-      width .4s var(--transition),
-      height .4s var(--transition),
-      opacity .35s,
-      padding .35s,
-      transform .4s var(--transition);
-
+    width .4s var(--transition),
+    height .4s var(--transition),
+    opacity .35s,
+    padding .35s,
+    transform .4s var(--transition);
 }
 
-/* Show burger only when collapsed */
 .is-collapsed .nav-capsule__burger,
-.is-opened .nav-capsule__burger{
-
-  width:58px;
-
-  height:58px;
-
-  padding:0 16px;
-
-  opacity:1;
-
+.is-opened .nav-capsule__burger {
+  width: 58px;
+  height: 58px;
+  padding: 0 16px;
+  opacity: 1;
 }
 
-.is-collapsed .nav-capsule__burger{
-
-  background:var(--header-bg);
-
-  backdrop-filter:blur(24px);
-
-  border:1px solid var(--header-border);
-
-  box-shadow:var(--header-shadow);
-
+.is-collapsed .nav-capsule__burger {
+  background: var(--header-bg);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--header-border);
+  box-shadow: var(--header-shadow);
 }
 
-.is-opened .nav-capsule__burger{
-
-  background:none;
-
-  border:none;
-
-  box-shadow:none;
-
+.is-opened .nav-capsule__burger {
+  background: none;
+  border: none;
+  box-shadow: none;
 }
 
-.nav-capsule__burger:hover{
-
-  transform:scale(1.05);
-
+.nav-capsule__burger:hover {
+  transform: scale(1.05);
 }
 
-.nav-capsule__burger span{
-
-  width:22px;
-
-  height:2px;
-
-  border-radius:99px;
-
-  background:#111;
-
-  transition:all .35s;
-
+.nav-capsule__burger span {
+  width: 22px;
+  height: 2px;
+  border-radius: 99px;
+  background: #1a1a1a;
+  transition: all .35s;
 }
 
-
-/* ===========================================================
-   BURGER → X animation
-=========================================================== */
-
-.is-opened .nav-capsule__burger span:nth-child(1){
-
-  transform:
-      translateY(7px)
-      rotate(45deg);
-
+.is-opened .nav-capsule__burger span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
 }
 
-.is-opened .nav-capsule__burger span:nth-child(2){
-
-  opacity:0;
-
-  transform:scaleX(0);
-
+.is-opened .nav-capsule__burger span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
 }
 
-.is-opened .nav-capsule__burger span:nth-child(3){
-
-  transform:
-      translateY(-7px)
-      rotate(-45deg);
-
+.is-opened .nav-capsule__burger span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-
-/* ===========================================================
-   ITEM
-=========================================================== */
-
-.nav-capsule__item{
-
-  position:relative;
-
-  overflow:hidden;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:flex-end;
-
-  gap:12px;
-
-  flex-shrink:0;
-
-  width:52px;
-
-  height:52px;
-
-  padding-inline:16px;
-
-  border-radius:999px;
-
-  color:#111;
-
-  text-decoration:none;
-
-  opacity:1;
-
+.nav-capsule__item {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  flex-shrink: 0;
+  width: auto;
+  min-width: 56px;
+  max-width: 56px;
+  height: 56px;
+  padding-inline: 16px;
+  border-radius: 999px;
+  color: #1a1a1a;
+  text-decoration: none;
+  opacity: 1;
   transition:
-      width .45s var(--transition),
-      opacity .35s,
-      background .30s,
-      transform .35s var(--transition),
-      box-shadow .35s;
-
+    max-width .45s var(--transition),
+    opacity .35s,
+    background .30s,
+    transform .35s var(--transition),
+    box-shadow .35s;
 }
 
-/* Hide items when collapsed (not opened) */
-.is-collapsed:not(.is-opened) .nav-capsule__item{
-
-  opacity:0;
-
-  pointer-events:none;
-
+.is-collapsed:not(.is-opened) .nav-capsule__item {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.nav-capsule__item:hover{
-
-  width:158px;
-
-  background:var(--hover-bg);
-
+.nav-capsule__item:hover {
+  max-width: 300px;
+  background: var(--hover-bg);
   box-shadow:
-      inset 0 1px rgba(255,255,255,.55),
-      0 6px 18px rgba(0,0,0,.08);
-
+    inset 0 1px rgba(255,255,255,.55),
+    0 6px 18px rgba(0,0,0,.08);
 }
 
-
-.nav-capsule__item:active{
-
-  transform:scale(.96);
-
+.nav-capsule__item:active {
+  transform: scale(.96);
 }
 
-
-/* ===========================================================
-   ACTIVE
-=========================================================== */
-
-.nav-capsule__item.active{
-
-  background:var(--active-bg);
-
+.nav-capsule__item.active {
+  background: var(--active-bg);
+  color: var(--accent, #ff4d00);
   box-shadow:
-      inset 0 1px rgba(255,255,255,.8),
-      0 8px 20px rgba(0,0,0,.08);
-
+    inset 0 1px rgba(255,255,255,.8),
+    0 8px 20px rgba(0,0,0,.08);
 }
 
-
-/* ===========================================================
-   ICON
-=========================================================== */
-
-.nav-capsule__item-icon{
-
-  width:24px;
-
-  height:24px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  flex-shrink:0;
-
-  z-index:2;
-
+.nav-capsule__item-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 2;
 }
 
-.nav-capsule__item-icon :deep(svg){
-
-  width:22px;
-
-  height:22px;
-
-  display:block;
-
+.nav-capsule__item-icon :deep(svg) {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
-
-/* ===========================================================
-   LABEL
-=========================================================== */
-
-.nav-capsule__item-label{
-
-  position:absolute;
-
-  left:18px;
-
-  white-space:nowrap;
-
-  font-size:15px;
-
-  font-weight:600;
-
-  color:#202020;
-
-  opacity:0;
-
-  transform:
-      translateX(-14px)
-      scale(.96);
-
-  filter:blur(8px);
-
+.nav-capsule__item-label {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 0;
+  opacity: 0;
+  padding-left: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
   transition:
-      opacity .30s,
-      transform .40s var(--transition),
-      filter .30s;
-
+    max-width .45s var(--transition),
+    opacity .25s .18s;
 }
 
-.nav-capsule__item-label.visible{
-
-  opacity:1;
-
-  transform:
-      translateX(0)
-      scale(1);
-
-  filter:blur(0);
-
+.nav-capsule__item-label.visible {
+  max-width: 200px;
+  opacity: 1;
 }
-
-
-/* ===========================================================
-   ACCESSIBILITY
-=========================================================== */
 
 .nav-capsule__item:focus-visible,
 .nav-capsule__burger:focus-visible,
-.app-header__logo:focus-visible{
-
-  outline:2px solid #3b82f6;
-
-  outline-offset:4px;
-
+.app-header__logo:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 4px;
 }
 
-
-/* ===========================================================
-   REDUCED MOTION
-=========================================================== */
-
-@media (prefers-reduced-motion: reduce){
-
-  *{
-
-    animation:none !important;
-
-    transition:none !important;
-
-    scroll-behavior:auto !important;
-
-  }
-
+.app-header-spacer {
+  height: calc(62px + 25px);
+  pointer-events: none;
 }
 
-
-/* ===========================================================
-   TABLET
-=========================================================== */
-
-@media (max-width:1024px){
-
-  .nav-capsule{
-
-    gap:6px;
-
-    padding:6px;
-
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
-
-  .nav-capsule__item{
-
-    width:48px;
-
-    height:48px;
-
-  }
-
-  .nav-capsule__item:hover{
-
-    width:145px;
-
-  }
-
 }
 
-
-/* ===========================================================
-   MOBILE
-=========================================================== */
-
-@media (max-width:768px){
-
-  .app-header{
-
-    top:18px;
-
+@media (max-width: 1024px) {
+  .app-header__inner {
+    padding: 0 40px;
   }
 
-  .app-header__logo{
-
-    width:60px;
-
-    height:60px;
-
-    left:20px;
-
+  .nav-capsule {
+    gap: 6px;
+    padding: 6px;
   }
 
-  .app-header__logo img{
-
-    width:50px;
-
-    height:50px;
-
+  .nav-capsule__item {
+    min-width: 56px;
+    max-width: 56px;
+    height: 56px;
   }
 
-  .nav-capsule{
+  .nav-capsule__item:hover {
+    max-width: 300px;
+  }
+}
 
-    right:20px;
+@media (max-width: 768px) {
+  .app-header {
+    top: 18px;
+  }
 
+  .app-header__inner {
+    padding: 0 20px;
+  }
+
+  .app-header__logo {
+    width: 38px;
+    height: 26px;
+  }
+
+  .app-header__logo :deep(svg) {
+    width: 38px;
+    height: 26px;
+  }
+
+  .nav-capsule {
+    right: 0;
   }
 
   .is-collapsed .nav-capsule__burger,
-  .is-opened .nav-capsule__burger{
-
-    width:56px;
-
-    height:56px;
-
+  .is-opened .nav-capsule__burger {
+    width: 56px;
+    height: 56px;
   }
 
+  .app-header-spacer {
+    height: calc(62px + 18px);
+  }
 }
-
 </style>

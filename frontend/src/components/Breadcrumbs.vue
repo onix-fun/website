@@ -20,10 +20,16 @@ const page = computed(() => {
   if (path.startsWith('/catalog/')) return 'product'
   if (path === '/digital-catalog') return 'digital-catalog'
   if (path.startsWith('/digital-catalog/')) return 'digital-product'
+  if (path === '/about') return 'about'
+  if (path === '/constructor') return 'constructor'
+  if (path === '/process') return 'process'
+  if (path === '/checkout') return 'checkout'
   return null
 })
 
-const isDigital = computed(() => page.value === 'digital-catalog' || page.value === 'digital-product')
+const isDigital = computed(() =>
+  page.value === 'digital-catalog' || page.value === 'digital-product' || page.value === 'about' || page.value === 'constructor' || page.value === 'process' || page.value === 'checkout'
+)
 </script>
 
 <template>
@@ -65,6 +71,26 @@ const isDigital = computed(() => page.value === 'digital-catalog' || page.value 
           <span class="bc-current">{{ dynamicData.badge }}</span>
         </template>
       </template>
+
+      <template v-else-if="page === 'about'">
+        <span class="bc-current">О нас</span>
+      </template>
+
+      <template v-else-if="page === 'constructor'">
+        <span class="bc-current">Конфигуратор</span>
+      </template>
+
+      <template v-else-if="page === 'process'">
+        <span class="bc-current">Процесс</span>
+      </template>
+
+      <template v-else-if="page === 'checkout'">
+        <router-link to="/constructor" class="bc-link">Конфигуратор</router-link>
+        <svg class="bc-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M5 3.5L8.5 7L5 10.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="bc-current">Проверка заявки</span>
+      </template>
     </nav>
   </div>
 </template>
@@ -94,6 +120,27 @@ const isDigital = computed(() => page.value === 'digital-catalog' || page.value 
   max-width: 1440px;
   margin: 0 auto;
   padding: 40px 80px 0;
+}
+
+.bc-about {
+  background: #f5f0e8;
+  padding: 40px 80px 48px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.bc-process,
+.bc-constructor,
+.bc-checkout {
+  background: #f5f0e8;
+  padding: 24px 80px;
+}
+
+.bc-constructor .bc-nav,
+.bc-checkout .bc-nav,
+.bc-process .bc-nav {
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .bc--default .bc-nav {

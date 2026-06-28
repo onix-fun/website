@@ -1,0 +1,102 @@
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+
+interface ProcessHeroData {
+  label: string
+  title: string
+  description: string
+}
+
+const data = ref<ProcessHeroData | null>(null)
+
+onMounted(async () => {
+  try {
+    const res = await fetch('/api/content/process_hero')
+    data.value = await res.json()
+  } catch {
+    data.value = null
+  }
+})
+</script>
+
+<template>
+  <section v-if="data" class="ph">
+    <div class="ph__blur ph__blur--orange" />
+    <div class="ph__blur ph__blur--green" />
+    <div class="ph__inner">
+      <span class="ph__label">{{ data.label }}</span>
+      <h1 class="ph__title">{{ data.title }}</h1>
+      <p class="ph__description">{{ data.description }}</p>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.ph {
+  position: relative;
+  background: #1a1a1a;
+  padding: 80px;
+  overflow: hidden;
+}
+
+.ph__blur {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.ph__blur--orange {
+  width: 600px;
+  height: 600px;
+  background: #ff4d00;
+  top: -200px;
+  left: -100px;
+}
+
+.ph__blur--green {
+  width: 400px;
+  height: 400px;
+  background: #58cc02;
+  bottom: -150px;
+  right: -50px;
+}
+
+.ph__inner {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ph__label {
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ff4d00;
+}
+
+.ph__title {
+  font-family: Helvetica, sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  color: #f5f0e8;
+  margin: 0;
+  line-height: 1.05;
+  white-space: pre-line;
+}
+
+.ph__description {
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #f5f0e8;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 500px;
+  white-space: pre-line;
+}
+</style>

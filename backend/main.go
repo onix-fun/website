@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"onix.fun/m/v2/components/configurator"
 	"onix.fun/m/v2/components/content"
 	"onix.fun/m/v2/components/health"
 	"onix.fun/m/v2/components/sections/catalog"
@@ -45,6 +46,7 @@ func main() {
 		&catalog.Component{},
 		&digital_catalog.Component{},
 		&content.Component{},
+		&configurator.Component{},
 	}
 
 	for _, c := range components {

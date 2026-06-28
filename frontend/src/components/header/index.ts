@@ -6,9 +6,9 @@ import DigitalCatalogIcon from '@/assets/icons/digital-catalog.svg'
 import ConstructorIcon from '@/assets/icons/constructor.svg'
 
 export const navItems: HeaderItem[] = [
-  { id: 'about', to: '/about', title: 'About', icon: AboutIcon },
-  { id: 'catalog', to: '/catalog', title: 'Catalog', icon: CatalogIcon },
-  { id: 'process', to: '/process', title: 'Process', icon: ProcessIcon },
-  { id: 'digital-catalog', to: '/digital-catalog', title: 'Digital Catalog', icon: DigitalCatalogIcon },
-  { id: 'constructor', to: '/constructor', title: 'Constructor', icon: ConstructorIcon },
+  { id: 'about', to: '/about', title: 'О компании', icon: AboutIcon },
+  { id: 'catalog', to: '/catalog', title: 'Продукция', icon: CatalogIcon },
+  { id: 'process', to: '/process', title: 'Производство', icon: ProcessIcon },
+  { id: 'digital-catalog', to: '/digital-catalog', title: 'IT-каталог', icon: DigitalCatalogIcon },
+  { id: 'constructor', to: '/constructor', title: 'Конфигуратор', icon: ConstructorIcon },
 ]
