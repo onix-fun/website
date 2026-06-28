@@ -21,7 +21,8 @@
     <div
         class="nav-capsule"
         ref="capsuleRef"
-        :style="{ width: capsuleWidth ? capsuleWidth + 'px' : '' }"
+        :style="capsuleStyle"
+        @transitionend="onTransitionEnd"
     >
       <button
           class="nav-capsule__burger"
@@ -111,6 +112,13 @@ const fullWidth = ref(0);
 
 const collapsedWidth = 72;
 
+const capsuleWidth = ref<number | null>(null);
+
+const capsuleStyle = computed(() => {
+  if (capsuleWidth.value === null) return {};
+  return { width: capsuleWidth.value + 'px' };
+});
+
 const activeId = computed(() => {
 
   const current = props.items.find(item => item.to === route.path);
@@ -119,16 +127,31 @@ const activeId = computed(() => {
 
 });
 
-const capsuleWidth = computed(() => {
+let collapseWatcherInitialized = false;
 
-  if (!fullWidth.value)
-    return 0;
+watch([isCollapsed, menuOpen], ([collapsed, opened]) => {
+  if (!collapseWatcherInitialized) return;
+  const el = capsuleRef.value;
+  if (!el || !fullWidth.value) return;
 
-  if (isCollapsed.value && !menuOpen.value)
-    return collapsedWidth;
-
-  return fullWidth.value;
-
+  if (collapsed && !opened) {
+    capsuleWidth.value = el.offsetWidth;
+    requestAnimationFrame(() => {
+      capsuleWidth.value = collapsedWidth;
+    });
+  } else if (collapsed && opened) {
+    capsuleWidth.value = collapsedWidth;
+    requestAnimationFrame(() => {
+      capsuleWidth.value = fullWidth.value;
+    });
+  } else if (!collapsed) {
+    if (capsuleWidth.value !== null) {
+      capsuleWidth.value = collapsedWidth;
+      requestAnimationFrame(() => {
+        capsuleWidth.value = fullWidth.value;
+      });
+    }
+  }
 });
 
 function measure() {
@@ -138,12 +161,17 @@ function measure() {
   if (!el)
     return;
 
-  el.style.width = "max-content";
+  el.style.width = "";
 
   fullWidth.value = el.offsetWidth;
 
-  el.style.width = fullWidth.value + "px";
+}
 
+function onTransitionEnd(e: TransitionEvent) {
+  if (e.propertyName !== 'width') return;
+  if (!isCollapsed.value || menuOpen.value) {
+    capsuleWidth.value = null;
+  }
 }
 
 function updateMobile() {
@@ -222,6 +250,12 @@ onMounted(async () => {
   await nextTick();
 
   measure();
+
+  collapseWatcherInitialized = true;
+
+  if (isCollapsed.value && !menuOpen.value) {
+    capsuleWidth.value = collapsedWidth;
+  }
 
   window.addEventListener(
       "resize",

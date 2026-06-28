@@ -1,12 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../pages/HomePage.vue'
-import TestPage from '../pages/TestPage.vue'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'home', component: HomePage },
-    { path: '/test', name: 'test', component: TestPage },
+    { path: '/about', name: 'about', component: () => import('../pages/AboutPage.vue') },
+    { path: '/catalog', name: 'catalog', component: () => import('../pages/CatalogPage.vue') },
+    { path: '/catalog/:slug', name: 'product', component: () => import('../pages/ProductPage.vue') },
+    { path: '/process', name: 'process', component: () => import('../pages/ProcessPage.vue') },
+    { path: '/digital-catalog', name: 'digital-catalog', component: () => import('../pages/DigitalCatalogPage.vue') },
+    { path: '/digital-catalog/:slug', name: 'digital-product', component: () => import('../pages/DigitalProductDetail.vue') },
+    { path: '/constructor', name: 'constructor', component: () => import('../pages/ConstructorPage.vue') },
   ],
 })
 

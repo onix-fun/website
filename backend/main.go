@@ -8,11 +8,15 @@ import (
 	"path/filepath"
 
 	"onix.fun/m/v2/components/health"
+	"onix.fun/m/v2/components/sections/about"
+	"onix.fun/m/v2/components/sections/catalog"
+	"onix.fun/m/v2/components/sections/digital_catalog"
 	"onix.fun/m/v2/components/sections/faq"
+	"onix.fun/m/v2/components/sections/footer"
+	"onix.fun/m/v2/components/sections/hero"
 	"onix.fun/m/v2/components/sections/materials"
-	"onix.fun/m/v2/components/sections/planets"
-	"onix.fun/m/v2/components/sections/product"
 	"onix.fun/m/v2/components/sections/reviews"
+	"onix.fun/m/v2/components/sections/ticker"
 	"onix.fun/m/v2/components/test"
 	"onix.fun/m/v2/core"
 	"onix.fun/m/v2/migrate"
@@ -44,11 +48,15 @@ func main() {
 	components := []core.Component{
 		&health.Component{},
 		&test.Component{},
-		&planets.Component{},
-		&product.Component{},
+		&catalog.Component{},
+		&digital_catalog.Component{},
+		&hero.Component{},
+		&about.Component{},
+		&ticker.Component{},
 		&materials.Component{},
 		&reviews.Component{},
 		&faq.Component{},
+		&footer.Component{},
 	}
 
 	for _, c := range components {
