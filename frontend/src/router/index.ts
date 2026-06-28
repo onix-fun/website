@@ -14,6 +14,8 @@ const router = createRouter({
     { path: '/constructor', name: 'constructor', component: () => import('../pages/ConstructorPage.vue') },
     { path: '/checkout', name: 'checkout', component: () => import('../pages/CheckoutPage.vue') },
     { path: '/checkout/:id/result', name: 'checkout-result', component: () => import('../pages/CheckoutResultPage.vue') },
+    { path: '/500', name: 'error-500', component: () => import('../pages/Error500Page.vue') },
+    { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('../pages/NotFoundPage.vue') },
   ],
 })
 

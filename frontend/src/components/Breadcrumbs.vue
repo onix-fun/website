@@ -25,7 +25,8 @@ const page = computed(() => {
   if (path === '/process') return 'process'
   if (path === '/checkout') return 'checkout'
   if (path.startsWith('/checkout/')) return 'checkout-result'
-  return null
+  if (path === '/500') return 'error-500'
+  return 'not-found'
 })
 
 const isDigital = computed(() =>
@@ -96,6 +97,14 @@ const isDigital = computed(() =>
         </svg>
         <span class="bc-current">Результат</span>
       </template>
+
+      <template v-else-if="page === 'not-found'">
+        <span class="bc-current">Ошибка 404</span>
+      </template>
+
+      <template v-else-if="page === 'error-500'">
+        <span class="bc-current">Ошибка 500</span>
+      </template>
     </nav>
   </div>
 </template>
@@ -136,14 +145,20 @@ const isDigital = computed(() =>
 
 .bc-process,
 .bc-constructor,
-.bc-checkout {
+.bc-not-found,
+.bc-error-500,
+.bc-checkout,
+.bc-checkout-result {
   background: #f5f0e8;
   padding: 24px 80px;
 }
 
 .bc-constructor .bc-nav,
+.bc-not-found .bc-nav,
+.bc-error-500 .bc-nav,
 .bc-checkout .bc-nav,
-.bc-process .bc-nav {
+.bc-process .bc-nav,
+.bc-checkout-result .bc-nav {
   max-width: 1280px;
   margin: 0 auto;
 }
