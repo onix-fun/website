@@ -12,7 +12,7 @@ import FaqSection from '@/components/sections/FaqSection.vue'
 
 <template>
   <AppHeader logo="/favicon.svg" :items="navItems" />
-  <main>
+  <main id="main-content">
     <HeroSection />
     <TickerSection bg-color="var(--yellow)" shadow-color="var(--yellow-shadow)" text-color="#1a1a1a" font-size="12px" />
     <AboutSection />

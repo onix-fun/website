@@ -39,8 +39,8 @@ onMounted(async () => {
         <span class="faq__label">{{ data.label }}</span>
         <h2 class="faq__title">{{ data.title }}</h2>
       </div>
-      <div class="faq__grid">
-        <div
+      <ul class="faq__grid">
+        <li
           v-for="(item, i) in data.items"
           :key="i"
           class="faq-item"
@@ -51,7 +51,7 @@ onMounted(async () => {
           }"
           v-show="openIndex === null || openIndex === i"
         >
-          <button class="faq-item__button" @click="toggle(i)">
+          <button class="faq-item__button" @click="toggle(i)" :aria-expanded="openIndex === i" :aria-controls="`faq-answer-${i}`">
             <span class="faq-item__question">{{ item.question }}</span>
             <span class="faq-item__icon" :class="{ 'faq-item__icon--open': openIndex === i }">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -60,11 +60,11 @@ onMounted(async () => {
               </svg>
             </span>
           </button>
-          <div v-if="openIndex === i" class="faq-item__answer">
+          <div v-if="openIndex === i" class="faq-item__answer" :id="`faq-answer-${i}`">
             {{ item.answer }}
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -94,16 +94,16 @@ onMounted(async () => {
 
 .faq__label {
   font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: var(--accent);
   text-transform: uppercase;
 }
 
 .faq__title {
   font-family: var(--font-heading);
-  font-size: 48px;
-  font-weight: 900;
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: var(--text-dark);
   margin: 0;
   text-align: center;
@@ -114,6 +114,9 @@ onMounted(async () => {
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .faq-item {
@@ -127,8 +130,8 @@ onMounted(async () => {
 
 .faq-item--open .faq-item__answer {
   padding: 0 24px 24px;
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
 }
 
 .faq-item__button {
@@ -145,8 +148,8 @@ onMounted(async () => {
 
 .faq-item__question {
   font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 900;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-black);
   color: var(--text-dark);
   text-align: left;
 }
@@ -164,10 +167,10 @@ onMounted(async () => {
 
 .faq-item__answer {
   padding: 0 16px 16px;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: var(--leading-normal);
 }
 
 @media (max-width: 768px) {
@@ -176,7 +179,7 @@ onMounted(async () => {
   }
 
   .faq__title {
-    font-size: 32px;
+    font-size: var(--text-2xl);
   }
 
   .faq__grid {

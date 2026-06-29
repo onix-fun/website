@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import HeroPlanets from '@/assets/hero-planets.svg'
+import AppButton from '@/components/AppButton.vue'
 
 interface Cta {
   text: string
@@ -41,8 +42,8 @@ onMounted(async () => {
       <p class="hero__subtitle">{{ data.subtitle }}</p>
 
       <div class="hero__actions">
-        <a :href="data.cta_primary.link" class="btn btn--primary">{{ data.cta_primary.text }}</a>
-        <a :href="data.cta_secondary.link" class="btn btn--secondary">{{ data.cta_secondary.text }}</a>
+        <AppButton variant="orange" size="md" :href="data.cta_primary.link">{{ data.cta_primary.text }}</AppButton>
+        <AppButton variant="green" size="md" :href="data.cta_secondary.link">{{ data.cta_secondary.text }}</AppButton>
       </div>
     </div>
   </section>
@@ -89,8 +90,8 @@ onMounted(async () => {
 
 .hero__badge {
   font-family: var(--font-heading);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: var(--white);
   background: #fc3200;
   padding: 4px 12px;
@@ -103,18 +104,18 @@ onMounted(async () => {
 
 .hero__title {
   font-family: var(--font-heading);
-  font-size: 48px;
-  font-weight: 900;
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   text-align: center;
   color: #1a1a1a;
   white-space: pre-line;
   margin: 0 0 8px;
-  line-height: 1.15;
+  line-height: var(--leading-xs);
 }
 
 .hero__subtitle {
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   text-align: center;
   color: #6b6555;
   margin: 0 0 24px;
@@ -125,38 +126,6 @@ onMounted(async () => {
   gap: 12px;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-size: 10px;
-  font-weight: 900;
-  text-transform: uppercase;
-  padding: 10px 24px;
-  border-radius: 999px;
-  color: var(--white);
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
-}
-
-.btn:active {
-  transform: translateY(1px);
-}
-
-.btn--primary {
-  background: var(--accent);
-  box-shadow: 0 4px 0 var(--accent-shadow);
-}
-
-.btn--secondary {
-  background: var(--green);
-  box-shadow: 0 4px 0 var(--green-shadow);
-}
 
 @media (max-width: 768px) {
   .hero {
@@ -183,11 +152,11 @@ onMounted(async () => {
   }
 
   .hero__title {
-    font-size: 32px;
+    font-size: var(--text-2xl);
   }
 
   .hero__subtitle {
-    font-size: 12px;
+    font-size: var(--text-xs);
   }
 
   .hero__actions {

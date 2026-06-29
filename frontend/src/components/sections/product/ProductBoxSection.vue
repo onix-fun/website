@@ -76,16 +76,16 @@ onMounted(async () => {
 
 .section-label {
   font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: var(--accent);
   text-transform: uppercase;
 }
 
 .section-title {
   font-family: var(--font-body);
-  font-size: 36px;
-  font-weight: 700;
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-bold);
   color: var(--text-dark);
   margin: 0;
 }
@@ -104,8 +104,8 @@ onMounted(async () => {
   align-items: center;
   gap: 10px;
   font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: var(--text-dark);
 }
 

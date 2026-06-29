@@ -40,7 +40,7 @@ onMounted(async () => {
 
 <template>
   <AppHeader logo="/favicon.svg" :items="navItems" />
-  <main>
+  <main id="main-content">
     <Breadcrumbs />
     <DigitalProductHeroSection :not-found="notFound" />
     <DigitalProductFeaturesSection />

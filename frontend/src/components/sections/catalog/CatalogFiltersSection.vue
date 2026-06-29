@@ -64,8 +64,8 @@ function setCategory(slug: string) {
   border-radius: 999px;
   background: var(--bg-dark);
   font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 700;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   color: var(--white);
   display: inline-flex;
   align-items: center;

@@ -82,29 +82,29 @@ onMounted(async () => {
 }
 
 .ah__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
 }
 
 .ah__title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #1a1a1a;
   margin: 0;
-  line-height: 1.05;
+  line-height: var(--leading-tight);
   white-space: pre-line;
 }
 
 .ah__description {
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   margin: 0;
-  line-height: 1.6;
+  line-height: var(--leading-normal);
 }
 
 @media (max-width: 768px) {
@@ -123,7 +123,7 @@ onMounted(async () => {
   }
 
   .ah__title {
-    font-size: 32px;
+    font-size: var(--text-2xl);
   }
 }
 </style>

@@ -51,16 +51,16 @@ onMounted(async () => {
 
 .section-label {
   font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: var(--accent);
   text-transform: uppercase;
 }
 
 .section-title {
   font-family: var(--font-body);
-  font-size: 36px;
-  font-weight: 700;
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-bold);
   color: var(--bg);
   margin: 0;
   padding-top: 12px;
@@ -84,15 +84,15 @@ onMounted(async () => {
 
 .specs__label {
   font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: var(--bg);
 }
 
 .specs__value {
   font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: var(--bg);
 }
 </style>

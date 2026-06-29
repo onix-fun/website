@@ -82,16 +82,16 @@ function featureIcon(name: string): unknown {
 }
 
 .section-badge {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
 
 .section-heading {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #1a1a1a;
   margin: 0;
 }
@@ -127,18 +127,18 @@ function featureIcon(name: string): unknown {
 }
 
 .feature-title {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
   margin: 0;
 }
 
 .feature-desc {
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
   color: #6b6555;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
   margin: 0;
 }
 </style>

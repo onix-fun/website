@@ -66,7 +66,7 @@ function socialIcon(name: string): string {
             </a>
           </div>
         </div>
-        <div v-for="col in data.nav" :key="col.title" class="footer__column">
+        <div v-for="col in data.nav" :key="col.title" class="footer__column" role="navigation" :aria-label="col.title">
           <span class="footer__column-title">{{ col.title }}</span>
           <a
             v-for="link in col.links"
@@ -111,17 +111,17 @@ function socialIcon(name: string): string {
 }
 
 .footer__logo {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: var(--text-md);
+  font-weight: var(--fw-bold);
   color: var(--bg);
 }
 
 .footer__description {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: var(--bg);
   margin: 0;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
   white-space: pre-line;
 }
 
@@ -140,8 +140,8 @@ function socialIcon(name: string): string {
   justify-content: center;
   text-decoration: none;
   color: #1a1a1a;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   transition: transform 0.2s;
 }
 
@@ -171,14 +171,14 @@ function socialIcon(name: string): string {
 }
 
 .footer__column-title {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: var(--bg);
 }
 
 .footer__link {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: var(--bg);
   text-decoration: none;
   transition: opacity 0.2s;
@@ -196,8 +196,8 @@ function socialIcon(name: string): string {
 }
 
 .footer__copyright {
-  font-size: 10px;
-  font-weight: 400;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-regular);
   color: var(--bg);
 }
 

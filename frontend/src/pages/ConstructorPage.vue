@@ -8,7 +8,7 @@ import ConfiguratorForm from '@/components/forms/ConfiguratorForm.vue'
 
 <template>
   <AppHeader logo="/favicon.svg" :items="navItems" />
-  <main>
+  <main id="main-content">
     <Breadcrumbs />
     <ConfiguratorForm />
   </main>

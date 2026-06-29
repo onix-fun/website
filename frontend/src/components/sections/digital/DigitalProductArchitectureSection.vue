@@ -65,16 +65,16 @@ onMounted(async () => {
 }
 
 .arch-badge {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #58cc02;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
 
 .arch-heading {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #f5f0e8;
   margin: 0;
 }
@@ -100,17 +100,17 @@ onMounted(async () => {
 }
 
 .arch-item__title {
-  font-size: 11px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
 
 .arch-item__subtitle {
-  font-size: 11px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #1a1a1a;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
 
 .arch-arrow {
@@ -118,10 +118,10 @@ onMounted(async () => {
 }
 
 .arch-desc {
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: var(--text-xs);
+  line-height: var(--leading-relaxed);
   color: #f5f0e8;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
   max-width: 1200px;
   margin: 0;
 }

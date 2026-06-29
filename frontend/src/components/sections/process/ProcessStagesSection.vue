@@ -111,18 +111,8 @@ function iconFor(index: number): string {
               v-html="iconFor(i)"
             />
           </div>
-          <h3
-            class="ps__card-title"
-            :class="stage.icon_bg === 'white' ? 'ps__text-light' : 'ps__text-dark'"
-          >{{ stage.title }}</h3>
-          <p
-            class="ps__card-duration"
-            :class="stage.icon_bg === 'white' ? 'ps__text-light-muted' : 'ps__text-dark-muted'"
-          >{{ stage.duration }}</p>
-          <p
-            class="ps__card-desc"
-            :class="stage.icon_bg === 'white' ? 'ps__text-light' : 'ps__text-dark'"
-          >{{ stage.description }}</p>
+          <h3 class="ps__card-title ps__text-light">{{ stage.title }}</h3>
+          <p class="ps__card-desc ps__text-light">{{ stage.description }}</p>
           <div class="ps__card-tags">
             <div v-for="(tag, j) in stage.tags" :key="j" class="ps__card-tag">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -210,25 +200,25 @@ function iconFor(index: number): string {
 }
 
 .ps__card-title {
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-bold);
   margin: 0;
 }
 
 .ps__card-duration {
-  font-family: Helvetica, sans-serif;
-  font-size: 11px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   margin: 0;
 }
 
 .ps__card-desc {
-  font-family: Helvetica, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   margin: 0;
-  line-height: 1.55;
+  line-height: var(--leading-normal);
   white-space: pre-line;
 }
 
@@ -269,9 +259,9 @@ function iconFor(index: number): string {
 }
 
 .ps__card-tag-text {
-  font-family: Helvetica, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   padding: 5px 10px;
   border-radius: 4px;
   white-space: nowrap;

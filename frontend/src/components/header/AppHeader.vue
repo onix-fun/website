@@ -7,6 +7,7 @@
       'is-opened': menuOpen
     }"
   >
+    <a href="#main-content" class="skip-to-content">Перейти к содержимому</a>
     <div class="app-header__inner">
       <RouterLink
         class="app-header__logo"
@@ -524,8 +525,8 @@ onBeforeUnmount(() => {
   max-width: 0;
   opacity: 0;
   padding-left: 12px;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
   color: #1a1a1a;
   transition:
     max-width .45s var(--transition),
@@ -547,6 +548,27 @@ onBeforeUnmount(() => {
 .app-header-spacer {
   height: calc(62px + 25px);
   pointer-events: none;
+}
+
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 1001;
+  background: var(--accent);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+  transition: top 0.2s;
+  pointer-events: auto;
+}
+
+.skip-to-content:focus {
+  top: 8px;
 }
 
 @media (prefers-reduced-motion: reduce) {

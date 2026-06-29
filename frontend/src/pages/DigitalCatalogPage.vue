@@ -9,7 +9,7 @@ import DigitalCatalogGridSection from '@/components/sections/digital/DigitalCata
 
 <template>
   <AppHeader logo="/favicon.svg" :items="navItems" />
-  <main>
+  <main id="main-content">
     <Breadcrumbs />
     <DigitalCatalogHeroSection />
     <DigitalCatalogGridSection />

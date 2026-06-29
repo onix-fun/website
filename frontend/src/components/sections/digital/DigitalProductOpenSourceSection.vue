@@ -69,18 +69,18 @@ onMounted(async () => {
 }
 
 .oss-heading {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #1a1a1a;
   margin: 0;
 }
 
 .oss-description {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
   color: #6b6555;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
   max-width: 500px;
   margin: 0;
 }
@@ -94,9 +94,9 @@ onMounted(async () => {
   text-decoration: none;
   padding: 14px 32px;
   border-radius: 100px;
-  font-size: 10px;
-  font-weight: 700;
-  font-family: Helvetica, sans-serif;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
+  font-family: var(--font-body);
   box-shadow: 0 4px 0 rgba(0,0,0,0.3);
 }
 </style>

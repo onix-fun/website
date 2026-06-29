@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { preorderData, clearPreorder } from '@/stores/preorder'
+import AppButton from '@/components/AppButton.vue'
 
 const router = useRouter()
 
@@ -138,8 +139,9 @@ async function submit() {
             <h2 class="co-form-heading">Контактные данные</h2>
 
             <div class="co-field">
-              <label class="co-label">Имя</label>
+              <label class="co-label" for="co-name">Имя</label>
               <input
+                id="co-name"
                 v-model="name"
                 class="co-input"
                 type="text"
@@ -148,8 +150,9 @@ async function submit() {
             </div>
 
             <div class="co-field">
-              <label class="co-label">Email</label>
+              <label class="co-label" for="co-email">Email</label>
               <input
+                id="co-email"
                 v-model="email"
                 class="co-input"
                 type="email"
@@ -158,8 +161,9 @@ async function submit() {
             </div>
 
             <div class="co-field">
-              <label class="co-label">Телефон</label>
+              <label class="co-label" for="co-phone">Телефон</label>
               <input
+                id="co-phone"
                 v-model="phone"
                 class="co-input"
                 type="tel"
@@ -168,8 +172,9 @@ async function submit() {
             </div>
 
             <div class="co-field">
-              <label class="co-label">Адрес доставки</label>
+              <label class="co-label" for="co-address">Адрес доставки</label>
               <input
+                id="co-address"
                 v-model="address"
                 class="co-input"
                 type="text"
@@ -178,8 +183,9 @@ async function submit() {
             </div>
 
             <div class="co-field">
-              <label class="co-label">Комментарий</label>
+              <label class="co-label" for="co-comment">Комментарий</label>
               <textarea
+                id="co-comment"
                 v-model="comment"
                 class="co-textarea"
                 placeholder="Любые дополнительные пожелания..."
@@ -258,17 +264,13 @@ async function submit() {
         <p v-if="error" class="co-error">{{ error }}</p>
 
         <!-- Submit button -->
-        <button
-          class="co-submit"
-          :disabled="submitting"
-          @click="submit"
-        >
+        <AppButton variant="orange" size="lg" :disabled="submitting" @click="submit">
           <span>{{ submitting ? 'ОТПРАВКА...' : 'ОФОРМИТЬ ПРЕДЗАКАЗ' }}</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M3 7H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             <path d="M7 3L11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-        </button>
+        </AppButton>
       </div>
     </section>
 
@@ -277,7 +279,7 @@ async function submit() {
 
 <style scoped>
 .co-page {
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
   background: #f5f0e8;
 }
 
@@ -308,8 +310,8 @@ async function submit() {
 
 .co-banner-text {
   margin: 0;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
 }
 
@@ -320,27 +322,27 @@ async function submit() {
 
 .co-hero-label {
   display: block;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
   margin-bottom: 16px;
 }
 
 .co-hero-title {
   margin: 0 0 16px;
-  font-size: 60px;
-  font-weight: 700;
+  font-size: var(--text-6xl);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
-  line-height: 1.05;
+  line-height: var(--leading-tight);
 }
 
 .co-hero-desc {
   margin: 0;
   max-width: 520px;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: #6b6555;
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
 }
 
 /* ---------- Steps ---------- */
@@ -374,14 +376,14 @@ async function submit() {
 }
 
 .co-step-num {
-  font-size: 11px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: #f5f0e8;
 }
 
 .co-step-label {
-  font-size: 11px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   text-align: center;
 }
@@ -419,8 +421,8 @@ async function submit() {
 
 .co-form-heading {
   margin: 0 0 8px;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
   color: #f5f0e8;
 }
 
@@ -431,8 +433,8 @@ async function submit() {
 }
 
 .co-label {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #f5f0e8;
 }
 
@@ -442,9 +444,9 @@ async function submit() {
   border: 1px solid #f5f0e8;
   border-radius: 14px;
   background: #f5f0e8;
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: #1a1a1a;
   outline: none;
   transition: border-color 0.2s;
@@ -466,9 +468,9 @@ async function submit() {
   border: 1px solid #f5f0e8;
   border-radius: 14px;
   background: #f5f0e8;
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: #1a1a1a;
   outline: none;
   transition: border-color 0.2s;
@@ -497,8 +499,8 @@ async function submit() {
 
 .co-summary-title {
   margin: 0 0 24px;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: var(--text-md);
+  font-weight: var(--fw-bold);
   color: #f5f0e8;
 }
 
@@ -528,21 +530,21 @@ async function submit() {
 
 .co-summary-name {
   margin: 0 0 2px;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
 }
 
 .co-summary-meta {
   margin: 0;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
 }
 
 .co-summary-empty {
   margin: 0 0 24px;
-  font-size: 12px;
+  font-size: var(--text-xs);
   color: #6b6555;
 }
 
@@ -562,14 +564,14 @@ async function submit() {
 }
 
 .co-summary-label {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
 }
 
 .co-summary-value {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: #f5f0e8;
   text-align: right;
   flex-shrink: 0;
@@ -583,10 +585,10 @@ async function submit() {
 
 .co-summary-notice p {
   margin: 0;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #f5f0e8;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
 }
 
 /* ---------- Checkboxes ---------- */
@@ -639,10 +641,10 @@ async function submit() {
 }
 
 .co-checkbox-label {
-  font-size: 13px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
 }
 
 .co-checkbox--wide .co-checkbox-label {
@@ -656,36 +658,9 @@ async function submit() {
   background: #fff0f0;
   border: 1px solid #ffcccc;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: var(--text-sm);
   color: #cc0000;
 }
 
 /* ---------- Submit ---------- */
-.co-submit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  height: 54px;
-  padding: 18px 32px;
-  border: none;
-  border-radius: 9999px;
-  background: #ff4d00;
-  color: #fff;
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.co-submit:hover:not(:disabled) {
-  background: #e04400;
-}
-
-.co-submit:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
 </style>

@@ -12,7 +12,7 @@ import ProcessCtaSection from '@/components/sections/process/ProcessCtaSection.v
 <template>
   <div class="process-page">
     <AppHeader logo="/favicon.svg" :items="navItems" />
-    <main>
+    <main id="main-content">
       <Breadcrumbs />
       <ProcessHeroSection />
       <ProcessStagesSection />

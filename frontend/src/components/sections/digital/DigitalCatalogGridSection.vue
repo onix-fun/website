@@ -76,9 +76,9 @@ function productIcon(slug: string): string {
 }
 
 .product-card__number {
-  font-size: 40px;
-  font-weight: 700;
-  font-family: Helvetica, sans-serif;
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-bold);
+  font-family: var(--font-body);
   color: #1a1a1a;
 }
 
@@ -102,26 +102,26 @@ function productIcon(slug: string): string {
 }
 
 .product-card__title {
-  font-size: 24px;
-  font-weight: 700;
-  font-family: Helvetica, sans-serif;
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  font-family: var(--font-body);
   color: #1a1a1a;
   margin: 0;
 }
 
 .product-card__subtitle {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: #6b6555;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
   margin: 0;
 }
 
 .product-card__description {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
   color: #6b6555;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
   margin: 0;
 }
 
@@ -132,9 +132,9 @@ function productIcon(slug: string): string {
   padding: 14px 32px;
   border: none;
   border-radius: 100px;
-  font-size: 10px;
-  font-weight: 700;
-  font-family: Helvetica, sans-serif;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
+  font-family: var(--font-body);
   cursor: pointer;
   color: #fff;
   box-shadow: 0 4px 0 0;

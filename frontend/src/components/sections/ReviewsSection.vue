@@ -84,8 +84,8 @@ function onMouseLeave() {
         @mouseenter="onMouseEnter"
         @mouseleave="onMouseLeave"
       >
-        <div ref="trackRef" class="reviews__track">
-          <div
+        <ul ref="trackRef" class="reviews__track">
+          <li
             v-for="review in [...data.reviews, ...data.reviews]"
             :key="review.id + '-' + Math.random()"
             class="review-card"
@@ -101,8 +101,8 @@ function onMouseLeave() {
               </div>
             </div>
             <p class="review-card__text">"{{ review.text }}"</p>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -131,9 +131,9 @@ function onMouseLeave() {
 }
 
 .reviews__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 13px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: #ff4d00;
   text-transform: uppercase;
 }
@@ -145,12 +145,12 @@ function onMouseLeave() {
 }
 
 .reviews__title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #f5f0e8;
   margin: 0;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
 }
 
 .reviews__rating-pill {
@@ -165,11 +165,11 @@ function onMouseLeave() {
 }
 
 .reviews__rating-number {
-  font-family: Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-bold);
   color: #ffffff;
-  line-height: 1;
+  line-height: var(--leading-tight);
 }
 
 .reviews__track-wrapper {
@@ -191,7 +191,9 @@ function onMouseLeave() {
   gap: 24px;
   width: max-content;
   will-change: transform;
+  list-style: none;
   padding: 10px 0;
+  margin: 0;
 }
 
 .review-card {
@@ -237,9 +239,9 @@ function onMouseLeave() {
 }
 
 .review-card__avatar-letter {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 22px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-black);
   color: #ffffff;
 }
 
@@ -250,16 +252,16 @@ function onMouseLeave() {
 }
 
 .review-card__name {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 18px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--fw-black);
   color: #ffffff;
 }
 
 .review-card__city {
-  font-family: Helvetica, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: rgba(255, 255, 255, 0.85);
 }
 
@@ -267,11 +269,11 @@ function onMouseLeave() {
   position: relative;
   z-index: 1;
   margin: 0;
-  font-family: Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-regular);
   color: #ffffff;
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
   flex: 1;
 }
 
@@ -286,7 +288,7 @@ function onMouseLeave() {
   }
 
   .reviews__title {
-    font-size: 32px;
+    font-size: var(--text-2xl);
   }
 
   .reviews__title-row {
@@ -306,7 +308,7 @@ function onMouseLeave() {
   }
 
   .review-card__text {
-    font-size: 17px;
+    font-size: var(--text-base);
   }
 }
 </style>

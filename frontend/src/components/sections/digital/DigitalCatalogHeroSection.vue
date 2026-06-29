@@ -74,32 +74,32 @@ onMounted(async () => {
 }
 
 .cta-badge {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #fff;
   position: relative;
   z-index: 1;
 }
 
 .cta-heading {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #f5f0e8;
   margin: 0;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
   position: relative;
   z-index: 1;
   white-space: pre-line;
 }
 
 .cta-description {
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
   color: #f5f0e8;
   max-width: 500px;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
   margin: 0;
   position: relative;
   z-index: 1;
@@ -113,11 +113,11 @@ onMounted(async () => {
   }
 
   .cta-heading {
-    font-size: 20px;
+    font-size: var(--text-lg);
   }
 
   .cta-description {
-    font-size: 14px;
+    font-size: var(--text-sm);
   }
 }
 </style>

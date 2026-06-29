@@ -31,7 +31,7 @@ onMounted(async () => {
   <section v-if="data" class="aauth">
     <div class="aauth__inner">
       <div class="aauth__image">
-        <img v-if="data.image_url" class="aauth__image-el" :src="data.image_url" alt="">
+        <img v-if="data.image_url" class="aauth__image-el" :src="data.image_url" alt="Автор проекта Sparrow">
         <div v-else class="aauth__image-placeholder" />
       </div>
       <div class="aauth__content">
@@ -97,34 +97,34 @@ onMounted(async () => {
 }
 
 .aauth__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
 }
 
 .aauth__name {
-  font-family: Helvetica, sans-serif;
-  font-size: 36px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   margin: 0;
 }
 
 .aauth__role {
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: #6b6555;
 }
 
 .aauth__bio {
-  font-family: Helvetica, sans-serif;
-  font-size: 15px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   margin: 0;
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
   white-space: pre-line;
 }
 
@@ -141,9 +141,9 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Helvetica, sans-serif;
-  font-size: 9px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   text-decoration: none;
   transition: transform 0.2s;

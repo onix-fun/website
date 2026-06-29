@@ -12,7 +12,7 @@ import AboutContactsSection from '@/components/sections/about/AboutContactsSecti
 
 <template>
   <AppHeader logo="/favicon.svg" :items="navItems" />
-  <main>
+  <main id="main-content">
     <Breadcrumbs />
     <AboutHeroSection />
     <AboutValuesSection />

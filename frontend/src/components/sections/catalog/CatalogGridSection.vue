@@ -85,6 +85,6 @@ const filteredProducts = computed(() => {
   text-align: center;
   padding: 64px 0;
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: var(--text-sm);
 }
 </style>

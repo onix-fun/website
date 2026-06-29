@@ -25,7 +25,7 @@ onMounted(async () => {
   <section v-if="data" class="about">
     <div class="about__inner">
       <div class="about__visual">
-        <img class="about__image" src="/content/home/about.png" alt="">
+        <img class="about__image" src="/content/home/about.png" alt="Изображение мастерской Sparrow">
       </div>
       <div class="about__content">
         <span class="about__label">{{ data.label }}</span>
@@ -80,8 +80,8 @@ onMounted(async () => {
 
 .about__label {
   font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: var(--accent);
   display: inline-block;
   width: fit-content;
@@ -90,20 +90,20 @@ onMounted(async () => {
 
 .about__title {
   font-family: var(--font-heading);
-  font-size: 48px;
-  font-weight: 900;
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: var(--white);
   margin: 0;
   white-space: pre-line;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
 }
 
 .about__description {
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: var(--bg);
   margin: 0;
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
 }
 
 .about__tags {
@@ -114,8 +114,8 @@ onMounted(async () => {
 }
 
 .about__tag {
-  font-size: 10px;
-  font-weight: 700;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   color: var(--text-dark);
   background: var(--bg);
   padding: 8px 16px;
@@ -139,7 +139,7 @@ onMounted(async () => {
   }
 
   .about__title {
-    font-size: 32px;
+    font-size: var(--text-2xl);
   }
 }
 </style>

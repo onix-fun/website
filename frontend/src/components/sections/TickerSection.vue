@@ -37,13 +37,13 @@ const tickerStyle = computed(() => ({
     class="ticker"
     :style="tickerStyle"
   >
-    <div class="ticker__track">
-      <span
+    <ul class="ticker__track">
+      <li
         v-for="(item, i) in [...data.items, ...data.items, ...data.items]"
         :key="i"
         class="ticker__item"
-      >{{ item }}</span>
-    </div>
+      >{{ item }}</li>
+    </ul>
   </div>
 </template>
 
@@ -64,12 +64,15 @@ const tickerStyle = computed(() => ({
   gap: 40px;
   white-space: nowrap;
   animation: ticker-scroll 30s linear infinite;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .ticker__item {
   font-family: var(--font-heading);
   font-size: var(--ticker-font-size);
-  font-weight: 900;
+  font-weight: var(--fw-black);
   color: var(--ticker-text);
   text-transform: uppercase;
   flex-shrink: 0;

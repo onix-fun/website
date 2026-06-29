@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { configuratorState, files, persistConfigurator } from '../../stores/configurator'
 
 import AppIcon from '@/components/icons/AppIcon.vue'
+import AppButton from '@/components/AppButton.vue'
 
 const router = useRouter()
 
@@ -230,7 +231,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
     <!-- Section 01: Product type -->
     <section class="cf-section cf-section--product">
       <div class="cf-section__header">
-        <div class="cf-step">{{ sections.product_type.step }}</div>
+        <div class="cf-step" aria-current="step">{{ sections.product_type.step }}</div>
         <h2 class="cf-section__title">{{ sections.product_type.title }}</h2>
       </div>
       <div class="cf-section__body">
@@ -253,7 +254,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
     <!-- Section 02: Description -->
     <section class="cf-section cf-section--description">
       <div class="cf-section__header">
-        <div class="cf-step">{{ sections.description.step }}</div>
+        <div class="cf-step" aria-current="step">{{ sections.description.step }}</div>
         <h2 class="cf-section__title">{{ sections.description.title }}</h2>
       </div>
       <div class="cf-section__body">
@@ -270,7 +271,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
     <!-- Section 03: Files -->
     <section class="cf-section cf-section--files">
       <div class="cf-section__header">
-        <div class="cf-step">{{ sections.files.step }}</div>
+        <div class="cf-step" aria-current="step">{{ sections.files.step }}</div>
         <h2 class="cf-section__title">{{ sections.files.title }}</h2>
       </div>
       <div class="cf-section__body">
@@ -297,7 +298,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
     <!-- Section 04: Dimensions -->
     <section class="cf-section cf-section--dimensions">
       <div class="cf-section__header">
-        <div class="cf-step">{{ sections.dimensions.step }}</div>
+        <div class="cf-step" aria-current="step">{{ sections.dimensions.step }}</div>
         <h2 class="cf-section__title">{{ sections.dimensions.title }}</h2>
       </div>
       <div class="cf-section__body">
@@ -340,7 +341,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
     <!-- Section 05: Features -->
     <section class="cf-section cf-section--features">
       <div class="cf-section__header">
-        <div class="cf-step">{{ sections.features.step }}</div>
+        <div class="cf-step" aria-current="step">{{ sections.features.step }}</div>
         <h2 class="cf-section__title">{{ sections.features.title }}</h2>
       </div>
       <div class="cf-section__body">
@@ -361,7 +362,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
     <!-- Section 06: Material -->
     <section class="cf-section cf-section--material">
       <div class="cf-section__header">
-        <div class="cf-step">{{ sections.material.step }}</div>
+        <div class="cf-step" aria-current="step">{{ sections.material.step }}</div>
         <h2 class="cf-section__title">{{ sections.material.title }}</h2>
       </div>
       <div class="cf-section__body">
@@ -390,7 +391,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
     <!-- Section 07: Color -->
     <section class="cf-section cf-section--color">
       <div class="cf-section__header">
-        <div class="cf-step">{{ sections.color.step }}</div>
+        <div class="cf-step" aria-current="step">{{ sections.color.step }}</div>
         <h2 class="cf-section__title">{{ sections.color.title }}</h2>
       </div>
       <div class="cf-section__body">
@@ -412,10 +413,10 @@ watch(configuratorState, persistConfigurator, { deep: true })
       <p class="cf-disclaimer">
         {{ submitContent.disclaimer }}
       </p>
-      <button class="cf-submit-btn" :disabled="uploading" @click="submitForm">
+      <AppButton variant="orange" size="lg" :disabled="uploading" @click="submitForm">
         {{ submitContent.button_text }}
         <AppIcon name="arrow-right" :size="14" :stroke-width="2" />
-      </button>
+      </AppButton>
     </div>
   </div>
 </template>
@@ -435,9 +436,9 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-hero__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
   margin: 0;
   text-transform: uppercase;
@@ -445,23 +446,23 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-hero__title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #ffffff;
   margin: 0;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
   white-space: pre-line;
 }
 
 .cf-hero__desc {
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--fw-regular);
   color: #f5f0e8;
   margin: 0;
   padding-top: 8px;
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
   max-width: 520px;
 }
 
@@ -524,17 +525,17 @@ watch(configuratorState, persistConfigurator, { deep: true })
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Helvetica, sans-serif;
-  font-size: 11px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: #ffffff;
   flex-shrink: 0;
 }
 
 .cf-section__title {
-  font-family: Helvetica, sans-serif;
-  font-size: 28px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   margin: 0;
 }
@@ -595,9 +596,9 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-product-label {
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--fw-bold);
   color: inherit;
 }
 
@@ -607,9 +608,9 @@ watch(configuratorState, persistConfigurator, { deep: true })
   border: 1px solid #d4d0c8;
   border-radius: 20px;
   background: #ffffff;
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: #1a1a1a;
   resize: vertical;
   outline: none;
@@ -657,17 +658,17 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-dropzone__title {
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   margin: 0 0 8px;
 }
 
 .cf-dropzone__hint {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   margin: 0;
 }
@@ -686,8 +687,8 @@ watch(configuratorState, persistConfigurator, { deep: true })
   background: #ffffff;
   border: 1px solid #d4d0c8;
   border-radius: 8px;
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
 }
 
 .cf-file-name {
@@ -708,7 +709,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
   border: none;
   color: #6b6555;
   cursor: pointer;
-  font-size: 16px;
+  font-size: var(--text-base);
   padding: 0;
 }
 
@@ -729,9 +730,9 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-field__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
 }
 
@@ -740,9 +741,9 @@ watch(configuratorState, persistConfigurator, { deep: true })
   border: 1px solid #d4d0c8;
   border-radius: 14px;
   background: #ffffff;
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: #1a1a1a;
   outline: none;
   box-sizing: border-box;
@@ -764,9 +765,9 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-dim-note {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   margin: 12px 0 0;
   padding: 0;
@@ -786,9 +787,9 @@ watch(configuratorState, persistConfigurator, { deep: true })
   background: #f5f0e8;
   border: 1px solid #d4d0c8;
   border-radius: 9999px;
-  font-family: Helvetica, sans-serif;
-  font-size: 11px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   cursor: pointer;
   transition: all 0.2s;
@@ -854,16 +855,16 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-mat-circle span {
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--fw-bold);
   color: #ffffff;
 }
 
 .cf-mat-name {
-  font-family: Helvetica, sans-serif;
-  font-size: 11px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   margin: 0;
   text-align: center;
@@ -882,9 +883,9 @@ watch(configuratorState, persistConfigurator, { deep: true })
   gap: 2px;
   padding: 4px 10px;
   border-radius: 9999px;
-  font-family: Helvetica, sans-serif;
-  font-size: 9px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   color: #ffffff;
 }
 
@@ -921,9 +922,9 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-color-note {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   margin: 8px 0 0;
   padding: 0;
@@ -944,39 +945,14 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-disclaimer {
-  font-family: Helvetica, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   text-align: center;
   margin: 0;
   max-width: 480px;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
 }
 
-.cf-submit-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 18px 48px;
-  background: #ff4d00;
-  border: none;
-  border-radius: 9999px;
-  box-shadow: 0 4px 0 #c84b00;
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  color: #ffffff;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.cf-submit-btn:hover {
-  background: #e04400;
-}
-
-.cf-submit-btn svg {
-  width: 14px;
-  height: 14px;
-}
 </style>

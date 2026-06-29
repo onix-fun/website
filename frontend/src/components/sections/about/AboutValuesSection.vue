@@ -67,9 +67,9 @@ function valueIcon(title: string): string {
 }
 
 .av__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
 }
 
@@ -101,20 +101,20 @@ function valueIcon(title: string): string {
 }
 
 .av__card-title {
-  font-family: Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   margin: 0;
 }
 
 .av__card-desc {
-  font-family: Helvetica, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   margin: 0;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
   white-space: pre-line;
 }
 </style>

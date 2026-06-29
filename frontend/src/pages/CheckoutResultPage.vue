@@ -28,7 +28,7 @@ onMounted(async () => {
 
 <template>
   <AppHeader logo="/favicon.svg" :items="navItems" />
-  <main>
+  <main id="main-content">
     <Breadcrumbs />
     <div class="cr-page">
       <div class="cr-inner">
@@ -92,7 +92,7 @@ onMounted(async () => {
 
 <style scoped>
 .cr-page {
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
   background: #f5f0e8;
   padding: 120px 80px;
   display: flex;
@@ -131,26 +131,26 @@ onMounted(async () => {
 }
 
 .cr-title {
-  font-size: 48px;
-  font-weight: 700;
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   text-align: center;
   margin: 0;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
 }
 
 .cr-desc {
-  font-size: 16px;
-  font-weight: 400;
+  font-size: var(--text-base);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   text-align: center;
   margin: 0;
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
   padding: 0 23px;
 }
 
 .cr-loading {
-  font-size: 16px;
+  font-size: var(--text-base);
   color: #6b6555;
 }
 
@@ -163,9 +163,9 @@ onMounted(async () => {
   border-radius: 9999px;
   background: #ff4d00;
   color: #fff;
-  font-family: Helvetica, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   cursor: pointer;
   text-decoration: none;
   text-transform: uppercase;

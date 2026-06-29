@@ -73,30 +73,30 @@ onMounted(async () => {
 }
 
 .ph__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
 }
 
 .ph__title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #f5f0e8;
   margin: 0;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
   white-space: pre-line;
   max-width: 645px;
 }
 
 .ph__description {
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: #f5f0e8;
   margin: 0;
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
   max-width: 500px;
   white-space: pre-line;
 }

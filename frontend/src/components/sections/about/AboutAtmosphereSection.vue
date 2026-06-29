@@ -24,7 +24,7 @@ onMounted(async () => {
   <section v-if="data" class="aa">
     <div class="aa__inner">
       <div class="aa__image">
-        <img v-if="data.image_url" class="aa__image-el" :src="data.image_url" alt="">
+        <img v-if="data.image_url" class="aa__image-el" :src="data.image_url" alt="Атмосфера мастерской Sparrow">
         <div v-else class="aa__image-placeholder" />
       </div>
       <div class="aa__content">
@@ -80,26 +80,26 @@ onMounted(async () => {
 }
 
 .aa__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
 }
 
 .aa__title {
-  font-family: Helvetica, sans-serif;
-  font-size: 36px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-bold);
   color: #f5f0e8;
   margin: 0;
 }
 
 .aa__text {
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: #f5f0e8;
   margin: 0;
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
 }
 </style>

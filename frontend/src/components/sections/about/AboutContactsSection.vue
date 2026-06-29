@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 
 import AppIcon from '@/components/icons/AppIcon.vue'
+import AppButton from '@/components/AppButton.vue'
 
 interface ContactItem {
   label: string
@@ -57,10 +58,10 @@ function contactIcon(label: string): string {
             </span>
           </div>
         </div>
-        <a :href="data.cta.link" class="ac__cta">
+        <AppButton variant="orange" size="lg" :href="data.cta.link">
           {{ data.cta.text }}
           <AppIcon name="arrow-right" :size="14" :stroke-width="2" />
-        </a>
+        </AppButton>
       </div>
     </div>
   </section>
@@ -85,20 +86,20 @@ function contactIcon(label: string): string {
 }
 
 .ac__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
 }
 
 .ac__title {
-  font-family: Helvetica, sans-serif;
-  font-size: 48px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   margin: 0;
   white-space: pre-line;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
 }
 
 .ac__list {
@@ -132,44 +133,17 @@ function contactIcon(label: string): string {
 }
 
 .ac__item-label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
 }
 
 .ac__item-value {
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
 }
 
-.ac__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: fit-content;
-  padding: 15px 32px;
-  background: #ff4d00;
-  box-shadow: 0 4px 0 #c84b00;
-  border-radius: 999px;
-  font-family: Helvetica, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  color: #ffffff;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: transform 0.2s;
-}
-
-.ac__cta:hover {
-  transform: translateY(-1px);
-}
-
-.ac__cta:active {
-  transform: translateY(1px);
-}
 </style>

@@ -92,32 +92,32 @@ const product = inject<Ref<ProductData | null>>('digitalProduct')
 .not-found {
   padding: 200px 80px;
   text-align: center;
-  font-family: Helvetica, sans-serif;
-  font-size: 18px;
+  font-family: var(--font-body);
+  font-size: var(--text-md);
   color: #6b6555;
 }
 
 .hero-badge {
-  font-size: 12px;
-  font-weight: 400;
-  font-family: Helvetica, sans-serif;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
+  font-family: var(--font-body);
 }
 
 .hero-heading {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #1a1a1a;
   margin: 0;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
   white-space: pre-line;
   max-width: 742px;
 }
 
 .hero-description {
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
   color: #6b6555;
   margin: 0;
 }
@@ -128,7 +128,7 @@ const product = inject<Ref<ProductData | null>>('digitalProduct')
   }
 
   .hero-heading {
-    font-size: 24px;
+    font-size: var(--text-xl);
   }
 }
 </style>

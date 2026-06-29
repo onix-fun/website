@@ -167,16 +167,16 @@ const isDigital = computed(() =>
 
 .bc--default .bc-link {
   font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: var(--text-muted);
   text-decoration: none;
 }
 
 .bc--default .bc-current {
   font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: var(--accent);
 }
 
@@ -187,17 +187,17 @@ const isDigital = computed(() =>
 }
 
 .bc--digital .bc-link {
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: #6b6555;
   text-decoration: none;
 }
 
 .bc--digital .bc-current {
-  font-family: Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: #ff4d00;
 }
 

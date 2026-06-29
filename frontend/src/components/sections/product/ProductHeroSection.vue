@@ -228,8 +228,8 @@ const mainImageBg = computed(() => {
   padding: 6px 14px;
   border-radius: 999px;
   font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 700;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.3px;
@@ -239,8 +239,8 @@ const mainImageBg = computed(() => {
   background: var(--accent);
   box-shadow: 0 3px 0 var(--accent-shadow);
   font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 700;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   color: var(--white);
   text-transform: uppercase;
   padding: 6px 14px;
@@ -250,8 +250,8 @@ const mainImageBg = computed(() => {
 .badge--dark {
   background: var(--bg-dark);
   font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 700;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   color: var(--white);
   text-transform: uppercase;
   padding: 6px 14px;
@@ -260,20 +260,20 @@ const mainImageBg = computed(() => {
 
 .info__title {
   font-family: var(--font-body);
-  font-size: 60px;
-  font-weight: 700;
+  font-size: var(--text-6xl);
+  font-weight: var(--fw-bold);
   color: var(--text-dark);
   margin: 0;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
 }
 
 .info__description {
   font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-regular);
   color: var(--text-muted);
   margin: 0;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
   max-width: 440px;
 }
 
@@ -285,15 +285,15 @@ const mainImageBg = computed(() => {
 
 .price__label {
   font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: var(--text-muted);
 }
 
 .price__value {
   font-family: var(--font-body);
-  font-size: 48px;
-  font-weight: 700;
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-bold);
   color: var(--text-dark);
 }
 
@@ -303,8 +303,8 @@ const mainImageBg = computed(() => {
   gap: 8px;
   padding-top: 4px;
   font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: var(--text-muted);
 }
 
@@ -328,8 +328,8 @@ const mainImageBg = computed(() => {
   padding: 14px 28px;
   border-radius: 999px;
   font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 700;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-bold);
   color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -360,6 +360,6 @@ const mainImageBg = computed(() => {
   text-align: center;
   padding: 120px 80px;
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: var(--text-sm);
 }
 </style>

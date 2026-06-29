@@ -3,6 +3,7 @@ import AppHeader from '@/components/header/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import { navItems } from '@/components/header'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
+import AppButton from '@/components/AppButton.vue'
 
 defineProps<{
   errorCode: string
@@ -34,13 +35,13 @@ defineProps<{
           <h1 class="ep-code">{{ errorCode }}</h1>
           <h2 class="ep-title">{{ title }}</h2>
           <p class="ep-desc">{{ description }}</p>
-          <router-link to="/" class="ep-btn">
+          <AppButton variant="orange" size="lg" to="/">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M3 7H11" stroke="white" stroke-width="1.5" stroke-linecap="round" />
               <path d="M7 3L3 7L7 11" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <span>НА ГЛАВНУЮ</span>
-          </router-link>
+          </AppButton>
         </div>
       </div>
     </section>
@@ -182,57 +183,34 @@ defineProps<{
 }
 
 .ep-code {
-  font-family: Helvetica, sans-serif;
-  font-size: 280px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-8xl);
+  font-weight: var(--fw-bold);
   color: #ff4d00;
   margin: 0;
-  line-height: 1;
+  line-height: var(--leading-tight);
   text-align: center;
 }
 
 .ep-title {
-  font-family: Helvetica, sans-serif;
-  font-size: 36px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   margin: 24px 0 0;
   text-align: center;
 }
 
 .ep-desc {
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--fw-regular);
   color: #6b6555;
   margin: 16px 0 0;
   text-align: center;
   max-width: 480px;
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
   padding: 0 18px;
 }
 
-.ep-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  border: none;
-  border-radius: 9999px;
-  background: #ff4d00;
-  color: #fff;
-  font-family: Helvetica, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: background 0.2s;
-  box-shadow: 0 4px 0 #c84b00;
-  margin-top: 32px;
-}
-
-.ep-btn:hover {
-  background: #e04400;
-}
 </style>

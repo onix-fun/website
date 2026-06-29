@@ -130,8 +130,8 @@ const productNameRu = computed(() => props.product.name_ru)
   padding: 4px 10px;
   border-radius: 999px;
   font-family: var(--font-heading);
-  font-size: 8px;
-  font-weight: 900;
+  font-size: var(--text-3xs);
+  font-weight: var(--fw-black);
   color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.3px;
@@ -176,22 +176,22 @@ const productNameRu = computed(() => props.product.name_ru)
 
 .card__name {
   font-family: var(--font-heading);
-  font-size: 16px;
-  font-weight: 900;
+  font-size: var(--text-base);
+  font-weight: var(--fw-black);
   color: var(--text-dark);
 }
 
 .card__name-ru {
   font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 400;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-regular);
   color: var(--text-muted);
 }
 
 .card__price {
   font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 900;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-black);
   color: var(--accent);
   white-space: nowrap;
 }
@@ -211,8 +211,8 @@ const productNameRu = computed(() => props.product.name_ru)
   background: var(--green);
   box-shadow: 0 3px 0 var(--green-shadow);
   font-family: var(--font-heading);
-  font-size: 9px;
-  font-weight: 900;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-black);
   color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.5px;

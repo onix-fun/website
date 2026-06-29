@@ -64,19 +64,19 @@ onMounted(async () => {
 }
 
 .pa__label {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
 }
 
 .pa__title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #f5f0e8;
   margin: 0;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
 }
 
 .pa__grid {
@@ -104,19 +104,19 @@ onMounted(async () => {
 }
 
 .pa__card-title {
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
   margin: 0;
 }
 
 .pa__card-description {
-  font-family: Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #1a1a1a;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
   margin: 0;
 }
 
@@ -132,7 +132,7 @@ onMounted(async () => {
 
 @media (max-width: 640px) {
   .pa__title {
-    font-size: 32px;
+    font-size: var(--text-2xl);
   }
 
   .pa__grid {

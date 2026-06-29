@@ -51,10 +51,10 @@ onMounted(async () => {
 }
 
 .section-badge {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #ff4d00;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
 
 .section-badge--orange {
@@ -62,9 +62,9 @@ onMounted(async () => {
 }
 
 .section-heading {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: #1a1a1a;
   margin: 0;
 }
@@ -85,16 +85,16 @@ onMounted(async () => {
 }
 
 .tech-category {
-  font-size: 11px;
-  font-weight: 400;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-regular);
   color: #6b6555;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
 
 .tech-title {
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: #1a1a1a;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
 </style>

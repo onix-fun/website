@@ -34,8 +34,8 @@ onMounted(async () => {
         <span class="materials__label">{{ data.label }}</span>
         <h2 class="materials__title">{{ data.title }}</h2>
       </div>
-      <div class="materials__grid">
-        <div v-for="mat in data.materials" :key="mat.name" class="material-card">
+      <ul class="materials__grid">
+        <li v-for="mat in data.materials" :key="mat.name" class="material-card">
           <div
             class="material-card__circle"
             :style="{ background: mat.color, boxShadow: `0 8px 0 ${mat.color}cc` }"
@@ -54,8 +54,8 @@ onMounted(async () => {
               :style="{ background: mat.color, boxShadow: '0 2px 0 rgba(0,0,0,0.08)' }"
             >{{ tag }}</span>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -84,8 +84,8 @@ onMounted(async () => {
 
 .materials__label {
   font-family: var(--font-heading);
-  font-size: 10px;
-  font-weight: 900;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-black);
   color: var(--accent);
   text-transform: uppercase;
   display: inline-block;
@@ -94,12 +94,12 @@ onMounted(async () => {
 
 .materials__title {
   font-family: var(--font-heading);
-  font-size: 48px;
-  font-weight: 900;
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
   color: var(--text-dark);
   margin: 0;
   white-space: pre-line;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
 }
 
 .materials__grid {
@@ -107,6 +107,8 @@ onMounted(async () => {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(24px, 5vw, 68px);
   align-items: start;
+  list-style: none;
+  padding: 0;
 }
 
 .material-card {
@@ -129,8 +131,8 @@ onMounted(async () => {
 
 .material-card__initial {
   font-family: var(--font-heading);
-  font-size: 20px;
-  font-weight: 900;
+  font-size: var(--text-lg);
+  font-weight: var(--fw-black);
   color: var(--white);
 }
 
@@ -145,18 +147,18 @@ onMounted(async () => {
 
 .material-card__name {
   font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
   color: var(--text-dark);
   margin: 0;
 }
 
 .material-card__desc {
-  font-size: 10px;
-  font-weight: 400;
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-regular);
   color: var(--text-muted);
   margin: 0;
-  line-height: 1.4;
+  line-height: var(--leading-sm);
 }
 
 .material-card__tags {
@@ -168,8 +170,8 @@ onMounted(async () => {
 
 .material-card__tag {
   font-family: var(--font-heading);
-  font-size: 8px;
-  font-weight: 900;
+  font-size: var(--text-3xs);
+  font-weight: var(--fw-black);
   color: var(--text-dark);
   padding: 2px 8px;
   border-radius: 999px;
@@ -213,7 +215,7 @@ onMounted(async () => {
   }
 
   .materials__title {
-    font-size: 32px;
+    font-size: var(--text-2xl);
   }
 
   .materials__grid {
