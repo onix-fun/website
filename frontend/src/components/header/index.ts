@@ -11,4 +11,5 @@ export const navItems: HeaderItem[] = [
   { id: 'process', to: '/process', title: 'Производство', icon: ProcessIcon },
   { id: 'digital-catalog', to: '/digital-catalog', title: 'IT-каталог', icon: DigitalCatalogIcon },
   { id: 'constructor', to: '/constructor', title: 'Конфигуратор', icon: ConstructorIcon },
+  { id: 'test', to: '/test', title: 'Тестовая страницы', icon: ConstructorIcon },
 ]
