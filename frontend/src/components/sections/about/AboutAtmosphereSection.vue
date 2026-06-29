@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue'
 interface AboutAtmosphereData {
   label: string
   title: string
+  image_url?: string
   description: string[]
 }
 
@@ -23,7 +24,8 @@ onMounted(async () => {
   <section v-if="data" class="aa">
     <div class="aa__inner">
       <div class="aa__image">
-        <div class="aa__image-placeholder" />
+        <img v-if="data.image_url" class="aa__image-el" :src="data.image_url" alt="">
+        <div v-else class="aa__image-placeholder" />
       </div>
       <div class="aa__content">
         <span class="aa__label">{{ data.label }}</span>
@@ -61,6 +63,13 @@ onMounted(async () => {
   height: 100%;
   background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
   border-radius: 15px;
+}
+
+.aa__image-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .aa__content {

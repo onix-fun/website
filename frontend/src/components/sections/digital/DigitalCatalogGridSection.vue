@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+import AppIcon from '@/components/icons/AppIcon.vue'
+
 interface DigitalProduct {
   id: number
   slug: string
@@ -26,6 +28,12 @@ onMounted(async () => {
 function goToProduct(slug: string) {
   router.push(`/digital-catalog/${slug}`)
 }
+
+function productIcon(slug: string): string {
+  if (slug === 'air') return 'air'
+  if (slug === 'account') return 'account'
+  return 'code'
+}
 </script>
 
 <template>
@@ -33,16 +41,14 @@ function goToProduct(slug: string) {
     <div v-for="p in products" :key="p.id" class="product-card">
       <div class="product-card__number">{{ String(p.number).padStart(2, '0') }}</div>
       <div class="product-card__icon" :class="`product-card__icon--${p.slug}`">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <rect x="10" y="10" width="20" height="20" rx="10" fill="currentColor"/>
-          <text x="20" y="25" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="Helvetica">{{ p.number }}</text>
-        </svg>
+        <AppIcon :name="productIcon(p.slug)" :size="34" :stroke-width="1.8" />
       </div>
       <h2 class="product-card__title">{{ p.title }}</h2>
       <p class="product-card__subtitle">{{ p.subtitle }}</p>
       <p class="product-card__description">{{ p.description }}</p>
       <button class="product-card__btn" :class="`product-card__btn--${p.slug}`" @click="goToProduct(p.slug)">
-        ПОДРОБНЕЕ →
+        ПОДРОБНЕЕ
+        <AppIcon name="arrow-right" :size="14" :stroke-width="2" />
       </button>
     </div>
   </section>
@@ -77,12 +83,14 @@ function goToProduct(slug: string) {
 }
 
 .product-card__icon {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #f5f0e8;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
 }
 
 .product-card__icon--air {
@@ -120,7 +128,7 @@ function goToProduct(slug: string) {
 .product-card__btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   padding: 14px 32px;
   border: none;
   border-radius: 100px;

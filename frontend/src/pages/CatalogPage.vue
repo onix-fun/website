@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 import AppHeader from '@/components/header/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import { navItems } from '@/components/header'
@@ -10,16 +10,27 @@ import CatalogCtaSection from '@/components/sections/catalog/CatalogCtaSection.v
 
 const activeCategory = ref('all')
 provide('activeCategory', activeCategory)
+
+const pageContent = ref<{ page_title?: string } | null>(null)
+
+onMounted(async () => {
+  try {
+    const res = await fetch('/api/content/catalog_page')
+    if (res.ok) pageContent.value = await res.json()
+  } catch {
+    pageContent.value = null
+  }
+})
 </script>
 
 <template>
   <AppHeader logo="/favicon.svg" :items="navItems" />
   <main>
     <Breadcrumbs />
-    <h1 class="catalog-page__title">Каталог</h1>
+    <h1 class="catalog-page__title">{{ pageContent?.page_title || 'Каталог' }}</h1>
     <CatalogFiltersSection />
     <CatalogGridSection />
-    <CatalogCtaSection />
+    <ProcessCtaSection />
   </main>
   <AppFooter />
 </template>

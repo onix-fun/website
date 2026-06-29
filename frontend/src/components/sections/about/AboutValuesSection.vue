@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
+import AppIcon from '@/components/icons/AppIcon.vue'
+
 interface ValueCard {
   title: string
   description: string
@@ -22,6 +24,15 @@ onMounted(async () => {
     data.value = null
   }
 })
+
+function valueIcon(title: string): string {
+  const normalized = title.toLowerCase()
+  if (normalized.includes('чест')) return 'honesty'
+  if (normalized.includes('каче')) return 'quality'
+  if (normalized.includes('уник')) return 'sparkles'
+  if (normalized.includes('диалог')) return 'dialog'
+  return 'check'
+}
 </script>
 
 <template>
@@ -30,7 +41,9 @@ onMounted(async () => {
       <span class="av__label">{{ data.label }}</span>
       <div class="av__grid">
         <article v-for="(v, i) in data.values" :key="i" class="av__card">
-          <div class="av__card-dot" :style="{ background: v.color }" />
+          <div class="av__card-icon" :style="{ background: v.color }">
+            <AppIcon :name="valueIcon(v.title)" :size="22" :stroke-width="2" />
+          </div>
           <h3 class="av__card-title">{{ v.title }}</h3>
           <p class="av__card-desc">{{ v.description }}</p>
         </article>
@@ -75,11 +88,16 @@ onMounted(async () => {
   gap: 12px;
 }
 
-.av__card-dot {
-  width: 8px;
-  height: 8px;
+.av__card-icon {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  color: #ffffff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.16);
 }
 
 .av__card-title {

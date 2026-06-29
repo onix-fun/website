@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
+import AppIcon from '@/components/icons/AppIcon.vue'
+
 interface ContactItem {
   label: string
   value: string
@@ -28,6 +30,14 @@ onMounted(async () => {
     data.value = null
   }
 })
+
+function contactIcon(label: string): string {
+  const normalized = label.toLowerCase()
+  if (normalized.includes('mail') || normalized.includes('почт') || normalized.includes('email')) return 'mail'
+  if (normalized.includes('тел') || normalized.includes('phone')) return 'phone'
+  if (normalized.includes('адрес') || normalized.includes('локац') || normalized.includes('город')) return 'map-pin'
+  return 'chat'
+}
 </script>
 
 <template>
@@ -38,11 +48,19 @@ onMounted(async () => {
         <h2 class="ac__title">{{ data.title }}</h2>
         <div class="ac__list">
           <div v-for="(c, i) in data.contacts" :key="i" class="ac__item">
-            <span class="ac__item-label">{{ c.label }}</span>
-            <span class="ac__item-value">{{ c.value }}</span>
+            <span class="ac__item-icon">
+              <AppIcon :name="contactIcon(c.label)" :size="18" :stroke-width="2" />
+            </span>
+            <span class="ac__item-text">
+              <span class="ac__item-label">{{ c.label }}</span>
+              <span class="ac__item-value">{{ c.value }}</span>
+            </span>
           </div>
         </div>
-        <a :href="data.cta.link" class="ac__cta">{{ data.cta.text }}</a>
+        <a :href="data.cta.link" class="ac__cta">
+          {{ data.cta.text }}
+          <AppIcon name="arrow-right" :size="14" :stroke-width="2" />
+        </a>
       </div>
     </div>
   </section>
@@ -91,8 +109,26 @@ onMounted(async () => {
 
 .ac__item {
   display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ac__item-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  color: #f5f0e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ac__item-text {
+  min-width: 0;
+  display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .ac__item-label {
@@ -113,6 +149,7 @@ onMounted(async () => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   width: fit-content;
   padding: 15px 32px;
   background: #ff4d00;

@@ -10,6 +10,7 @@ interface AboutAuthorData {
   label: string
   name: string
   role: string
+  image_url?: string
   bio: string[]
   social: SocialLink[]
 }
@@ -30,7 +31,8 @@ onMounted(async () => {
   <section v-if="data" class="aauth">
     <div class="aauth__inner">
       <div class="aauth__image">
-        <div class="aauth__image-placeholder" />
+        <img v-if="data.image_url" class="aauth__image-el" :src="data.image_url" alt="">
+        <div v-else class="aauth__image-placeholder" />
       </div>
       <div class="aauth__content">
         <span class="aauth__label">{{ data.label }}</span>
@@ -76,6 +78,13 @@ onMounted(async () => {
   height: 100%;
   background: linear-gradient(135deg, #d4d0c8 0%, #c4c0b8 100%);
   border-radius: 15px;
+}
+
+.aauth__image-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .aauth__content {

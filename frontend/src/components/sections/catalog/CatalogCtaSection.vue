@@ -5,6 +5,7 @@ interface CtaContent {
   heading: string
   description: string
   button_text: string
+  button_link?: string
 }
 
 const content = ref<CtaContent | null>(null)
@@ -25,7 +26,7 @@ onMounted(async () => {
     <div class="cta__circle cta__circle--green" />
     <h2 class="cta__title">{{ content.heading }}</h2>
     <p class="cta__text">{{ content.description }}</p>
-    <router-link to="/constructor" class="cta__btn">
+    <router-link :to="content.button_link || '/constructor'" class="cta__btn">
       {{ content.button_text }}
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
         <path d="M4 9H14" stroke="white" stroke-width="2" stroke-linecap="round"/>

@@ -100,7 +100,13 @@ const mainImageBg = computed(() => {
           :style="{ borderColor: activeThumb === i ? 'var(--accent)' : '#000' }"
           @click="activeThumb = i"
         >
-          <div class="thumb__inner" :style="{ background: thumb.bg_color || '#f0edff' }" />
+          <div
+            class="thumb__inner"
+            :style="{
+              background: thumb.bg_color || '#f0edff',
+              backgroundImage: thumb.image_url ? `url(${thumb.image_url})` : undefined
+            }"
+          />
         </button>
       </div>
     </div>
@@ -198,6 +204,9 @@ const mainImageBg = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .product-hero__info {

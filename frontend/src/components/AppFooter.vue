@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
+import AppIcon from '@/components/icons/AppIcon.vue'
+
 interface NavLink {
   text: string
   url: string
@@ -34,6 +36,14 @@ onMounted(async () => {
     data.value = null
   }
 })
+
+function socialIcon(name: string): string {
+  const normalized = name.toLowerCase()
+  if (normalized.includes('telegram')) return 'telegram'
+  if (normalized.includes('whatsapp')) return 'whatsapp'
+  if (normalized.includes('vk') || normalized.includes('вк')) return 'vk'
+  return 'sparkles'
+}
 </script>
 
 <template>
@@ -50,8 +60,9 @@ onMounted(async () => {
               :href="s.url"
               class="footer__social-link"
               :title="s.name"
+              :aria-label="s.name"
             >
-              <span class="footer__social-icon">{{ s.name.charAt(0) }}</span>
+              <AppIcon :name="socialIcon(s.name)" :size="16" :stroke-width="2.2" />
             </a>
           </div>
         </div>
@@ -132,6 +143,10 @@ onMounted(async () => {
   font-size: 12px;
   font-weight: 700;
   transition: transform 0.2s;
+}
+
+.footer__social-link :deep(.app-icon) {
+  overflow: visible;
 }
 
 .footer__social-link:hover {

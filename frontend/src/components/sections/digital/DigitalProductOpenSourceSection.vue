@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { inject, computed, onMounted, ref, type Ref } from 'vue'
 
+import AppIcon from '@/components/icons/AppIcon.vue'
+
 interface ContentData {
   heading: string
   button_text: string
@@ -10,6 +12,7 @@ interface ProductData {
   content?: {
     open_source?: {
       description: string
+      button_text?: string
       github_url: string
     }
   }
@@ -31,18 +34,14 @@ onMounted(async () => {
 <template>
   <section v-if="oss" class="oss-section">
     <div class="oss-icon">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M19 8l-7 8-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <AppIcon name="code" :size="28" :stroke-width="2" />
     </div>
     <h2 class="oss-heading">{{ content?.heading || 'Открытый код' }}</h2>
     <p class="oss-description">{{ oss.description }}</p>
     <a :href="oss.github_url" target="_blank" class="oss-btn">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <path d="M9 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M13 5.5H5a3 3 0 0 0-3 3v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      {{ content?.button_text || 'НА GITHUB' }}
+      <AppIcon name="github" :size="16" :stroke-width="1.7" />
+      {{ oss.button_text || content?.button_text || 'НА GITHUB' }}
+      <AppIcon name="arrow-right" :size="14" :stroke-width="2" />
     </a>
   </section>
 </template>

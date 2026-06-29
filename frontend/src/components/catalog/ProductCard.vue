@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import AppIcon from '@/components/icons/AppIcon.vue'
+
 export interface Product {
   id: number
   name: string
@@ -78,6 +80,7 @@ const productNameRu = computed(() => props.product.name_ru)
       <div class="card__action">
         <span class="card__btn">
           ПРЕДЗАКАЗ
+          <AppIcon name="arrow-right" :size="13" :stroke-width="2.2" />
         </span>
       </div>
     </div>
@@ -199,6 +202,10 @@ const productNameRu = computed(() => props.product.name_ru)
 
 .card__btn {
   width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   padding: 8px 0;
   border-radius: 999px;
   background: var(--green);

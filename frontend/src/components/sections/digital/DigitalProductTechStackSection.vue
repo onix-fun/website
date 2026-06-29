@@ -28,7 +28,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section v-if="tech" class="tech-section">
+  <section v-if="tech?.items?.length" class="tech-section">
     <span class="section-badge section-badge--orange">{{ content?.badge || 'ТЕХНОЛОГИИ' }}</span>
     <h2 class="section-heading">{{ content?.heading || 'Стек' }}</h2>
     <div class="tech-grid">

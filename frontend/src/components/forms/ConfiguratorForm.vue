@@ -1,13 +1,95 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { configuratorState, files, persistConfigurator } from '../../stores/configurator'
 
+import AppIcon from '@/components/icons/AppIcon.vue'
+
 const router = useRouter()
 
-const productOptions = ['Настольный светильник', 'Ночник'] as const
+interface FeatureOption {
+  id: string
+  label: string
+}
 
-const featureOptions = [
+interface MaterialOption {
+  id: string
+  label: string
+  fullName: string
+  color: string
+  tags: string[]
+}
+
+interface ConfiguratorSection {
+  step: string
+  title: string
+  note?: string
+  placeholder?: string
+  title_text?: string
+  hint?: string
+  width_label?: string
+  height_label?: string
+  depth_label?: string
+}
+
+interface ConfiguratorOptions {
+  hero?: {
+    label: string
+    title: string
+    description: string
+  }
+  product_types?: string[]
+  features?: FeatureOption[]
+  materials?: MaterialOption[]
+  colors?: string[]
+  sections?: Record<string, ConfiguratorSection>
+  submit?: {
+    disclaimer: string
+    button_text: string
+  }
+}
+
+const fallbackHero = {
+  label: 'КОНФИГУРАТОР',
+  title: 'Создай свой светильник',
+  description: 'Опишите идею — мы воплотим её в жизнь. Каждый светильник уникален и создаётся специально для вас.',
+}
+
+const fallbackSections: Record<string, ConfiguratorSection> = {
+  product_type: { step: '01', title: 'Что необходимо изготовить' },
+  features: { step: '02', title: 'Дополнительные функции' },
+  material: { step: '03', title: 'Материал корпуса' },
+  color: { step: '04', title: 'Цвет корпуса', note: 'Доступно более 40 цветов. Если нужного оттенка нет — укажите в комментарии.' },
+  dimensions: {
+    step: '05',
+    title: 'Примерные размеры',
+    width_label: 'Ширина (мм)',
+    height_label: 'Высота (мм)',
+    depth_label: 'Глубина (мм)',
+    placeholder: 'например, 240',
+    note: '* Размеры являются приблизительными. Точные параметры согласовываются при обсуждении проекта.',
+  },
+  files: {
+    step: '06',
+    title: 'Загрузка файлов',
+    title_text: 'Перетащите файлы или нажмите',
+    hint: 'Изображения, фото, эскизы, референсы — любые форматы',
+  },
+  description: {
+    step: '07',
+    title: 'Описание идеи',
+    placeholder: 'Опишите максимально подробно: назначение, атмосферу, стиль интерьера, пожелания по свету и форме. Чем подробнее — тем точнее результат.',
+  },
+}
+
+const fallbackSubmit = {
+  disclaimer: 'Отправляя заявку, вы оформляете предзаказ, а не покупаете готовый товар. Стоимость и сроки согласовываются индивидуально.',
+  button_text: 'ОТПРАВИТЬ ЗАЯВКУ',
+}
+
+const fallbackProductOptions = ['Настольный светильник', 'Ночник']
+
+const fallbackFeatureOptions: FeatureOption[] = [
   { id: 'smart', label: 'Умная подсветка' },
   { id: 'rgbic', label: 'RGBIC' },
   { id: 'rgb', label: 'RGB' },
@@ -16,24 +98,62 @@ const featureOptions = [
   { id: 'battery', label: 'Аккумулятор' },
   { id: 'app', label: 'Управление через приложение' },
   { id: 'usbc', label: 'USB Type-C' },
-] as const
+] 
 
-const materialOptions = [
+const fallbackMaterialOptions: MaterialOption[] = [
   { id: 'pla', label: 'PLA', fullName: 'Полимолочная кислота', color: '#00c45a', tags: ['Био', '14 цв', 'Мат'] },
   { id: 'petg', label: 'PETG', fullName: 'Полиэтилентерефталат', color: '#7b61ff', tags: ['Прозр', '8 цв', 'Проч'] },
   { id: 'asa', label: 'ASA', fullName: 'Акрилонитрил-стирол-акрилат', color: '#ff4d00', tags: ['УФ', '12 цв', 'Жёст'] },
-] as const
+] 
 
-const colorSwatches = [
+const fallbackColorSwatches = [
   '#1a1a1a', '#ffffff', '#ff4d00', '#58cc02', '#ffd600',
   '#7b61ff', '#00c45a', '#ec8383', '#96d3e6', '#f5f0e8',
   '#c84b00', '#3e9e00', '#b08d4a', '#6b6555', '#1a1a2e',
-] as const
+]
+
+const options = ref<ConfiguratorOptions | null>(null)
+
+const hero = computed(() => options.value?.hero || fallbackHero)
+const sections = computed(() => ({ ...fallbackSections, ...(options.value?.sections || {}) }))
+const submitContent = computed(() => options.value?.submit || fallbackSubmit)
+const productOptions = computed(() => options.value?.product_types?.length ? options.value.product_types : fallbackProductOptions)
+const featureOptions = computed(() => options.value?.features?.length ? options.value.features : fallbackFeatureOptions)
+const materialOptions = computed(() => options.value?.materials?.length ? options.value.materials : fallbackMaterialOptions)
+const colorSwatches = computed(() => options.value?.colors?.length ? options.value.colors : fallbackColorSwatches)
+
+onMounted(async () => {
+  try {
+    const res = await fetch('/api/configurator/options')
+    if (res.ok) options.value = await res.json()
+  } catch {
+    options.value = null
+  }
+})
 
 function toggleFeature(id: string) {
   const idx = configuratorState.features.indexOf(id)
   if (idx === -1) configuratorState.features.push(id)
   else configuratorState.features.splice(idx, 1)
+}
+
+function productTypeIcon(label: string): string {
+  return label.toLowerCase().includes('ноч') ? 'lamp-night' : 'lamp-desk'
+}
+
+function featureIcon(id: string): string {
+  const map: Record<string, string> = {
+    smart: 'sparkles',
+    rgbic: 'sparkles',
+    rgb: 'sparkles',
+    bluetooth: 'brief',
+    wifi: 'wifi',
+    battery: 'shield',
+    app: 'phone',
+    usbc: 'usbc',
+  }
+
+  return map[id] || 'check'
 }
 
 function addFiles(list: FileList) {
@@ -91,21 +211,18 @@ watch(configuratorState, persistConfigurator, { deep: true })
 <template>
   <section class="cf-hero">
     <div class="cf-hero__inner">
-      <p class="cf-hero__label">КОНФИГУРАТОР</p>
-      <h1 class="cf-hero__title">Создай свой<br>светильник</h1>
-      <p class="cf-hero__desc">
-        Опишите идею — мы воплотим её в жизнь. Каждый светильник<br>
-        уникален и создаётся специально для вас.
-      </p>
+      <p class="cf-hero__label">{{ hero.label }}</p>
+      <h1 class="cf-hero__title">{{ hero.title }}</h1>
+      <p class="cf-hero__desc">{{ hero.description }}</p>
     </div>
   </section>
 
   <div class="cf-form">
     <!-- Section 01: Product type -->
-    <section class="cf-section">
+    <section class="cf-section cf-section--product">
       <div class="cf-section__header">
-        <div class="cf-step">01</div>
-        <h2 class="cf-section__title">Что необходимо изготовить</h2>
+        <div class="cf-step">{{ sections.product_type.step }}</div>
+        <h2 class="cf-section__title">{{ sections.product_type.title }}</h2>
       </div>
       <div class="cf-section__body">
         <div class="cf-product-grid">
@@ -115,21 +232,8 @@ watch(configuratorState, persistConfigurator, { deep: true })
             :class="['cf-product-card', { active: configuratorState.productType === opt }]"
             @click="configuratorState.productType = opt"
           >
-            <div v-if="opt === 'Настольный светильник'" class="cf-product-icon cf-product-icon--desk">
-              <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
-                <path d="M2 18L7 4L16 2L25 4L30 18" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-                <path d="M16 2V0" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-                <path d="M10 18L16 14L22 18" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div v-else class="cf-product-icon cf-product-icon--night">
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                <circle cx="18" cy="18" r="16" stroke="currentColor" stroke-width="4"/>
-                <path d="M18 6V12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-                <path d="M18 24V30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-                <path d="M6 18H12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-                <path d="M24 18H30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-              </svg>
+            <div class="cf-product-icon">
+              <AppIcon :name="productTypeIcon(opt)" :size="36" :stroke-width="2.4" />
             </div>
             <span class="cf-product-label">{{ opt }}</span>
           </button>
@@ -138,10 +242,10 @@ watch(configuratorState, persistConfigurator, { deep: true })
     </section>
 
     <!-- Section 02: Description -->
-    <section class="cf-section">
+    <section class="cf-section cf-section--description">
       <div class="cf-section__header">
-        <div class="cf-step">02</div>
-        <h2 class="cf-section__title">Описание идеи</h2>
+        <div class="cf-step">{{ sections.description.step }}</div>
+        <h2 class="cf-section__title">{{ sections.description.title }}</h2>
       </div>
       <div class="cf-section__body">
         <textarea
@@ -149,30 +253,25 @@ watch(configuratorState, persistConfigurator, { deep: true })
           rows="6"
           :value="configuratorState.description"
           @input="configuratorState.description = ($event.target as HTMLTextAreaElement).value"
-          placeholder="Опишите максимально подробно: назначение, атмосферу, стиль интерьера, пожелания по свету и форме. Чем подробнее — тем точнее результат."
+          :placeholder="sections.description.placeholder"
         />
       </div>
     </section>
 
     <!-- Section 03: Files -->
-    <section class="cf-section">
+    <section class="cf-section cf-section--files">
       <div class="cf-section__header">
-        <div class="cf-step">03</div>
-        <h2 class="cf-section__title">Загрузка файлов</h2>
+        <div class="cf-step">{{ sections.files.step }}</div>
+        <h2 class="cf-section__title">{{ sections.files.title }}</h2>
       </div>
       <div class="cf-section__body">
         <div class="cf-dropzone" @click="triggerFilePicker" @dragover.prevent @drop.prevent="addFiles(($event as DragEvent).dataTransfer!.files)">
           <div class="cf-dropzone__icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12 4V20" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              <path d="M12 4L8 8" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              <path d="M12 4L16 8" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+            <AppIcon name="upload" :size="26" :stroke-width="2.2" />
           </div>
           <div class="cf-dropzone__text">
-            <p class="cf-dropzone__title">Перетащите файлы или нажмите</p>
-            <p class="cf-dropzone__hint">Изображения, фото, эскизы, референсы — любые форматы</p>
+            <p class="cf-dropzone__title">{{ sections.files.title_text }}</p>
+            <p class="cf-dropzone__hint">{{ sections.files.hint }}</p>
           </div>
           <input ref="fileInput" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.dwg,.dxf,.svg" hidden @change="addFiles(($event.target as HTMLInputElement).files!)" />
         </div>
@@ -187,53 +286,53 @@ watch(configuratorState, persistConfigurator, { deep: true })
     </section>
 
     <!-- Section 04: Dimensions -->
-    <section class="cf-section">
+    <section class="cf-section cf-section--dimensions">
       <div class="cf-section__header">
-        <div class="cf-step">04</div>
-        <h2 class="cf-section__title">Примерные размеры</h2>
+        <div class="cf-step">{{ sections.dimensions.step }}</div>
+        <h2 class="cf-section__title">{{ sections.dimensions.title }}</h2>
       </div>
       <div class="cf-section__body">
         <div class="cf-dim-grid">
           <label class="cf-field">
-            <span class="cf-field__label">Ширина (мм)</span>
+            <span class="cf-field__label">{{ sections.dimensions.width_label }}</span>
             <input
               class="cf-input"
               type="number" min="1"
               :value="configuratorState.widthMm ?? ''"
               @input="setDimension('widthMm', $event)"
-              placeholder="например, 240"
+              :placeholder="sections.dimensions.placeholder"
             />
           </label>
           <label class="cf-field">
-            <span class="cf-field__label">Высота (мм)</span>
+            <span class="cf-field__label">{{ sections.dimensions.height_label }}</span>
             <input
               class="cf-input"
               type="number" min="1"
               :value="configuratorState.heightMm ?? ''"
               @input="setDimension('heightMm', $event)"
-              placeholder="например, 240"
+              :placeholder="sections.dimensions.placeholder"
             />
           </label>
           <label class="cf-field">
-            <span class="cf-field__label">Глубина (мм)</span>
+            <span class="cf-field__label">{{ sections.dimensions.depth_label }}</span>
             <input
               class="cf-input"
               type="number" min="1"
               :value="configuratorState.depthMm ?? ''"
               @input="setDimension('depthMm', $event)"
-              placeholder="например, 240"
+              :placeholder="sections.dimensions.placeholder"
             />
           </label>
         </div>
-        <p class="cf-dim-note">* Размеры являются приблизительными. Точные параметры согласовываются при обсуждении проекта.</p>
+        <p class="cf-dim-note">{{ sections.dimensions.note }}</p>
       </div>
     </section>
 
     <!-- Section 05: Features -->
-    <section class="cf-section">
+    <section class="cf-section cf-section--features">
       <div class="cf-section__header">
-        <div class="cf-step">05</div>
-        <h2 class="cf-section__title">Дополнительные функции</h2>
+        <div class="cf-step">{{ sections.features.step }}</div>
+        <h2 class="cf-section__title">{{ sections.features.title }}</h2>
       </div>
       <div class="cf-section__body">
         <div class="cf-chips">
@@ -243,48 +342,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
             :class="['cf-chip', { active: configuratorState.features.includes(opt.id) }]"
             @click="toggleFeature(opt.id)"
           >
-            <svg v-if="opt.id === 'smart'" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <circle cx="7" cy="7" r="3" stroke="currentColor" stroke-width="1"/>
-              <path d="M7 1V3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-              <path d="M7 11V13" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-              <path d="M1 7H3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-              <path d="M11 7H13" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-            </svg>
-            <svg v-else-if="opt.id === 'rgbic'" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <rect x="1" y="4" width="12" height="6" rx="1" stroke="currentColor" stroke-width="1"/>
-              <rect x="1" y="4" width="12" height="3" rx="1" stroke="currentColor" stroke-width="1"/>
-              <rect x="1" y="7" width="12" height="3" rx="1" stroke="currentColor" stroke-width="1"/>
-            </svg>
-            <svg v-else-if="opt.id === 'rgb'" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1"/>
-              <circle cx="7" cy="4" r="1" fill="currentColor"/>
-              <circle cx="9" cy="7" r="1" fill="currentColor"/>
-              <circle cx="8" cy="10" r="1" fill="currentColor"/>
-              <circle cx="5" cy="10" r="1" fill="currentColor"/>
-              <circle cx="4" cy="7" r="1" fill="currentColor"/>
-            </svg>
-            <svg v-else-if="opt.id === 'bluetooth'" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M4 2L10 8L7 12V2L10 6L4 12" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <svg v-else-if="opt.id === 'wifi'" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M1 5C3 3 5 2 7 2C9 2 11 3 13 5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-              <path d="M3 7.5C4.5 6.5 5.5 6 7 6C8.5 6 9.5 6.5 11 7.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-              <path d="M5 10C6 9.5 6.5 9 7 9C7.5 9 8 9.5 9 10" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-              <circle cx="7" cy="12" r="0.5" fill="currentColor"/>
-            </svg>
-            <svg v-else-if="opt.id === 'battery'" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <rect x="1" y="2" width="11" height="10" rx="2" stroke="currentColor" stroke-width="1"/>
-              <rect x="12" y="5" width="1" height="4" rx="0.5" stroke="currentColor" stroke-width="1"/>
-              <rect x="2" y="3" width="9" height="8" rx="1" fill="currentColor"/>
-            </svg>
-            <svg v-else-if="opt.id === 'app'" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1"/>
-              <rect x="3" y="3" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1"/>
-            </svg>
-            <svg v-else-if="opt.id === 'usbc'" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <rect x="2" y="5" width="10" height="4" rx="2" stroke="currentColor" stroke-width="1"/>
-              <path d="M5 9L7 12L9 9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <AppIcon :name="featureIcon(opt.id)" :size="15" :stroke-width="2" />
             <span>{{ opt.label }}</span>
           </button>
         </div>
@@ -292,10 +350,10 @@ watch(configuratorState, persistConfigurator, { deep: true })
     </section>
 
     <!-- Section 06: Material -->
-    <section class="cf-section">
+    <section class="cf-section cf-section--material">
       <div class="cf-section__header">
-        <div class="cf-step">06</div>
-        <h2 class="cf-section__title">Материал корпуса</h2>
+        <div class="cf-step">{{ sections.material.step }}</div>
+        <h2 class="cf-section__title">{{ sections.material.title }}</h2>
       </div>
       <div class="cf-section__body">
         <div class="cf-material-grid">
@@ -311,10 +369,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
             <p class="cf-mat-name">{{ mat.fullName }}</p>
             <div class="cf-mat-tags">
               <span v-for="tag in mat.tags" :key="tag" class="cf-mat-tag" :style="{ background: mat.color }">
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-                  <path d="M8 3L4 7" stroke="white" stroke-width="1"/>
-                  <path d="M3 4L5 6" stroke="white" stroke-width="1"/>
-                </svg>
+                <AppIcon name="check" :size="11" :stroke-width="2" />
                 {{ tag }}
               </span>
             </div>
@@ -324,10 +379,10 @@ watch(configuratorState, persistConfigurator, { deep: true })
     </section>
 
     <!-- Section 07: Color -->
-    <section class="cf-section">
+    <section class="cf-section cf-section--color">
       <div class="cf-section__header">
-        <div class="cf-step">07</div>
-        <h2 class="cf-section__title">Цвет корпуса</h2>
+        <div class="cf-step">{{ sections.color.step }}</div>
+        <h2 class="cf-section__title">{{ sections.color.title }}</h2>
       </div>
       <div class="cf-section__body">
         <div class="cf-swatches">
@@ -339,56 +394,18 @@ watch(configuratorState, persistConfigurator, { deep: true })
             @click="configuratorState.colorHex = c"
           />
         </div>
-        <p class="cf-color-note">Доступно более 40 цветов. Если нужного оттенка нет — укажите в комментарии.</p>
-      </div>
-    </section>
-
-    <!-- Section 08: Budget -->
-    <section class="cf-section">
-      <div class="cf-section__header">
-        <div class="cf-step">08</div>
-        <h2 class="cf-section__title">Предпочитаемый бюджет</h2>
-      </div>
-      <div class="cf-section__body">
-        <input
-          class="cf-input cf-input--budget"
-          type="text"
-          inputmode="numeric"
-          :value="configuratorState.budgetRange"
-          @input="configuratorState.budgetRange = ($event.target as HTMLInputElement).value"
-          placeholder="например, 5 000–8 000 ₽"
-        />
-      </div>
-    </section>
-
-    <!-- Section 09: Comments -->
-    <section class="cf-section">
-      <div class="cf-section__header">
-        <div class="cf-step">09</div>
-        <h2 class="cf-section__title">Дополнительные комментарии</h2>
-      </div>
-      <div class="cf-section__body">
-        <textarea
-          class="cf-textarea"
-          rows="4"
-          :value="configuratorState.comments"
-          @input="configuratorState.comments = ($event.target as HTMLTextAreaElement).value"
-          placeholder="Любые дополнительные пожелания, вопросы или уточнения..."
-        />
+        <p class="cf-color-note">{{ sections.color.note }}</p>
       </div>
     </section>
 
     <!-- Submit -->
     <div class="cf-submit">
       <p class="cf-disclaimer">
-        Отправляя заявку, вы оформляете предзаказ, а не покупаете готовый<br>
-        товар. Стоимость и сроки согласовываются индивидуально.
+        {{ submitContent.disclaimer }}
       </p>
       <button class="cf-submit-btn" :disabled="uploading" @click="submitForm">
-        ОТПРАВИТЬ ЗАЯВКУ
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M4 2L10 8L4 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        {{ submitContent.button_text }}
+        <AppIcon name="arrow-right" :size="14" :stroke-width="2" />
       </button>
     </div>
   </div>
@@ -425,6 +442,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
   color: #ffffff;
   margin: 0;
   line-height: 1.05;
+  white-space: pre-line;
 }
 
 .cf-hero__desc {
@@ -435,6 +453,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
   margin: 0;
   padding-top: 8px;
   line-height: 1.6;
+  max-width: 520px;
 }
 
 .cf-form {
@@ -450,6 +469,34 @@ watch(configuratorState, persistConfigurator, { deep: true })
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+.cf-section--product {
+  order: 1;
+}
+
+.cf-section--features {
+  order: 2;
+}
+
+.cf-section--material {
+  order: 3;
+}
+
+.cf-section--color {
+  order: 4;
+}
+
+.cf-section--dimensions {
+  order: 5;
+}
+
+.cf-section--files {
+  order: 6;
+}
+
+.cf-section--description {
+  order: 7;
 }
 
 .cf-section__header {
@@ -861,6 +908,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-submit {
+  order: 8;
   display: flex;
   flex-direction: column;
   align-items: center;

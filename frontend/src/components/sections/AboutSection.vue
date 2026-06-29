@@ -6,10 +6,10 @@ interface AboutData {
   title: string
   description: string
   tags: string[]
+  image_url?: string
 }
 
 const data = ref<AboutData | null>(null)
-const aboutImageUrl = `${import.meta.env.VITE_UPLOADS_BASE}/about.png`
 
 onMounted(async () => {
   try {
@@ -25,7 +25,7 @@ onMounted(async () => {
   <section v-if="data" class="about">
     <div class="about__inner">
       <div class="about__visual">
-        <img class="about__image" :src="aboutImageUrl" alt="">
+        <img class="about__image" :src="data.image_url || '/content/about/pic.jpg'" alt="">
       </div>
       <div class="about__content">
         <span class="about__label">{{ data.label }}</span>

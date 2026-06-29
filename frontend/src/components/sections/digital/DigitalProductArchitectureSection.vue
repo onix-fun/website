@@ -9,6 +9,8 @@ interface ContentData {
 interface ProductData {
   content?: {
     architecture?: {
+      badge?: string
+      heading?: string
       items: { title: string; subtitle: string }[]
       description: string
     }
@@ -29,9 +31,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section v-if="arch" class="arch-section">
-    <span class="arch-badge">{{ content?.badge || 'КАК ЭТО РАБОТАЕТ' }}</span>
-    <h2 class="arch-heading">{{ content?.heading || 'Архитектура системы' }}</h2>
+  <section v-if="arch?.items?.length" class="arch-section">
+    <span class="arch-badge">{{ arch.badge || content?.badge || 'КАК ЭТО РАБОТАЕТ' }}</span>
+    <h2 class="arch-heading">{{ arch.heading || content?.heading || 'Архитектура системы' }}</h2>
     <div class="arch-flow">
       <template v-for="(item, i) in arch.items" :key="i">
         <div class="arch-item">

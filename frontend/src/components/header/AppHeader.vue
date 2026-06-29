@@ -112,9 +112,11 @@ const isCollapsed = ref(false)
 
 const isMobile = ref(false)
 
+const isCompactHeader = ref(false)
+
 const fullWidth = ref(0)
 
-const collapsedWidth = computed(() => isMobile.value ? 72 : 74)
+const collapsedWidth = ref(76)
 
 const capsuleWidth = ref<number | null>(null)
 
@@ -164,6 +166,23 @@ function measure() {
   fullWidth.value = el.offsetWidth
 }
 
+function updateCollapsedWidth() {
+  const el = capsuleRef.value
+  if (!el) return
+
+  const cssValue = Number.parseFloat(
+    getComputedStyle(el).getPropertyValue('--collapsed-capsule-width')
+  )
+
+  collapsedWidth.value = Number.isFinite(cssValue)
+    ? cssValue
+    : isMobile.value
+      ? 66
+      : isCompactHeader.value
+        ? 68
+        : 76
+}
+
 function onTransitionEnd(e: TransitionEvent) {
   if (e.propertyName !== 'width') return
   if (!isCollapsed.value || menuOpen.value) {
@@ -172,6 +191,7 @@ function onTransitionEnd(e: TransitionEvent) {
 }
 
 function updateMobile() {
+  isCompactHeader.value = window.innerWidth <= 1024
   isMobile.value = window.innerWidth <= 768
   if (isMobile.value) {
     isCollapsed.value = true
@@ -186,6 +206,28 @@ function updateScroll() {
     if (!collapsed)
       menuOpen.value = false
     emit("collapse", collapsed)
+  }
+}
+
+async function syncHeaderOnResize() {
+  const wasMobile = isMobile.value
+
+  updateMobile()
+  await nextTick()
+  measure()
+  updateCollapsedWidth()
+
+  if (!isMobile.value) {
+    if (wasMobile) {
+      menuOpen.value = false
+    }
+    updateScroll()
+  }
+
+  if (isCollapsed.value && !menuOpen.value) {
+    capsuleWidth.value = collapsedWidth.value
+  } else {
+    capsuleWidth.value = null
   }
 }
 
@@ -217,19 +259,20 @@ onMounted(async () => {
   updateScroll()
   await nextTick()
   measure()
+  updateCollapsedWidth()
   collapseWatcherInitialized = true
 
   if (isCollapsed.value && !menuOpen.value) {
     capsuleWidth.value = collapsedWidth.value
   }
 
-  window.addEventListener("resize", updateMobile, { passive: true })
+  window.addEventListener("resize", syncHeaderOnResize, { passive: true })
   window.addEventListener("scroll", updateScroll, { passive: true })
   window.addEventListener("keydown", onKeyDown)
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", updateMobile)
+  window.removeEventListener("resize", syncHeaderOnResize)
   window.removeEventListener("scroll", updateScroll)
   window.removeEventListener("keydown", onKeyDown)
 })
@@ -298,6 +341,8 @@ onBeforeUnmount(() => {
 }
 
 .nav-capsule {
+  --collapsed-capsule-width: 76px;
+
   position: absolute;
   right: 0;
   top: 50%;
@@ -357,6 +402,10 @@ onBeforeUnmount(() => {
   box-shadow: var(--header-shadow);
 }
 
+.is-collapsed:not(.is-opened) .nav-capsule {
+  overflow: hidden;
+}
+
 .is-opened .nav-capsule__burger {
   background: none;
   border: none;
@@ -404,9 +453,11 @@ onBeforeUnmount(() => {
   color: #1a1a1a;
   text-decoration: none;
   opacity: 1;
+  visibility: visible;
   transition:
     max-width .45s var(--transition),
     opacity .35s,
+    visibility 0s,
     background .30s,
     transform .35s var(--transition),
     box-shadow .35s;
@@ -414,6 +465,7 @@ onBeforeUnmount(() => {
 
 .is-collapsed:not(.is-opened) .nav-capsule__item {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 
@@ -445,12 +497,14 @@ onBeforeUnmount(() => {
   justify-content: center;
   flex-shrink: 0;
   z-index: 2;
+  overflow: visible;
 }
 
 .nav-capsule__item-icon :deep(svg) {
   width: 24px;
   height: 24px;
   display: block;
+  overflow: visible;
 }
 
 .nav-capsule__item-label {
@@ -508,6 +562,8 @@ onBeforeUnmount(() => {
 
 @media (max-width: 1024px) {
   .nav-capsule {
+    --collapsed-capsule-width: 68px;
+
     gap: 4px;
     padding: 4px;
   }
@@ -524,13 +580,13 @@ onBeforeUnmount(() => {
   }
 
   .nav-capsule__item-icon {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
   }
 
   .nav-capsule__item-icon :deep(svg) {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
   }
 }
 
@@ -550,6 +606,8 @@ onBeforeUnmount(() => {
   }
 
   .nav-capsule {
+    --collapsed-capsule-width: 66px;
+
     right: 0;
   }
 
@@ -610,6 +668,10 @@ onBeforeUnmount(() => {
     opacity: 1;
     padding-left: 0;
     white-space: normal;
+  }
+
+  .is-mobile.is-collapsed:not(.is-opened) .nav-capsule__item {
+    display: none;
   }
 
 }

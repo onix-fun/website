@@ -15,6 +15,7 @@ interface CatalogData {
 }
 
 const data = ref<CatalogData | null>(null)
+const pageContent = ref<{ empty_state?: string } | null>(null)
 const activeCategory = inject<Ref<string>>('activeCategory')!
 
 onMounted(async () => {
@@ -23,6 +24,13 @@ onMounted(async () => {
     data.value = await res.json()
   } catch {
     data.value = null
+  }
+
+  try {
+    const res = await fetch('/api/content/catalog_page')
+    if (res.ok) pageContent.value = await res.json()
+  } catch {
+    pageContent.value = null
   }
 })
 
@@ -44,7 +52,7 @@ const filteredProducts = computed(() => {
     />
   </div>
   <div v-else-if="data && !filteredProducts.length" class="catalog__empty">
-    Нет товаров в этой категории
+    {{ pageContent?.empty_state || 'Нет товаров в этой категории' }}
   </div>
 </template>
 
