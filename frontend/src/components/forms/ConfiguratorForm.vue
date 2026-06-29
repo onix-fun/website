@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { configuratorState, files, persistConfigurator } from '../../stores/configurator'
 
@@ -44,9 +44,45 @@ function removeFile(i: number) {
   files.splice(i, 1)
 }
 
+const fileInput = ref<HTMLInputElement | null>(null)
+
+function triggerFilePicker() {
+  fileInput.value?.click()
+}
+
 function setDimension(key: 'widthMm' | 'heightMm' | 'depthMm', e: Event) {
   const val = (e.target as HTMLInputElement).value
   configuratorState[key] = val === '' ? null : Number(val)
+}
+
+const uploading = ref(false)
+
+async function submitForm() {
+  if (uploading.value) return
+  uploading.value = true
+
+  try {
+    const uploadedUrls: string[] = []
+
+    for (const file of files) {
+      const form = new FormData()
+      form.append('file', file)
+      form.append('folder', 'configurator')
+
+      const res = await fetch('/api/upload', { method: 'POST', body: form })
+      if (res.ok) {
+        const data = await res.json()
+        uploadedUrls.push(data.url)
+      }
+    }
+
+    configuratorState.fileUrls = uploadedUrls
+    persistConfigurator()
+
+    router.push('/checkout?from=constructor')
+  } finally {
+    uploading.value = false
+  }
 }
 
 watch(configuratorState, persistConfigurator, { deep: true })
@@ -125,7 +161,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
         <h2 class="cf-section__title">Загрузка файлов</h2>
       </div>
       <div class="cf-section__body">
-        <div class="cf-dropzone" @dragover.prevent @drop.prevent="addFiles(($event as DragEvent).dataTransfer!.files)">
+        <div class="cf-dropzone" @click="triggerFilePicker" @dragover.prevent @drop.prevent="addFiles(($event as DragEvent).dataTransfer!.files)">
           <div class="cf-dropzone__icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M12 4V20" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -138,7 +174,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
             <p class="cf-dropzone__title">Перетащите файлы или нажмите</p>
             <p class="cf-dropzone__hint">Изображения, фото, эскизы, референсы — любые форматы</p>
           </div>
-          <input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.dwg,.dxf,.svg" hidden @change="addFiles(($event.target as HTMLInputElement).files!)" />
+          <input ref="fileInput" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.dwg,.dxf,.svg" hidden @change="addFiles(($event.target as HTMLInputElement).files!)" />
         </div>
         <div v-if="files.length" class="cf-file-list">
           <div v-for="(f, i) in files" :key="i" class="cf-file-item">
@@ -348,7 +384,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
         Отправляя заявку, вы оформляете предзаказ, а не покупаете готовый<br>
         товар. Стоимость и сроки согласовываются индивидуально.
       </p>
-      <button class="cf-submit-btn" @click="router.push('/checkout?from=constructor')">
+      <button class="cf-submit-btn" :disabled="uploading" @click="submitForm">
         ОТПРАВИТЬ ЗАЯВКУ
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M4 2L10 8L4 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

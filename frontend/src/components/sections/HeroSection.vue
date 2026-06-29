@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import HeroPlanets from '@/assets/hero-planets.svg'
 
 interface Cta {
   text: string
@@ -29,23 +30,20 @@ onMounted(async () => {
 <template>
   <section v-if="data" class="hero">
     <div class="hero__orbs">
-      <svg width="1163" height="1176" viewBox="0 0 1163 1176" fill="none">
-        <ellipse cx="348" cy="305" rx="348" ry="305" stroke="#929292" stroke-width="1" />
-        <ellipse cx="263" cy="230" rx="263" ry="230" stroke="#929292" stroke-width="1" />
-        <ellipse cx="523" cy="298" rx="523" ry="298" stroke="#929292" stroke-width="1" />
-        <ellipse cx="447" cy="391" rx="447" ry="391" stroke="#929292" stroke-width="1" />
-      </svg>
+      <HeroPlanets />
     </div>
 
-    <div class="hero__badge">{{ data.badge }}</div>
+    <div class="hero__content">
+      <div class="hero__badge">{{ data.badge }}</div>
 
-    <h1 class="hero__title">{{ data.title }}</h1>
+      <h1 class="hero__title">{{ data.title }}</h1>
 
-    <p class="hero__subtitle">{{ data.subtitle }}</p>
+      <p class="hero__subtitle">{{ data.subtitle }}</p>
 
-    <div class="hero__actions">
-      <a :href="data.cta_primary.link" class="btn btn--primary">{{ data.cta_primary.text }}</a>
-      <a :href="data.cta_secondary.link" class="btn btn--secondary">{{ data.cta_secondary.text }}</a>
+      <div class="hero__actions">
+        <a :href="data.cta_primary.link" class="btn btn--primary">{{ data.cta_primary.text }}</a>
+        <a :href="data.cta_secondary.link" class="btn btn--secondary">{{ data.cta_secondary.text }}</a>
+      </div>
     </div>
   </section>
 </template>
@@ -65,17 +63,28 @@ onMounted(async () => {
 
 .hero__orbs {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 100%;
-  height: 100%;
+  max-width: 1163px;
   pointer-events: none;
   opacity: 0.5;
+  z-index: 0;
 }
 
 .hero__orbs svg {
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  transform: translate(calc(-43%), -55%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero__badge {
@@ -147,5 +156,43 @@ onMounted(async () => {
 .btn--secondary {
   background: var(--green);
   box-shadow: 0 4px 0 var(--green-shadow);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100dvh;
+    padding: 80px 20px 48px;
+  }
+
+  .hero__orbs {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    opacity: 0.2;
+    transform: none;
+  }
+
+  .hero__orbs svg {
+    width: 160%;
+    max-width: none;
+    height: auto;
+    display: block;
+    transform: none;
+  }
+
+  .hero__title {
+    font-size: 32px;
+  }
+
+  .hero__subtitle {
+    font-size: 12px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>

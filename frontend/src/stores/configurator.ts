@@ -13,6 +13,7 @@ export interface ConfiguratorData {
   colorHex: string | null
   budgetRange: string
   comments: string
+  fileUrls: string[]
 }
 
 function loadFromStorage(): ConfiguratorData {
@@ -31,6 +32,7 @@ function loadFromStorage(): ConfiguratorData {
     colorHex: null,
     budgetRange: '',
     comments: '',
+    fileUrls: [],
   }
 }
 
@@ -47,13 +49,14 @@ export const configuratorState = reactive<ConfiguratorData>({
   colorHex: saved.colorHex,
   budgetRange: saved.budgetRange,
   comments: saved.comments,
+  fileUrls: saved.fileUrls,
 })
 
 export const files = reactive<File[]>([])
 
 const serializable: (keyof ConfiguratorData)[] = [
   'productType', 'description', 'widthMm', 'heightMm', 'depthMm',
-  'features', 'material', 'colorHex', 'budgetRange', 'comments',
+  'features', 'material', 'colorHex', 'budgetRange', 'comments', 'fileUrls',
 ]
 
 export function persistConfigurator(): void {
@@ -76,5 +79,6 @@ export function clearConfigurator(): void {
   configuratorState.colorHex = null
   configuratorState.budgetRange = ''
   configuratorState.comments = ''
+  configuratorState.fileUrls = []
   files.splice(0, files.length)
 }

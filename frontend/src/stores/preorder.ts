@@ -17,6 +17,7 @@ export interface OrderData {
   color_hex?: string
   budget_range?: string
   comments?: string
+  file_urls?: string[]
 }
 
 export const preorderData = reactive<{
@@ -28,7 +29,7 @@ export const preorderData = reactive<{
 })
 
 export async function setPreorderFromConfigurator() {
-  const { configuratorState } = await import('./configurator')
+  const { configuratorState, files } = await import('./configurator')
 
   let priceRange = configuratorState.budgetRange || '4 900–5 200 ₽'
 
@@ -53,7 +54,11 @@ export async function setPreorderFromConfigurator() {
     color_hex: configuratorState.colorHex || undefined,
     budget_range: configuratorState.budgetRange || undefined,
     comments: configuratorState.comments || undefined,
+    file_urls: configuratorState.fileUrls.length ? configuratorState.fileUrls : undefined,
   }
+
+  files.splice(0, files.length)
+  configuratorState.fileUrls = []
 
   preorderData.origin = 'constructor'
   preorderData.orderData = data

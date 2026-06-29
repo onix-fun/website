@@ -253,12 +253,12 @@ onBeforeUnmount(() => {
   top: 25px;
   z-index: 1000;
   pointer-events: none;
+  padding-inline: 25px;
 }
 
 .app-header__inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 80px;
   height: var(--header-height);
   position: relative;
   pointer-events: none;
@@ -313,7 +313,6 @@ onBeforeUnmount(() => {
   border: 1px solid var(--header-border);
   box-shadow: var(--header-shadow);
   pointer-events: auto;
-  overflow: hidden;
   transition:
     width .45s var(--transition),
     padding .35s var(--transition),
@@ -391,7 +390,6 @@ onBeforeUnmount(() => {
 
 .nav-capsule__item {
   position: relative;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -496,34 +494,49 @@ onBeforeUnmount(() => {
   }
 }
 
-@media (max-width: 1024px) {
-  .app-header__inner {
-    padding: 0 40px;
+@media (min-width: 1025px) {
+  .app-header {
+    padding-inline: 40px;
   }
+}
 
+@media (min-width: 1281px) {
+  .app-header {
+    padding-inline: 80px;
+  }
+}
+
+@media (max-width: 1024px) {
   .nav-capsule {
-    gap: 6px;
-    padding: 6px;
+    gap: 4px;
+    padding: 4px;
   }
 
   .nav-capsule__item {
-    min-width: 56px;
-    max-width: 56px;
-    height: 56px;
+    min-width: 48px;
+    max-width: 48px;
+    height: 48px;
+    padding-inline: 12px;
   }
 
   .nav-capsule__item:hover {
-    max-width: 300px;
+    max-width: 260px;
+  }
+
+  .nav-capsule__item-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-capsule__item-icon :deep(svg) {
+    width: 20px;
+    height: 20px;
   }
 }
 
 @media (max-width: 768px) {
   .app-header {
     top: 18px;
-  }
-
-  .app-header__inner {
-    padding: 0 20px;
   }
 
   .app-header__logo {
@@ -542,8 +555,22 @@ onBeforeUnmount(() => {
 
   .is-collapsed .nav-capsule__burger,
   .is-opened .nav-capsule__burger {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
+    padding: 0 12px;
+  }
+
+  .nav-capsule__burger span {
+    width: 18px;
+    height: 2px;
+  }
+
+  .is-opened .nav-capsule__burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .is-opened .nav-capsule__burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   .app-header-spacer {

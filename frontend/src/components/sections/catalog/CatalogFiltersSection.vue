@@ -31,6 +31,13 @@ function setCategory(slug: string) {
 <template>
   <div v-if="data" class="filters">
     <button
+      class="filter-btn"
+      :class="{ 'filter-btn--active': activeCategory === 'all' }"
+      @click="setCategory('all')"
+    >
+      Все
+    </button>
+    <button
       v-for="cat in data.categories"
       :key="cat.id"
       class="filter-btn"

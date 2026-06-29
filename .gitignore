@@ -9,6 +9,8 @@
 *.test.exe
 /tmp/
 vendor/
+ui/
+uploads/
 
 # --- Node / Frontend ---
 node_modules/

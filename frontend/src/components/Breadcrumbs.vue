@@ -52,10 +52,6 @@ const isDigital = computed(() =>
           <svg class="bc-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M5 3.5L8.5 7L5 10.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <router-link v-if="dynamicData.category_slug" :to="`/catalog?category=${dynamicData.category_slug}`" class="bc-link">{{ dynamicData.category }}</router-link>
-          <svg v-if="dynamicData.category_slug" class="bc-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M5 3.5L8.5 7L5 10.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
           <span class="bc-current">{{ dynamicData.name }}</span>
         </template>
       </template>

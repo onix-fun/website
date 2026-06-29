@@ -9,16 +9,11 @@ services:
       POSTGRES_DB: sparrow
     ports:
       - "6666:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
-
-volumes:
-  pgdata:
 
 networks:
   default:

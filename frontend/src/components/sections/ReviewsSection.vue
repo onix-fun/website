@@ -28,9 +28,6 @@ onMounted(async () => {
   }
 })
 
-function stars(rating: number): string[] {
-  return Array.from({ length: 5 }, (_, i) => i < Math.round(rating) ? '★' : '☆')
-}
 </script>
 
 <template>
@@ -43,10 +40,6 @@ function stars(rating: number): string[] {
             <h2 class="reviews__title">{{ data.title }}</h2>
             <div class="reviews__rating-pill">
               <span class="reviews__rating-number">{{ data.rating }}</span>
-              <span class="reviews__stars">
-                <span v-for="(s, i) in stars(data.rating)" :key="i">{{ s }}</span>
-              </span>
-              <span class="reviews__count">{{ data.review_count }}</span>
             </div>
           </div>
         </div>
@@ -131,30 +124,16 @@ function stars(rating: number): string[] {
 .reviews__rating-pill {
   display: flex;
   align-items: center;
-  gap: 8px;
   background: var(--accent);
-  padding: 10px 20px;
+  padding: 6px 14px;
   border-radius: 999px;
   box-shadow: 0 4px 0 var(--accent-shadow);
 }
 
 .reviews__rating-number {
   font-family: var(--font-heading);
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 900;
-  color: var(--white);
-}
-
-.reviews__stars {
-  display: flex;
-  gap: 2px;
-  color: var(--yellow);
-  font-size: 12px;
-}
-
-.reviews__count {
-  font-size: 8px;
-  font-weight: 600;
   color: var(--white);
 }
 
@@ -166,13 +145,14 @@ function stars(rating: number): string[] {
 
 .review-card {
   flex: 1;
-  min-width: 280px;
-  border-radius: 16px;
-  padding: 24px;
+  min-width: 289px;
+  border-radius: 24px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 6px 0 rgba(0,0,0,0.3);
+  gap: 20px;
+  opacity: 0.85;
+  min-height: 280px;
 }
 
 .review-card__author {
@@ -182,18 +162,17 @@ function stars(rating: number): string[] {
 }
 
 .review-card__avatar {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 0 rgba(0,0,0,0.15);
 }
 
 .review-card__avatar-letter {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 900;
   color: var(--white);
 }
@@ -205,13 +184,13 @@ function stars(rating: number): string[] {
 
 .review-card__name {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 900;
   color: var(--bg);
 }
 
 .review-card__city {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--bg);
   opacity: 0.8;
@@ -219,16 +198,37 @@ function stars(rating: number): string[] {
 
 .review-card__stars {
   display: flex;
-  gap: 2px;
+  gap: 4px;
   color: var(--yellow);
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .review-card__text {
   margin: 0;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   color: var(--bg);
-  line-height: 1.6;
+  line-height: 1.8;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .reviews {
+    padding: 40px 16px;
+  }
+
+  .reviews__title {
+    font-size: 32px;
+  }
+
+  .reviews__title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .reviews__grid {
+    flex-direction: column;
+  }
 }
 </style>

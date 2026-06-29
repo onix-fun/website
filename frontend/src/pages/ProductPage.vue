@@ -20,11 +20,7 @@ provide('product', product)
 
 const breadcrumbDynamic = computed<BreadcrumbData | undefined>(() => {
   if (!product.value) return undefined
-  return {
-    name: product.value.name,
-    category: product.value.category,
-    category_slug: product.value.category_slug,
-  }
+  return { name: product.value.name }
 })
 provide('breadcrumbData', breadcrumbDynamic)
 

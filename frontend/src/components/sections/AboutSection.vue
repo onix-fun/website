@@ -9,6 +9,7 @@ interface AboutData {
 }
 
 const data = ref<AboutData | null>(null)
+const aboutImageUrl = `${import.meta.env.VITE_UPLOADS_BASE}/about.png`
 
 onMounted(async () => {
   try {
@@ -24,7 +25,7 @@ onMounted(async () => {
   <section v-if="data" class="about">
     <div class="about__inner">
       <div class="about__visual">
-        <div class="about__circle"></div>
+        <img class="about__image" :src="aboutImageUrl" alt="">
       </div>
       <div class="about__content">
         <span class="about__label">{{ data.label }}</span>
@@ -64,11 +65,10 @@ onMounted(async () => {
   justify-content: center;
 }
 
-.about__circle {
-  width: 446px;
-  height: 446px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.2);
+.about__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .about__content {
@@ -119,9 +119,30 @@ onMounted(async () => {
 .about__tag {
   font-size: 10px;
   font-weight: 700;
-  color: var(--bg);
+  color: var(--text-dark);
   background: var(--white);
   padding: 8px 16px;
   border-radius: 999px;
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 40px 16px;
+    min-height: auto;
+  }
+
+  .about__inner {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .about__visual {
+    flex: 0 0 300px;
+    height: 300px;
+  }
+
+  .about__title {
+    font-size: 32px;
+  }
 }
 </style>

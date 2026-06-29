@@ -176,4 +176,23 @@ onMounted(async () => {
   font-weight: 400;
   color: var(--bg);
 }
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 32px 16px;
+  }
+
+  .footer__grid {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer__brand {
+    padding-bottom: 0;
+  }
+
+  .footer__column {
+    padding-bottom: 0;
+  }
+}
 </style>

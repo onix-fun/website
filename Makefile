@@ -3,7 +3,7 @@ PORT_BE = 8085
 
 GOARCH ?= $(shell go env GOARCH)
 
-.PHONY: dev build run docker
+.PHONY: dev build run docker migrate/up migrate/down migrate/status migrate/create migrate/reset seed
 
 dev:
 	@echo "cleaning ports..."
@@ -42,3 +42,23 @@ docker:
 		-e SERVER_PORT=$(PORT_BE) \
 		-e FRONTEND_DIST=/app/dist \
 		ghcr.io/onix-fun/website:latest
+
+MIGRATE = cd backend && go run . migrate
+
+migrate/up:
+	$(MIGRATE) up
+
+migrate/down:
+	$(MIGRATE) down
+
+migrate/status:
+	$(MIGRATE) status
+
+migrate/reset:
+	$(MIGRATE) reset
+
+migrate/create:
+	@read -p "Migration name: " name; $(MIGRATE) create $$name
+
+seed:
+	cd backend && go run . seed

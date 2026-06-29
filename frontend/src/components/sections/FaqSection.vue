@@ -44,10 +44,12 @@ onMounted(async () => {
           v-for="(item, i) in data.items"
           :key="i"
           class="faq-item"
+          :class="{ 'faq-item--open': openIndex === i }"
           :style="{
             background: cardBgColors[i],
             boxShadow: `0 5px 0 ${cardShadowColors[i]}`,
           }"
+          v-show="openIndex === null || openIndex === i"
         >
           <button class="faq-item__button" @click="toggle(i)">
             <span class="faq-item__question">{{ item.question }}</span>
@@ -112,16 +114,25 @@ onMounted(async () => {
 }
 
 .faq__grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
   width: 100%;
 }
 
 .faq-item {
-  width: 312px;
   border-radius: 16px;
   overflow: hidden;
+}
+
+.faq-item--open {
+  grid-column: 1 / -1;
+}
+
+.faq-item--open .faq-item__answer {
+  padding: 0 24px 24px;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
 .faq-item__button {
@@ -161,5 +172,19 @@ onMounted(async () => {
   font-weight: 400;
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .faq {
+    padding: 40px 16px;
+  }
+
+  .faq__title {
+    font-size: 32px;
+  }
+
+  .faq__grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

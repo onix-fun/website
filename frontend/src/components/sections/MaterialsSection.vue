@@ -173,4 +173,24 @@ onMounted(async () => {
   padding: 2px 8px;
   border-radius: 999px;
 }
+
+@media (max-width: 768px) {
+  .materials {
+    padding: 40px 16px;
+  }
+
+  .materials__title {
+    font-size: 32px;
+  }
+
+  .materials__grid {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .material-card__circle {
+    width: 120px;
+    height: 120px;
+  }
+}
 </style>

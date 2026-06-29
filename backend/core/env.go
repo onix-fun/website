@@ -16,6 +16,7 @@ type Environment struct {
 	DBName       string
 	ServerPort   int
 	FrontendDist string
+	UploadsDir   string
 }
 
 func LoadEnvironment() *Environment {
@@ -26,6 +27,11 @@ func LoadEnvironment() *Environment {
 		}
 	}
 
+	uploadsDir := os.Getenv("UPLOADS_DIR")
+	if uploadsDir == "" {
+		uploadsDir = "./uploads"
+	}
+
 	return &Environment{
 		DBHost:       mustEnv("DB_HOST"),
 		DBPort:       mustEnvInt("DB_PORT"),
@@ -34,17 +40,28 @@ func LoadEnvironment() *Environment {
 		DBName:       mustEnv("DB_NAME"),
 		ServerPort:   mustEnvInt("SERVER_PORT"),
 		FrontendDist: mustEnv("FRONTEND_DIST"),
+		UploadsDir:   uploadsDir,
 	}
 }
 
 func findEnvFile() string {
+	candidates := []string{}
+
 	exe, err := os.Executable()
-	if err != nil {
-		return ""
+	if err == nil {
+		candidates = append(candidates, filepath.Join(filepath.Dir(exe), ".env"))
 	}
-	path := filepath.Join(filepath.Dir(exe), ".env")
-	if _, err := os.Stat(path); err == nil {
-		return path
+
+	cwd, err := os.Getwd()
+	if err == nil {
+		candidates = append(candidates, filepath.Join(cwd, ".env"))
+		candidates = append(candidates, filepath.Join(cwd, "tmp", ".env"))
+	}
+
+	for _, p := range candidates {
+		if _, err := os.Stat(p); err == nil {
+			return p
+		}
 	}
 	return ""
 }

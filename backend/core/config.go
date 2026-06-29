@@ -12,6 +12,7 @@ import (
 type Config struct {
 	DB     *sql.DB
 	Logger *log.Logger
+	Env    *Environment
 }
 
 func NewConfig(env *Environment) *Config {
@@ -32,6 +33,7 @@ func NewConfig(env *Environment) *Config {
 	return &Config{
 		DB:     db,
 		Logger: log.New(os.Stdout, "", log.LstdFlags),
+		Env:    env,
 	}
 }
 
