@@ -14,9 +14,9 @@ import ProcessCtaSection from '@/components/sections/process/ProcessCtaSection.v
     <AppHeader logo="/favicon.svg" :items="navItems" />
     <main>
       <Breadcrumbs />
-      <ProcessArsenalSection />
       <ProcessHeroSection />
       <ProcessStagesSection />
+      <ProcessArsenalSection />
       <ProcessCtaSection />
     </main>
     <AppFooter />

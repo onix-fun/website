@@ -6,7 +6,7 @@ import { navItems } from '@/components/header'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import CatalogFiltersSection from '@/components/sections/catalog/CatalogFiltersSection.vue'
 import CatalogGridSection from '@/components/sections/catalog/CatalogGridSection.vue'
-import CatalogCtaSection from '@/components/sections/catalog/CatalogCtaSection.vue'
+import ProcessCtaSection from '@/components/sections/process/ProcessCtaSection.vue'
 
 const activeCategory = ref('all')
 provide('activeCategory', activeCategory)

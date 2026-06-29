@@ -106,9 +106,10 @@ onMounted(async () => {
 }
 
 .materials__grid {
-  display: flex;
-  justify-content: space-between;
-  gap: 68px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 5vw, 68px);
+  align-items: start;
 }
 
 .material-card {
@@ -116,7 +117,7 @@ onMounted(async () => {
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  flex: 1;
+  min-width: 0;
 }
 
 .material-card__circle {
@@ -137,10 +138,12 @@ onMounted(async () => {
 }
 
 .material-card__info {
+  max-width: 220px;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
 }
 
 .material-card__name {
@@ -156,6 +159,7 @@ onMounted(async () => {
   font-weight: 400;
   color: var(--text-muted);
   margin: 0;
+  line-height: 1.4;
 }
 
 .material-card__tags {
@@ -172,6 +176,38 @@ onMounted(async () => {
   color: var(--text-dark);
   padding: 2px 8px;
   border-radius: 999px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .materials {
+    padding: 72px 40px 64px;
+  }
+
+  .materials__inner {
+    padding: 0;
+    gap: 48px;
+  }
+
+  .materials__grid {
+    gap: 28px;
+  }
+
+  .material-card__circle {
+    width: clamp(118px, 15vw, 144px);
+    height: clamp(118px, 15vw, 144px);
+  }
+}
+
+@media (max-width: 900px) {
+  .materials__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+
+  .materials__title {
+    font-size: clamp(42px, 7vw, 56px);
+  }
 }
 
 @media (max-width: 768px) {
@@ -184,6 +220,8 @@ onMounted(async () => {
   }
 
   .materials__grid {
+    display: grid;
+    grid-template-columns: 1fr;
     flex-direction: column;
     gap: 32px;
   }
