@@ -576,5 +576,41 @@ onBeforeUnmount(() => {
   .app-header-spacer {
     height: calc(62px + 18px);
   }
+
+  .is-opened .nav-capsule {
+    position: fixed;
+    top: 18px;
+    right: 16px;
+    left: 16px;
+    width: auto !important;
+    max-width: none;
+    transform: none;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 28px;
+    padding: 8px;
+  }
+
+  .is-opened .nav-capsule__burger {
+    align-self: flex-end;
+  }
+
+  .is-opened .nav-capsule__item {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    justify-content: flex-start;
+    gap: 12px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .is-opened .nav-capsule__item-label {
+    max-width: none;
+    opacity: 1;
+    padding-left: 0;
+    white-space: normal;
+  }
+
 }
 </style>
