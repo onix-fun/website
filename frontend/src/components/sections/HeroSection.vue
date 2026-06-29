@@ -63,20 +63,21 @@ onMounted(async () => {
 
 .hero__orbs {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  max-width: 1163px;
+  left: clamp(-220px, -12vw, -80px);
+  bottom: clamp(-210px, -15vw, -120px);
+  width: min(96vw, 1163px);
+  max-width: none;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.42;
   z-index: 0;
+  transform: rotate(-13deg);
+  transform-origin: left bottom;
 }
 
 .hero__orbs svg {
   display: block;
   width: 100%;
   height: auto;
-  transform: translate(calc(-43%), -55%);
 }
 
 .hero__content {
@@ -165,14 +166,13 @@ onMounted(async () => {
   }
 
   .hero__orbs {
-    position: absolute;
-    top: auto;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    left: -28vw;
+    bottom: -12vw;
+    width: 150vw;
     max-width: none;
-    opacity: 0.2;
+    opacity: 0.22;
     pointer-events: none;
+    transform: rotate(-16deg);
   }
 
   .hero__orbs svg {
@@ -180,7 +180,6 @@ onMounted(async () => {
     width: 100%;
     max-width: none;
     height: auto;
-    transform: none;
   }
 
   .hero__title {

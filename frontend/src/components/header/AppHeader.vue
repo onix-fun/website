@@ -315,11 +315,13 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45px;
-  height: 31px;
+  width: 58px;
+  height: 44px;
+  padding: 5px 7px;
   text-decoration: none;
   pointer-events: auto;
   color: #ff4d00;
+  overflow: visible;
   transition:
     transform .45s var(--transition),
     opacity .35s;
@@ -327,8 +329,15 @@ onBeforeUnmount(() => {
 
 .app-header__logo :deep(svg) {
   width: 45px;
-  height: 31px;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
   display: block;
+  overflow: visible;
+}
+
+.app-header__logo :deep(path) {
+  vector-effect: non-scaling-stroke;
 }
 
 .is-collapsed:not(.is-mobile) .app-header__logo {
@@ -596,13 +605,14 @@ onBeforeUnmount(() => {
   }
 
   .app-header__logo {
-    width: 38px;
-    height: 26px;
+    width: 52px;
+    height: 40px;
+    padding: 6px 7px;
   }
 
   .app-header__logo :deep(svg) {
     width: 38px;
-    height: 26px;
+    height: auto;
   }
 
   .nav-capsule {
