@@ -141,14 +141,23 @@ function productTypeIcon(label: string): string {
   return label.toLowerCase().includes('ноч') ? 'lamp-night' : 'lamp-desk'
 }
 
+function materialShadow(color: string): string {
+  const map: Record<string, string> = {
+    '#00c45a': '#00994d',
+    '#7b61ff': '#5a3dd9',
+    '#ff4d00': '#c84b00',
+  }
+  return map[color] || `${color}cc`
+}
+
 function featureIcon(id: string): string {
   const map: Record<string, string> = {
     smart: 'sparkles',
-    rgbic: 'sparkles',
-    rgb: 'sparkles',
-    bluetooth: 'brief',
+    rgbic: 'quality',
+    rgb: 'quality',
+    bluetooth: 'wifi',
     wifi: 'wifi',
-    battery: 'shield',
+    battery: 'clock',
     app: 'phone',
     usbc: 'usbc',
   }
@@ -363,12 +372,12 @@ watch(configuratorState, persistConfigurator, { deep: true })
             :class="['cf-material-card', { active: configuratorState.material === mat.id }]"
             @click="configuratorState.material = mat.id"
           >
-            <div class="cf-mat-circle" :style="{ background: mat.color }">
+            <div class="cf-mat-circle" :style="{ background: mat.color, boxShadow: `0 6px 0 ${materialShadow(mat.color)}` }">
               <span>{{ mat.label }}</span>
             </div>
             <p class="cf-mat-name">{{ mat.fullName }}</p>
             <div class="cf-mat-tags">
-              <span v-for="tag in mat.tags" :key="tag" class="cf-mat-tag" :style="{ background: mat.color }">
+              <span v-for="tag in mat.tags" :key="tag" class="cf-mat-tag" :style="{ background: mat.color, boxShadow: `0 2px 0 ${materialShadow(mat.color)}` }">
                 <AppIcon name="check" :size="11" :stroke-width="2" />
                 {{ tag }}
               </span>
@@ -549,7 +558,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
   gap: 16px;
   padding: 40px 0;
   background: #f5f0e8;
-  border: 2px solid #1a1a1a;
+  border: 2px solid #d4d0c8;
   border-radius: 24px;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
@@ -558,27 +567,31 @@ watch(configuratorState, persistConfigurator, { deep: true })
 
 .cf-product-card:hover {
   border-color: #ff4d00;
+  background: #fff5f0;
 }
 
 .cf-product-card.active {
   border-color: #ff4d00;
   background: #fff5f0;
+  box-shadow: 0 4px 0 #c84b00;
 }
 
 .cf-product-icon {
   width: 48px;
   height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.cf-product-icon svg {
   color: #1a1a1a;
+  box-shadow: 0 3px 0 #d4d0c8;
 }
 
-.cf-product-card.active .cf-product-icon svg {
-  color: #ff4d00;
+.cf-product-card.active .cf-product-icon {
+  background: #ff4d00;
+  color: #ffffff;
+  box-shadow: 0 3px 0 #c84b00;
 }
 
 .cf-product-label {
@@ -591,7 +604,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
 .cf-textarea {
   width: 100%;
   padding: 20px 24px;
-  border: 1px solid #1a1a1a;
+  border: 1px solid #d4d0c8;
   border-radius: 20px;
   background: #ffffff;
   font-family: Helvetica, sans-serif;
@@ -602,6 +615,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
   outline: none;
   box-sizing: border-box;
   min-height: 80px;
+  transition: border-color 0.2s;
 }
 
 .cf-textarea::placeholder {
@@ -670,7 +684,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
   gap: 12px;
   padding: 10px 16px;
   background: #ffffff;
-  border: 1px solid #1a1a1a;
+  border: 1px solid #d4d0c8;
   border-radius: 8px;
   font-family: Helvetica, sans-serif;
   font-size: 14px;
@@ -723,7 +737,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
 
 .cf-input {
   padding: 17px 20px;
-  border: 1px solid #1a1a1a;
+  border: 1px solid #d4d0c8;
   border-radius: 14px;
   background: #ffffff;
   font-family: Helvetica, sans-serif;
@@ -734,6 +748,7 @@ watch(configuratorState, persistConfigurator, { deep: true })
   box-sizing: border-box;
   width: 100%;
   -moz-appearance: textfield;
+  transition: border-color 0.2s;
 }
 
 .cf-input::-webkit-inner-spin-button {
@@ -768,15 +783,20 @@ watch(configuratorState, persistConfigurator, { deep: true })
   align-items: center;
   gap: 6px;
   padding: 10px 18px;
-  background: #1a1a1a;
-  border: 1px solid #1a1a1a;
+  background: #f5f0e8;
+  border: 1px solid #d4d0c8;
   border-radius: 9999px;
   font-family: Helvetica, sans-serif;
   font-size: 11px;
   font-weight: 700;
-  color: #ffffff;
+  color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  transition: all 0.2s;
+}
+
+.cf-chip svg {
+  flex-shrink: 0;
+  opacity: 0.6;
 }
 
 .cf-chip:hover {
@@ -786,10 +806,12 @@ watch(configuratorState, persistConfigurator, { deep: true })
 .cf-chip.active {
   border-color: #ff4d00;
   background: #ff4d00;
+  color: #ffffff;
+  box-shadow: 0 3px 0 #c84b00;
 }
 
-.cf-chip svg {
-  flex-shrink: 0;
+.cf-chip.active svg {
+  opacity: 1;
 }
 
 .cf-material-grid {
@@ -805,18 +827,21 @@ watch(configuratorState, persistConfigurator, { deep: true })
   gap: 16px;
   padding: 32px 0;
   background: #f5f0e8;
-  border: 2px solid #1a1a1a;
+  border: 2px solid #d4d0c8;
   border-radius: 24px;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
 }
 
 .cf-material-card:hover {
   border-color: #ff4d00;
+  background: #fff5f0;
 }
 
 .cf-material-card.active {
   border-color: #ff4d00;
+  background: #fff5f0;
+  box-shadow: 0 4px 0 #c84b00;
 }
 
 .cf-mat-circle {
@@ -826,7 +851,6 @@ watch(configuratorState, persistConfigurator, { deep: true })
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 0 var(--mat-shadow, currentColor);
 }
 
 .cf-mat-circle span {
@@ -879,19 +903,21 @@ watch(configuratorState, persistConfigurator, { deep: true })
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 4px solid #1a1a1a;
+  border: 2px solid #d4d0c8;
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
 }
 
 .cf-swatch:hover {
   transform: scale(1.08);
+  border-color: #ff4d00;
 }
 
 .cf-swatch.active {
   border-color: #ff4d00;
-  transform: scale(1.08);
+  transform: scale(1.12);
+  box-shadow: 0 4px 0 #c84b00;
 }
 
 .cf-color-note {
@@ -914,14 +940,14 @@ watch(configuratorState, persistConfigurator, { deep: true })
   align-items: center;
   gap: 20px;
   padding: 40px 0;
-  border-top: 1px solid #1a1a1a;
+  border-top: 1px solid #d4d0c8;
 }
 
 .cf-disclaimer {
-  font-family: Arial, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-size: 13px;
   font-weight: 400;
-  color: #1a1a1a;
+  color: #6b6555;
   text-align: center;
   margin: 0;
   max-width: 480px;

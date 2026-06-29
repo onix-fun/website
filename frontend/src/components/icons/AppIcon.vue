@@ -98,11 +98,11 @@ const icons: Record<string, IconDef> = {
   },
   'lamp-desk': {
     viewBox: '0 0 32 32',
-    body: '<path d="M4 24 10 8l6-2 6 2 6 16"/><path d="M16 6V2"/><path d="M8 24h16"/><path d="M10 24l6-5 6 5"/>',
+    body: '<path d="M9 28h14"/><path d="M14 28v-6"/><path d="M18 28v-6"/><path d="M12 22V10l4-6 4 6v12"/><path d="M12 14h8"/><path d="M10 14l-3-5"/><path d="M16 4v2"/>',
   },
   'lamp-night': {
     viewBox: '0 0 32 32',
-    body: '<path d="M20 2a12 12 0 1 0 8 20A10 10 0 0 1 20 2Z"/><path d="M8 22h13"/><path d="M12 26h5"/>',
+    body: '<path d="M9 28h14"/><path d="M12 28v-4"/><path d="M20 28v-4"/><path d="M10 24V14a6 6 0 0 1 12 0v10"/><path d="M16 4v6"/><path d="M12 10h8"/>',
   },
   mail: {
     viewBox: '0 0 24 24',
