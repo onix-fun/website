@@ -165,20 +165,21 @@ onMounted(async () => {
   }
 
   .hero__orbs {
+    position: absolute;
     top: auto;
     bottom: 0;
     left: 0;
     width: 100%;
     max-width: none;
     opacity: 0.2;
-    transform: none;
+    pointer-events: none;
   }
 
   .hero__orbs svg {
-    width: 160%;
+    display: block;
+    width: 100%;
     max-width: none;
     height: auto;
-    display: block;
     transform: none;
   }
 
