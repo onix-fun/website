@@ -49,7 +49,7 @@ onMounted(async () => {
 
 <style scoped>
 .box {
-  background: var(--bg);
+  background: #ffffff;
   padding: 80px;
 }
 
@@ -58,13 +58,15 @@ onMounted(async () => {
   margin: 0 auto;
   display: flex;
   gap: 80px;
+  align-items: flex-start;
 }
 
 .box__left {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
+  max-width: 560px;
 }
 
 .box__right {
@@ -78,7 +80,6 @@ onMounted(async () => {
   font-weight: 400;
   color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .section-title {
@@ -91,17 +92,17 @@ onMounted(async () => {
 
 .box__list {
   list-style: none;
-  padding: 16px 0 0;
+  padding: 8px 0 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .box__item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 400;

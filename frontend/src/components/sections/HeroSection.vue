@@ -63,15 +63,14 @@ onMounted(async () => {
 
 .hero__orbs {
   position: absolute;
-  left: clamp(-220px, -12vw, -80px);
-  bottom: clamp(-210px, -15vw, -120px);
-  width: min(96vw, 1163px);
-  max-width: none;
+  top: 50%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1163px;
   pointer-events: none;
-  opacity: 0.42;
+  opacity: 0.65;
   z-index: 0;
-  transform: rotate(-13deg);
-  transform-origin: left bottom;
 }
 
 .hero__orbs svg {
@@ -90,15 +89,16 @@ onMounted(async () => {
 
 .hero__badge {
   font-family: var(--font-heading);
-  font-size: 9px;
-  font-weight: 900;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--white);
-  background: var(--accent);
+  background: #fc3200;
   padding: 4px 12px;
-  border-radius: 4px;
+  border-radius: 999px;
   margin-bottom: 16px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .hero__title {
@@ -106,18 +106,17 @@ onMounted(async () => {
   font-size: 48px;
   font-weight: 900;
   text-align: center;
-  color: var(--text-dark);
+  color: #1a1a1a;
   white-space: pre-line;
   margin: 0 0 8px;
   line-height: 1.15;
-  text-shadow: 0 4px 4px rgba(0,0,0,0.15);
 }
 
 .hero__subtitle {
   font-size: 14px;
   font-weight: 400;
   text-align: center;
-  color: var(--accent);
+  color: #6b6555;
   margin: 0 0 24px;
 }
 
@@ -166,13 +165,14 @@ onMounted(async () => {
   }
 
   .hero__orbs {
-    left: -28vw;
-    bottom: -12vw;
-    width: 150vw;
+    display: none;
+    width: 130vw;
     max-width: none;
-    opacity: 0.22;
-    pointer-events: none;
-    transform: rotate(-16deg);
+    opacity: 0.45;
+    top: auto;
+    bottom: -20%;
+    left: 50%;
+    transform: translate(-50%, 0) scaleY(-1) rotate(360);
   }
 
   .hero__orbs svg {

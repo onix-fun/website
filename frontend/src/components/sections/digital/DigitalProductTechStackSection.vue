@@ -62,10 +62,10 @@ onMounted(async () => {
 }
 
 .section-heading {
-  font-size: 36px;
-  font-weight: 700;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
   color: #1a1a1a;
-  font-family: Helvetica, sans-serif;
   margin: 0;
 }
 
@@ -77,7 +77,6 @@ onMounted(async () => {
 
 .tech-card {
   background: #fff;
-  border: 1px solid #1a1a1a;
   border-radius: 20px;
   padding: 24px;
   display: flex;

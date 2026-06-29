@@ -80,18 +80,19 @@ onMounted(async () => {
 }
 
 .ph__title {
-  font-family: Helvetica, sans-serif;
-  font-size: 60px;
-  font-weight: 700;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
   color: #f5f0e8;
   margin: 0;
-  line-height: 1.05;
+  line-height: 1.1;
   white-space: pre-line;
+  max-width: 645px;
 }
 
 .ph__description {
   font-family: Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   color: #f5f0e8;
   margin: 0;

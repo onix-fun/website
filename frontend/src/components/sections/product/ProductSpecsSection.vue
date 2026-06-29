@@ -55,7 +55,6 @@ onMounted(async () => {
   font-weight: 400;
   color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .section-title {
@@ -64,6 +63,7 @@ onMounted(async () => {
   font-weight: 700;
   color: var(--bg);
   margin: 0;
+  padding-top: 12px;
 }
 
 .specs__grid {
@@ -77,9 +77,8 @@ onMounted(async () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--bg);
   padding: 20px 32px;
-  border: 1px solid var(--bg);
+  border-bottom: 1px solid #2a2a2a;
   min-height: 62px;
 }
 
@@ -87,13 +86,13 @@ onMounted(async () => {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 400;
-  color: var(--text-dark);
+  color: var(--bg);
 }
 
 .specs__value {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--bg);
 }
 </style>

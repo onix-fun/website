@@ -84,20 +84,17 @@ onMounted(async () => {
 
 .materials__label {
   font-family: var(--font-heading);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 900;
-  color: var(--white);
-  background: var(--accent);
-  padding: 4px 8px;
-  border-radius: 4px;
+  color: var(--accent);
+  text-transform: uppercase;
   display: inline-block;
   width: fit-content;
-  text-transform: uppercase;
 }
 
 .materials__title {
   font-family: var(--font-heading);
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 900;
   color: var(--text-dark);
   margin: 0;

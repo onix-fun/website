@@ -14,9 +14,9 @@ import FaqSection from '@/components/sections/FaqSection.vue'
   <AppHeader logo="/favicon.svg" :items="navItems" />
   <main>
     <HeroSection />
-    <TickerSection bg-color="var(--yellow)" shadow-color="var(--yellow-shadow)" />
+    <TickerSection bg-color="var(--yellow)" shadow-color="var(--yellow-shadow)" text-color="#1a1a1a" font-size="12px" />
     <AboutSection />
-    <TickerSection bg-color="var(--green)" shadow-color="var(--green-shadow)" />
+    <TickerSection bg-color="var(--green)" shadow-color="var(--green-shadow)" text-color="#ffffff" font-size="11px" />
     <MaterialsSection />
     <ReviewsSection />
     <FaqSection />

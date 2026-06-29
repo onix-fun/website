@@ -162,7 +162,7 @@ const isDigital = computed(() =>
 .bc--default .bc-nav {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .bc--default .bc-link {

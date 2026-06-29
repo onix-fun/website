@@ -39,13 +39,14 @@ onMounted(async () => {
   position: relative;
   background: #1a1a1a;
   padding: 80px;
-  margin: 0 -80px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
   text-align: center;
+  min-height: 397px;
+  justify-content: center;
 }
 
 .cta-blur {
@@ -73,19 +74,19 @@ onMounted(async () => {
 }
 
 .cta-badge {
+  font-family: Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: #fff;
-  font-family: Helvetica, sans-serif;
   position: relative;
   z-index: 1;
 }
 
 .cta-heading {
-  font-size: 60px;
-  font-weight: 700;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
   color: #f5f0e8;
-  font-family: Helvetica, sans-serif;
   margin: 0;
   line-height: 1.1;
   position: relative;
@@ -94,13 +95,29 @@ onMounted(async () => {
 }
 
 .cta-description {
+  font-family: Helvetica, sans-serif;
   font-size: 16px;
   color: #f5f0e8;
-  font-family: Helvetica, sans-serif;
   max-width: 500px;
   line-height: 1.5;
   margin: 0;
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .hero-cta {
+    padding: 48px 16px;
+    min-height: auto;
+    margin: 0;
+  }
+
+  .cta-heading {
+    font-size: 20px;
+  }
+
+  .cta-description {
+    font-size: 14px;
+  }
 }
 </style>

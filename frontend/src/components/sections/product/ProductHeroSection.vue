@@ -238,10 +238,24 @@ const mainImageBg = computed(() => {
 .badge--orange {
   background: var(--accent);
   box-shadow: 0 3px 0 var(--accent-shadow);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--white);
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
 }
 
 .badge--dark {
   background: var(--bg-dark);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--white);
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
 }
 
 .info__title {

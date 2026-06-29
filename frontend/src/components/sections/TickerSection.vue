@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 interface TickerData {
   items: string[]
@@ -8,6 +8,8 @@ interface TickerData {
 const props = defineProps<{
   bgColor?: string
   shadowColor?: string
+  textColor?: string
+  fontSize?: string
 }>()
 
 const data = ref<TickerData | null>(null)
@@ -20,16 +22,20 @@ onMounted(async () => {
     data.value = null
   }
 })
+
+const tickerStyle = computed(() => ({
+  '--ticker-bg': props.bgColor || 'var(--yellow)',
+  '--ticker-shadow': props.shadowColor || 'var(--yellow-shadow)',
+  '--ticker-text': props.textColor || '#1a1a1a',
+  '--ticker-font-size': props.fontSize || '12px',
+}))
 </script>
 
 <template>
   <div
     v-if="data"
     class="ticker"
-    :style="{
-      '--ticker-bg': bgColor || 'var(--yellow)',
-      '--ticker-shadow': shadowColor || 'var(--yellow-shadow)',
-    }"
+    :style="tickerStyle"
   >
     <div class="ticker__track">
       <span
@@ -62,11 +68,15 @@ onMounted(async () => {
 
 .ticker__item {
   font-family: var(--font-heading);
-  font-size: 11px;
+  font-size: var(--ticker-font-size);
   font-weight: 900;
-  color: var(--white);
+  color: var(--ticker-text);
   text-transform: uppercase;
   flex-shrink: 0;
+}
+
+.ticker__item::before {
+  content: '✦ ';
 }
 
 @keyframes ticker-scroll {

@@ -134,12 +134,12 @@ function socialIcon(name: string): string {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--bg);
+  background: #ffd600;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--text-dark);
+  color: #1a1a1a;
   font-size: 12px;
   font-weight: 700;
   transition: transform 0.2s;
@@ -147,6 +147,15 @@ function socialIcon(name: string): string {
 
 .footer__social-link :deep(.app-icon) {
   overflow: visible;
+  color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .footer__social-link {
+    width: 51px;
+    height: 22px;
+    border-radius: 999px;
+  }
 }
 
 .footer__social-link:hover {

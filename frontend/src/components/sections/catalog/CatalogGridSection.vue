@@ -63,7 +63,22 @@ const filteredProducts = computed(() => {
   padding: 0 80px 64px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 64px 24px;
+  justify-items: center;
+}
+
+@media (max-width: 1024px) {
+  .product-grid {
+    gap: 48px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    justify-items: stretch;
+  }
 }
 
 .catalog__empty {

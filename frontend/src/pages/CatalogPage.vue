@@ -39,10 +39,17 @@ onMounted(async () => {
 .catalog-page__title {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 32px 80px 16px;
+  padding: 0 80px 12px;
   font-family: var(--font-body);
   font-size: 24px;
   font-weight: 700;
   color: var(--text-dark);
+}
+
+@media (max-width: 768px) {
+  .catalog-page__title {
+    padding: 12px var(--page-gutter) 12px;
+    font-size: 20px;
+  }
 }
 </style>

@@ -25,7 +25,7 @@ onMounted(async () => {
   <section v-if="data" class="about">
     <div class="about__inner">
       <div class="about__visual">
-        <img class="about__image" :src="data.image_url || '/content/about/pic.jpg'" alt="">
+        <img class="about__image" src="/content/home/about.png" alt="">
       </div>
       <div class="about__content">
         <span class="about__label">{{ data.label }}</span>
@@ -68,7 +68,7 @@ onMounted(async () => {
 .about__image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .about__content {
@@ -80,12 +80,9 @@ onMounted(async () => {
 
 .about__label {
   font-family: var(--font-heading);
-  font-size: 9px;
-  font-weight: 900;
-  color: var(--white);
-  background: var(--accent);
-  padding: 4px 8px;
-  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
   display: inline-block;
   width: fit-content;
   text-transform: uppercase;
@@ -93,7 +90,7 @@ onMounted(async () => {
 
 .about__title {
   font-family: var(--font-heading);
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 900;
   color: var(--white);
   margin: 0;
@@ -103,7 +100,7 @@ onMounted(async () => {
 
 .about__description {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--bg);
   margin: 0;
   line-height: 1.6;
@@ -113,14 +110,14 @@ onMounted(async () => {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  padding-top: 16px;
+  padding-top: 8px;
 }
 
 .about__tag {
   font-size: 10px;
   font-weight: 700;
   color: var(--text-dark);
-  background: var(--white);
+  background: var(--bg);
   padding: 8px 16px;
   border-radius: 999px;
 }

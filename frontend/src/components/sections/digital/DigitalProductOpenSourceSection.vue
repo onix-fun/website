@@ -54,7 +54,7 @@ onMounted(async () => {
   gap: 16px;
   padding: 80px;
   text-align: center;
-  border-top: 1px solid #1a1a1a;
+  border-top: 1px solid #d4d0c8;
 }
 
 .oss-icon {
@@ -69,10 +69,10 @@ onMounted(async () => {
 }
 
 .oss-heading {
-  font-size: 30px;
-  font-weight: 700;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
   color: #1a1a1a;
-  font-family: Helvetica, sans-serif;
   margin: 0;
 }
 

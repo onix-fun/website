@@ -72,7 +72,7 @@ onMounted(async () => {
 <style scoped>
 .faq {
   background: var(--bg);
-  padding: 144px 208px;
+  padding: 80px 208px;
 }
 
 .faq__inner {
@@ -81,7 +81,7 @@ onMounted(async () => {
   padding: 0 32px;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 48px;
   align-items: center;
 }
 
@@ -89,27 +89,23 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 8px;
 }
 
 .faq__label {
-  font-family: var(--font-heading);
-  font-size: 9px;
-  font-weight: 900;
-  color: var(--white);
-  background: var(--accent);
-  padding: 4px 8px;
-  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
   text-transform: uppercase;
 }
 
 .faq__title {
   font-family: var(--font-heading);
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 900;
   color: var(--text-dark);
   margin: 0;
-  padding-top: 12px;
   text-align: center;
 }
 

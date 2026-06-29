@@ -93,16 +93,13 @@ onMounted(async () => {
 }
 
 .reviews__label {
-  font-family: var(--font-heading);
-  font-size: 9px;
-  font-weight: 900;
-  color: var(--white);
-  background: var(--accent);
-  padding: 4px 8px;
-  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
   display: inline-block;
   width: fit-content;
-  text-transform: uppercase;
 }
 
 .reviews__title-row {
@@ -113,17 +110,17 @@ onMounted(async () => {
 
 .reviews__title {
   font-family: var(--font-heading);
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 900;
   color: var(--bg);
   margin: 0;
   line-height: 1.1;
-  padding-top: 12px;
 }
 
 .reviews__rating-pill {
   display: flex;
   align-items: center;
+  gap: 6px;
   background: var(--accent);
   padding: 6px 14px;
   border-radius: 999px;
@@ -131,9 +128,9 @@ onMounted(async () => {
 }
 
 .reviews__rating-number {
-  font-family: var(--font-heading);
-  font-size: 24px;
-  font-weight: 900;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 700;
   color: var(--white);
 }
 

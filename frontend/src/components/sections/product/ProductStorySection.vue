@@ -46,7 +46,7 @@ onMounted(async () => {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .section-label {
@@ -55,7 +55,6 @@ onMounted(async () => {
   font-weight: 400;
   color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .section-title {
@@ -79,6 +78,18 @@ onMounted(async () => {
   font-weight: 400;
   color: var(--bg);
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .story {
+    padding: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .story {
+    padding: 40px 16px;
+  }
 }
 </style>

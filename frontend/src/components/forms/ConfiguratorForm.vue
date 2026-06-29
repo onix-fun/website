@@ -436,12 +436,12 @@ watch(configuratorState, persistConfigurator, { deep: true })
 }
 
 .cf-hero__title {
-  font-family: Helvetica, sans-serif;
-  font-size: 60px;
-  font-weight: 700;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
   color: #ffffff;
   margin: 0;
-  line-height: 1.05;
+  line-height: 1.1;
   white-space: pre-line;
 }
 

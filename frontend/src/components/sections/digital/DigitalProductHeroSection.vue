@@ -85,8 +85,8 @@ const product = inject<Ref<ProductData | null>>('digitalProduct')
   padding: 40px 80px 80px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 16px;
-  max-width: 600px;
 }
 
 .not-found {
@@ -104,20 +104,31 @@ const product = inject<Ref<ProductData | null>>('digitalProduct')
 }
 
 .hero-heading {
-  font-size: 60px;
-  font-weight: 700;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
   color: #1a1a1a;
-  font-family: Helvetica, sans-serif;
   margin: 0;
   line-height: 1.1;
   white-space: pre-line;
+  max-width: 742px;
 }
 
 .hero-description {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #6b6555;
   font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6b6555;
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 24px 16px 40px;
+  }
+
+  .hero-heading {
+    font-size: 24px;
+  }
 }
 </style>

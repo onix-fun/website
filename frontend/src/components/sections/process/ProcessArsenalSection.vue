@@ -45,8 +45,8 @@ onMounted(async () => {
 
 <style scoped>
 .pa {
-  background: #f5f0e8;
-  padding: 56px 80px 80px;
+  background: #1a1a1a;
+  padding: 80px;
 }
 
 .pa__inner {
@@ -71,10 +71,10 @@ onMounted(async () => {
 }
 
 .pa__title {
-  font-family: Helvetica, sans-serif;
+  font-family: 'Unbounded', sans-serif;
   font-size: 48px;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-weight: 900;
+  color: #f5f0e8;
   margin: 0;
   line-height: 1.1;
 }
@@ -88,8 +88,8 @@ onMounted(async () => {
 .pa__card {
   min-height: 180px;
   border: 1px solid #1a1a1a;
-  border-radius: 20px;
-  background: #fff;
+  border-radius: 24px;
+  background: #ffd600;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -105,7 +105,7 @@ onMounted(async () => {
 
 .pa__card-title {
   font-family: Helvetica, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   color: #1a1a1a;
   margin: 0;
@@ -113,9 +113,9 @@ onMounted(async () => {
 
 .pa__card-description {
   font-family: Helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
-  color: #6b6555;
+  color: #1a1a1a;
   line-height: 1.5;
   margin: 0;
 }

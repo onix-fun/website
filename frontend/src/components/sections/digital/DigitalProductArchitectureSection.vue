@@ -56,6 +56,12 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  align-items: flex-start;
+}
+
+.arch-section > * {
+  max-width: 1280px;
+  width: 100%;
 }
 
 .arch-badge {
@@ -66,10 +72,10 @@ onMounted(async () => {
 }
 
 .arch-heading {
-  font-size: 36px;
-  font-weight: 700;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
   color: #f5f0e8;
-  font-family: Helvetica, sans-serif;
   margin: 0;
 }
 

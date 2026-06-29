@@ -137,8 +137,7 @@ onMounted(async () => {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid #d4d0c8;
-  background: #f5f0e8;
+  background: #ffd600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,10 +146,10 @@ onMounted(async () => {
   font-weight: 700;
   color: #1a1a1a;
   text-decoration: none;
-  transition: border-color 0.2s;
+  transition: transform 0.2s;
 }
 
 .aauth__social-btn:hover {
-  border-color: #ff4d00;
+  transform: scale(1.1);
 }
 </style>

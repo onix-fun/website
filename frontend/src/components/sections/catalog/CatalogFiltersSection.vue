@@ -59,15 +59,17 @@ function setCategory(slug: string) {
 }
 
 .filter-btn {
-  padding: 10px 20px;
+  height: 35px;
+  padding: 10px 16px;
   border-radius: 999px;
   background: var(--bg-dark);
   font-family: var(--font-body);
   font-size: 10px;
   font-weight: 700;
   color: var(--white);
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
