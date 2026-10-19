@@ -30,6 +30,12 @@ export default defineConfig([
     rules: { 'react-refresh/only-export-components': 'off' },
   },
 
+  // Route config files export data, not components
+  {
+    files: ['src/app/router.tsx'],
+    rules: { 'react-refresh/only-export-components': 'off' },
+  },
+
   // Architecture: app -> pages -> features -> common
   {
     files: ['src/**/*.{ts,tsx}'],

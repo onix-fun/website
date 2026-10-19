@@ -7,6 +7,7 @@ Minimal React 19 + Vite + TypeScript single-page app.
 - React 19, TypeScript, Vite
 - Tailwind CSS v4
 - shadcn/ui (`base-nova`) on `@base-ui/react`
+- React Router (data router, lazy code-split pages)
 - Zustand
 - ESLint flat config + `eslint-plugin-boundaries` (architecture enforcement)
 

@@ -31,6 +31,7 @@ Run `npm run lint` — violations fail with the offending layer types.
 - shadcn/ui primitives live in `src/common/ui`.
 - Export each feature/page via an `index.ts` barrel.
 - Styling with Tailwind v4 utility classes.
+- Routing: `react-router` data router in `src/app/router.tsx`. Pages are lazy-loaded (`lazy(() => import('@/pages/*'))`) so each becomes its own chunk. Route-level boundaries are the only place `app` imports `pages`.
 
 ## Commands
 
