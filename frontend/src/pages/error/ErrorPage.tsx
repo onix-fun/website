@@ -1,5 +1,7 @@
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router'
+import { Page } from '@/common'
 import { Button } from '@/common/ui/button'
+import { AppHeader } from '@/features/header'
 
 export function ErrorPage() {
   const error = useRouteError()
@@ -16,10 +18,12 @@ export function ErrorPage() {
         : undefined
 
   return (
-    <main className="mx-auto flex min-h-svh w-full max-w-3xl flex-col items-center justify-center gap-4 px-4 text-center">
-      <h1 className="text-3xl font-medium tracking-tight">{title}</h1>
-      {detail ? <p className="text-sm text-muted-foreground">{String(detail)}</p> : null}
-      <Button render={<Link to="/" />}>На главную</Button>
-    </main>
+    <>
+      <AppHeader />
+      <Page centered title={title} titleSize="2xl">
+        {detail ? <p>{String(detail)}</p> : null}
+        <Button render={<Link to="/" />}>На главную</Button>
+      </Page>
+    </>
   )
 }

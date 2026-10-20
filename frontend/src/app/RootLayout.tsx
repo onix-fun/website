@@ -1,13 +1,12 @@
 import { Outlet } from 'react-router'
-import { Nav } from '@/app/Nav'
+import { Stack } from '@/common'
 
 export function RootLayout() {
   return (
-    <div className="flex min-h-svh flex-col">
-      <Nav />
-      <div className="flex flex-1 flex-col">
+    <Stack direction="column" style={{ minHeight: '100svh' }}>
+      <Stack direction="column" style={{ flex: 1 }}>
         <Outlet />
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   )
 }

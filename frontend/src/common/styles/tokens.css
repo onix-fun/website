@@ -1,0 +1,77 @@
+/**
+ * Design system — the single global source of truth for every shared value:
+ * brand colors, surfaces, text, spacing, radii, motion and the page grid.
+ *
+ * This is the CANON. All colors/spacing/effects consumed anywhere in the app
+ * reference a token from here. Component CSS must never hardcode a color or a
+ * size — always reference a token.
+ *
+ * `index.css` bridges these tokens into Tailwind: it maps shadcn-style names
+ * (`--color-primary`, `--color-muted-foreground`, …) onto the tokens below, so
+ * both `var(--color-accent)` and the `text-accent`/`bg-primary` utilities point
+ * at the SAME value.
+ *
+ * Only header-specific sizes/effects stay scoped to the header root
+ * (`features/header/styles/header.module.scss`).
+ */
+:root {
+  /* ---- Brand ---- */
+  --color-accent: #ff4d00;
+  --color-accent-hover: #e64500;
+  --color-on-accent: #ffffff;
+  --color-ink: #1a1a1a;
+
+  /* ---- Surfaces ---- */
+  --surface: rgba(245, 240, 232, 0.93);
+  --surface-solid: rgb(245, 240, 232);
+  --surface-hover: rgba(245, 240, 232, 0.94);
+
+  /* ---- Text ---- */
+  --color-text: var(--color-ink);
+  --color-text-muted: #6b6b6b;
+
+  /* ---- Borders & focus ---- */
+  --color-hairline: rgba(212, 208, 200, 0.5);
+  --color-focus: #3b82f6;
+
+  /* ---- Spacing scale ---- */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+
+  /* ---- Radii ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-panel: 28px;
+  --radius-pill: 9999px;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 0.2s;
+  --duration-base: 0.35s;
+  --duration-capsule: 0.45s;
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08);
+  --shadow-inset-top: inset 0 1px rgba(255, 255, 255, 0.55);
+
+  /* ---- Page grid (shared by header and page content) ---- */
+  --page-max-width: 1280px;
+  --page-inline: 25px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --page-inline: 40px;
+  }
+}
+
+@media (min-width: 1281px) {
+  :root {
+    --page-inline: 80px;
+  }
+}

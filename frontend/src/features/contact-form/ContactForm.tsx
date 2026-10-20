@@ -1,8 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Button } from '@/common/ui/button'
-
-const fieldClass =
-  'w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50'
+import styles from './ContactForm.module.scss'
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState<string | null>(null)
@@ -14,19 +12,17 @@ export function ContactForm() {
   }
 
   return (
-    <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit}>
-      <label className="flex flex-col gap-1.5 text-sm font-medium">
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <label className={styles.label}>
         Имя
-        <input name="name" required className={fieldClass} />
+        <input name="name" required className={styles.field} />
       </label>
-      <label className="flex flex-col gap-1.5 text-sm font-medium">
+      <label className={styles.label}>
         Почта
-        <input name="email" type="email" required className={fieldClass} />
+        <input name="email" type="email" required className={styles.field} />
       </label>
       <Button type="submit">Отправить</Button>
-      {submitted ? (
-        <p className="text-sm text-muted-foreground">Спасибо, {submitted}!</p>
-      ) : null}
+      {submitted ? <p className={styles.note}>Спасибо, {submitted}!</p> : null}
     </form>
   )
 }

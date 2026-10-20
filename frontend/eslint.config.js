@@ -36,6 +36,42 @@ export default defineConfig([
     rules: { 'react-refresh/only-export-components': 'off' },
   },
 
+  // Barrel files compose components with shared values (nav config, utils)
+  {
+    files: ['src/**/index.ts'],
+    rules: { 'react-refresh/only-export-components': 'off' },
+  },
+
+  // Styling policy: Tailwind utility classes are allowed ONLY in `common/ui`.
+  // Everywhere else styles come from SCSS modules (`styles.foo`) or layout
+  // primitives — never from raw class strings.
+  {
+    files: ['src/features/**/*.{ts,tsx}', 'src/pages/**/*.{ts,tsx}', 'src/app/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            'JSXAttribute[name.name="className"] > Literal',
+          message:
+            'Tailwind/raw class strings are not allowed outside `common/ui`. Use a SCSS module (`styles.foo`) or a layout primitive from `common/ui`.',
+        },
+        {
+          selector:
+            'JSXAttribute[name.name="className"] > JSXExpressionContainer > TemplateLiteral',
+          message:
+            'Tailwind/raw class strings are not allowed outside `common/ui`. Use a SCSS module (`styles.foo`) or a layout primitive from `common/ui`.',
+        },
+        {
+          selector:
+            'JSXAttribute[name.name="className"] > JSXExpressionContainer > Literal',
+          message:
+            'Tailwind/raw class strings are not allowed outside `common/ui`. Use a SCSS module (`styles.foo`) or a layout primitive from `common/ui`.',
+        },
+      ],
+    },
+  },
+
   // Architecture: app -> pages -> features -> common
   {
     files: ['src/**/*.{ts,tsx}'],

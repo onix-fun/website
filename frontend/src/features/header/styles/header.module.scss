@@ -1,0 +1,37 @@
+/**
+ * Header style scope — non-dimensional header styles live here as CSS custom
+ * properties on the header root, so they can also reach
+ * `common/ui` primitives (nav capsule, logo) that are rendered inside it.
+ *
+ * Only header-SPECIFIC values live here. Anything shared with the rest of the
+ * app (colors, surfaces, motion, elevation) comes from the global design system
+ * in `common/styles/tokens.css` and is referenced, never redefined.
+ *
+ * Sizes that depend on the breakpoint are NOT here — they are computed in
+ * `model/header-metrics.ts` and passed to the primitives as props.
+ */
+.header {
+  --blur-panel: 24px;
+  --radius-panel-stacked: 28px;
+
+  /* Capsule elevation = global shadow + a hairline "stacked" line beneath it. */
+  --shadow-panel: var(--shadow-md), 0 4px 0 color-mix(in srgb, var(--color-hairline) 70%, transparent);
+
+  /* Item states are header-local: they compose the global elevation tokens
+     with an inner top highlight bespoke to the capsule. */
+  --shadow-item-hover: var(--shadow-inset-top), var(--shadow-sm);
+  --shadow-item-active: inset 0 1px rgba(255, 255, 255, 0.8), var(--shadow-sm);
+
+  --duration-burger: var(--duration-base);
+
+  /* Fixed-bar placement + spacer height for non-hero routes. */
+  --header-top: 25px;
+  --header-spacer: 87px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    --header-top: 18px;
+    --header-spacer: 80px;
+  }
+}

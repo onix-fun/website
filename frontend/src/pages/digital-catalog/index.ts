@@ -1,0 +1,1 @@
+export { DigitalCatalogPage } from './DigitalCatalogPage'
