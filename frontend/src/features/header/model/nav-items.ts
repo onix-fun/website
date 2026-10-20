@@ -1,28 +1,14 @@
 import type { Item } from '@/common'
-import {
-  Factory,
-  FlaskConical,
-  Info,
-  MonitorSmartphone,
-  ShoppingBag,
-  SlidersHorizontal,
-} from 'lucide-react'
+import { Home, Info, MonitorSmartphone, ShoppingBag } from 'lucide-react'
 
 export const navItems: readonly Item[] = [
-  { id: 'about', to: '/about', title: 'О компании', icon: Info },
-  { id: 'catalog', to: '/catalog', title: 'Продукция', icon: ShoppingBag },
-  { id: 'process', to: '/process', title: 'Производство', icon: Factory },
+  { id: 'home', to: '/', title: 'Главная', icon: Home },
+  { id: 'about', to: '/about', title: 'О нас', icon: Info },
+  { id: 'catalog', to: '/catalog', title: 'Каталог', icon: ShoppingBag },
   {
-    id: 'digital-catalog',
-    to: '/digital-catalog',
-    title: 'IT-каталог',
+    id: 'digital',
+    to: '/digital',
+    title: 'Цифровые продукты',
     icon: MonitorSmartphone,
   },
-  {
-    id: 'constructor',
-    to: '/constructor',
-    title: 'Конфигуратор',
-    icon: SlidersHorizontal,
-  },
-  { id: 'test', to: '/test', title: 'Тестовая страница', icon: FlaskConical },
 ]

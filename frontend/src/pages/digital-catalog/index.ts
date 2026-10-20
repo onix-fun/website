@@ -1,1 +1,0 @@
-export { DigitalCatalogPage } from './DigitalCatalogPage'

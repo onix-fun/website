@@ -1,13 +1,12 @@
 import { Page } from '@/common'
-import { ContactForm } from '@/features/contact-form'
 import { AppHeader } from '@/features/header'
 
-export function FormPage() {
+export function DigitalPage() {
   return (
     <>
       <AppHeader />
-      <Page title="Форма">
-        <ContactForm />
+      <Page title="Цифровые продукты">
+        <p>Страница в разработке.</p>
       </Page>
     </>
   )

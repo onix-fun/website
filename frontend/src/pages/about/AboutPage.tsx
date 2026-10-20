@@ -5,7 +5,7 @@ export function AboutPage() {
   return (
     <>
       <AppHeader />
-      <Page title="О компании">
+      <Page title="О нас">
         <p>Страница в разработке.</p>
       </Page>
     </>

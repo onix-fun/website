@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router'
 import { RootLayout } from '@/app/RootLayout'
 
@@ -11,25 +11,16 @@ const AboutPage = lazy(() =>
 const CatalogPage = lazy(() =>
   import('@/pages/catalog').then((m) => ({ default: m.CatalogPage })),
 )
-const ProcessPage = lazy(() =>
-  import('@/pages/process').then((m) => ({ default: m.ProcessPage })),
+const ProductPage = lazy(() =>
+  import('@/pages/product').then((m) => ({ default: m.ProductPage })),
 )
-const DigitalCatalogPage = lazy(() =>
-  import('@/pages/digital-catalog').then((m) => ({
-    default: m.DigitalCatalogPage,
+const DigitalPage = lazy(() =>
+  import('@/pages/digital').then((m) => ({ default: m.DigitalPage })),
+)
+const DigitalProductPage = lazy(() =>
+  import('@/pages/digital-product').then((m) => ({
+    default: m.DigitalProductPage,
   })),
-)
-const ConstructorPage = lazy(() =>
-  import('@/pages/constructor').then((m) => ({ default: m.ConstructorPage })),
-)
-const FormPage = lazy(() =>
-  import('@/pages/form').then((m) => ({ default: m.FormPage })),
-)
-const TestPage = lazy(() =>
-  import('@/pages/test').then((m) => ({ default: m.TestPage })),
-)
-const NotFoundPage = lazy(() =>
-  import('@/pages/not-found').then((m) => ({ default: m.NotFoundPage })),
 )
 const ErrorPage = lazy(() =>
   import('@/pages/error').then((m) => ({ default: m.ErrorPage })),
@@ -38,24 +29,15 @@ const ErrorPage = lazy(() =>
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'catalog', element: <CatalogPage /> },
-      { path: 'process', element: <ProcessPage /> },
-      { path: 'digital-catalog', element: <DigitalCatalogPage /> },
-      { path: 'constructor', element: <ConstructorPage /> },
-      { path: 'form', element: <FormPage /> },
-      { path: 'test', element: <TestPage /> },
-      { path: '*', element: <NotFoundPage /> },
+      { path: 'catalog/:id', element: <ProductPage /> },
+      { path: 'digital', element: <DigitalPage /> },
+      { path: 'digital/:id', element: <DigitalProductPage /> },
+      { path: '*', element: <ErrorPage /> },
     ],
-  },
-  {
-    element: (
-      <Suspense fallback={null}>
-        <ErrorPage />
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
   },
 ])
