@@ -128,7 +128,11 @@ export function AppHeader({
 
                         <Logo
                             hidden={model.logoHidden}
-                            sizes={{ height: metrics.logoHeight }}
+                            sizes={{
+                                height: metrics.logoHeight,
+                                wordmarkSize: metrics.logoWordmarkSize,
+                                gap: metrics.logoGap,
+                            }}
                         />
                     </Stack>
                 </Container>
