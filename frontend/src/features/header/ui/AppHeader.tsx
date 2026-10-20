@@ -1,4 +1,4 @@
-import { Hexagon } from "lucide-react";
+import { useCallback, useEffect, useRef } from "react";
 import { Container, Logo, NavPanel, Position, Spacer, Stack } from "@/common";
 import type { Item, NavPanelSizes, NavPanelStyleValues } from "@/common";
 import { navItems } from "../model/nav-items";
@@ -24,6 +24,9 @@ const NAV_STYLE_VALUES: NavPanelStyleValues = {
     shadowPanel: "var(--shadow-panel)",
     shadowItemHover: "var(--shadow-item-hover)",
     shadowItemActive: "var(--shadow-item-active)",
+    surfaceItemHover: "var(--nav-surface-hover)",
+    surfaceItemActive: "var(--nav-surface-active)",
+    focusColor: "var(--nav-focus)",
     easing: "var(--ease-out)",
     durationCapsule: "var(--duration-capsule)",
     durationBurger: "var(--duration-burger)",
@@ -42,16 +45,36 @@ export function AppHeader({
     className,
 }: AppHeaderProps) {
     const model = useHeaderModel({ items, collapseOffset, onMenuChange });
+    const { closeMenu, isMobile, menuOpen, metrics } = model;
+    const navigationRef = useRef<HTMLElement | null>(null);
+    const menuButtonRef = useRef<HTMLButtonElement | null>(null);
     const { capsuleRef, capsuleWidth, handleCapsuleTransitionEnd } = useHeaderController({
         isCollapsed: model.isCollapsed,
         menuOpen: model.menuOpen,
         isMobile: model.isMobile,
         capsuleCollapsedWidth: model.metrics.capsuleCollapsedWidth,
         onCloseMenu: model.closeMenu,
+        onEscape: () => menuButtonRef.current?.focus(),
         onCollapseChange,
     });
 
-    const { metrics } = model;
+    const handleNavigate = useCallback(() => {
+        closeMenu();
+        if (isMobile) requestAnimationFrame(() => menuButtonRef.current?.focus());
+    }, [closeMenu, isMobile]);
+
+    useEffect(() => {
+        if (!isMobile || !menuOpen) return;
+
+        const handleOutsidePointerDown = (event: PointerEvent) => {
+            if (event.target instanceof Node && !navigationRef.current?.contains(event.target)) {
+                closeMenu();
+            }
+        };
+
+        document.addEventListener("pointerdown", handleOutsidePointerDown);
+        return () => document.removeEventListener("pointerdown", handleOutsidePointerDown);
+    }, [closeMenu, isMobile, menuOpen]);
 
     const sizes: NavPanelSizes = {
         itemSize: metrics.itemSize,
@@ -83,6 +106,9 @@ export function AppHeader({
                     >
                         <NavPanel
                             ref={capsuleRef}
+                            containerRef={navigationRef}
+                            menuButtonRef={menuButtonRef}
+                            navigationId="primary-navigation"
                             items={model.items}
                             activeId={model.activeId}
                             collapsed={model.isCollapsed}
@@ -96,18 +122,13 @@ export function AppHeader({
                             skipLink={{ targetId: "main-content" }}
                             onToggle={model.toggleMenu}
                             onHoverChange={model.setHoveredId}
-                            onNavigate={model.closeMenu}
+                            onNavigate={handleNavigate}
                             onTransitionEnd={handleCapsuleTransitionEnd}
                         />
 
                         <Logo
-                            icon={Hexagon}
                             hidden={model.logoHidden}
-                            sizes={{
-                                width: metrics.logoWidth,
-                                height: metrics.logoHeight,
-                                iconWidth: metrics.logoIconWidth,
-                            }}
+                            sizes={{ height: metrics.logoHeight }}
                         />
                     </Stack>
                 </Container>

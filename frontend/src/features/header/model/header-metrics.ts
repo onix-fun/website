@@ -8,9 +8,8 @@ export interface HeaderMetrics {
   headerInline: number
   headerHeight: number
   headerMaxWidth: number
-  logoWidth: number
+  /** Rendered brand-mark height (px); width follows the mark's aspect ratio. */
   logoHeight: number
-  logoIconWidth: number
   itemSize: number
   itemLabelMax: number
   iconSize: number
@@ -27,8 +26,6 @@ export interface HeaderMetrics {
 export interface HeaderViewport {
   isMobile: boolean
   isCompact: boolean
-  /** Viewport ≥1281px — the header gutter widens. */
-  isLarge: boolean
 }
 
 /** Panel border width (px) — matches the capsule's `border` in `navPanel`. */
@@ -42,17 +39,15 @@ function collapsedCapsuleSize(burgerSize: number, capsulePadding: number): numbe
   return burgerSize + 2 * (capsulePadding + PANEL_BORDER)
 }
 
-export function getHeaderMetrics({ isMobile, isCompact, isLarge }: HeaderViewport): HeaderMetrics {
+export function getHeaderMetrics({ isMobile, isCompact }: HeaderViewport): HeaderMetrics {
   if (isMobile) {
     const capsulePadding = 4
     const burgerSize = 48
     return {
-      headerInline: 40,
+      headerInline: 24,
       headerHeight: 62,
-      headerMaxWidth: 1280,
-      logoWidth: 52,
-      logoHeight: 40,
-      logoIconWidth: 38,
+      headerMaxWidth: 1296,
+      logoHeight: 34,
       itemSize: 48,
       itemLabelMax: 260,
       iconSize: 22,
@@ -70,10 +65,8 @@ export function getHeaderMetrics({ isMobile, isCompact, isLarge }: HeaderViewpor
     return {
       headerInline: 40,
       headerHeight: 62,
-      headerMaxWidth: 1280,
-      logoWidth: 58,
-      logoHeight: 44,
-      logoIconWidth: 45,
+      headerMaxWidth: 1296,
+      logoHeight: 40,
       itemSize: 48,
       itemLabelMax: 260,
       iconSize: 22,
@@ -88,12 +81,10 @@ export function getHeaderMetrics({ isMobile, isCompact, isLarge }: HeaderViewpor
   const capsulePadding = 8
   const burgerSize = 58
   return {
-    headerInline: isLarge ? 80 : 25,
+    headerInline: 72,
     headerHeight: 62,
-    headerMaxWidth: 1280,
-    logoWidth: 58,
-    logoHeight: 44,
-    logoIconWidth: 45,
+    headerMaxWidth: 1296,
+    logoHeight: 40,
     itemSize: 56,
     itemLabelMax: 300,
     iconSize: 24,

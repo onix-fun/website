@@ -4,6 +4,8 @@ import { cn } from '@/common/lib/utils'
 export type PositionType = 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
 
 export interface PositionProps {
+  id?: string
+  'aria-hidden'?: boolean
   position?: PositionType
   top?: number | string
   right?: number | string
@@ -33,6 +35,8 @@ const px = (value?: number | string) => (typeof value === 'number' ? `${value}px
 
 /** Positional container — sets coordinates without utility classes. */
 export function Position({
+  id,
+  'aria-hidden': ariaHidden,
   position = 'absolute',
   top,
   right,
@@ -71,7 +75,14 @@ export function Position({
   }
 
   return (
-    <div ref={ref} className={cn(className)} style={resolved} onTransitionEnd={onTransitionEnd}>
+    <div
+      id={id}
+      ref={ref}
+      aria-hidden={ariaHidden}
+      className={cn(className)}
+      style={resolved}
+      onTransitionEnd={onTransitionEnd}
+    >
       {children}
     </div>
   )

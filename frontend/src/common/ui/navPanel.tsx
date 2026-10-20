@@ -1,4 +1,6 @@
+import { useId } from 'react'
 import type { CSSProperties, ComponentType, Ref, TransitionEvent } from 'react'
+import { Link } from 'react-router'
 import { cn } from '@/common/lib/utils'
 import { Position } from './layout'
 
@@ -44,6 +46,9 @@ export interface NavPanelStyleValues {
   shadowPanel: string
   shadowItemHover: string
   shadowItemActive: string
+  surfaceItemHover: string
+  surfaceItemActive: string
+  focusColor: string
   easing: string
   durationCapsule: string
   durationBurger: string
@@ -76,6 +81,12 @@ export interface Props {
   className?: string
   /** Ref to the capsule element (used by the caller for width measurement). */
   ref?: Ref<HTMLDivElement>
+  /** Ref to the semantic navigation landmark. */
+  containerRef?: Ref<HTMLElement>
+  /** Ref to the menu toggle, used to keep keyboard focus anchored on close. */
+  menuButtonRef?: Ref<HTMLButtonElement>
+  /** Stable id used by aria-controls and the navigation landmark. */
+  navigationId?: string
 }
 
 function SkipLink({ targetId, label = 'Перейти к содержимому' }: SkipLinkConfig) {
@@ -85,7 +96,8 @@ function SkipLink({ targetId, label = 'Перейти к содержимому'
       className={cn(
         'sr-only',
         'focus:not-sr-only focus:absolute focus:left-0 focus:top-2 focus:z-[1001] focus:whitespace-nowrap focus:rounded-[var(--radius-pill)] focus:bg-[var(--color-accent)] focus:px-[var(--space-md)] focus:py-[var(--space-sm)] focus:text-xs focus:font-bold focus:text-[var(--color-on-accent)] focus:no-underline',
-        'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-focus)]',
+        'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--nav-focus-ring)]',
+        'pointer-events-auto',
       )}
     >
       {label}
@@ -98,11 +110,15 @@ function Burger({
   onClick,
   sizes,
   styles,
+  controlsId,
+  buttonRef,
 }: {
   open: boolean
   onClick?: () => void
   sizes: NavPanelSizes
   styles: NavPanelStyleValues
+  controlsId: string
+  buttonRef?: Ref<HTMLButtonElement>
 }) {
   const barStyle: CSSProperties = {
     width: sizes.burgerBarWidth,
@@ -110,24 +126,30 @@ function Burger({
   }
 
   const bar = (variant?: string) =>
-    cn('h-0.5 rounded-full bg-[var(--color-ink)] transition-all', open && variant)
+    cn(
+      'h-0.5 rounded-full bg-[var(--color-ink)] transition-all',
+      open && 'bg-[var(--color-accent)]',
+      open && variant,
+    )
 
   return (
     <button
+      ref={buttonRef}
       type="button"
       aria-expanded={open}
+      aria-controls={controlsId}
       aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
       onClick={onClick}
       className={cn(
-        'flex shrink-0 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-[var(--radius-pill)] border-0 p-0 outline-none',
-        'hover:scale-[1.05]',
-        'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-focus)]',
+        'flex shrink-0 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-[var(--nav-radius-pill)] border-0 p-0 outline-none',
+        'hover:scale-[1.03] hover:bg-[var(--nav-item-surface-hover)]',
+        'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--nav-focus-ring)]',
       )}
       style={{
         width: sizes.burgerSize,
         height: sizes.burgerSize,
         transitionProperty: 'opacity, transform',
-        transitionDuration: `0.35s, 0.4s`,
+        transitionDuration: `${styles.durationBurger}, ${styles.durationBurger}`,
         transitionTimingFunction: `ease, ${styles.easing}`,
       }}
     >
@@ -166,31 +188,40 @@ function NavLink({
     maxWidth: hidden ? 0 : sizes.itemSize,
     minWidth: hidden ? 0 : sizes.itemSize,
     transitionProperty: 'max-width, opacity, visibility, background, transform, box-shadow',
-    transitionDuration: `${styles.durationCapsule}, 0.35s, 0s, 0.3s, 0.35s, 0.35s`,
+    transitionDuration: `${styles.durationCapsule}, ${styles.durationCapsule}, 0s, ${styles.durationCapsule}, ${styles.durationCapsule}, ${styles.durationCapsule}`,
     transitionTimingFunction: `${styles.easing}, ease, ease, ease, ${styles.easing}, ease`,
   }
 
   return (
-    <a
-      href={item.to}
+    <Link
+      to={item.to}
+      aria-label={item.title}
       aria-current={active ? 'page' : undefined}
       aria-disabled={item.disabled || undefined}
+      tabIndex={item.disabled ? -1 : undefined}
       onMouseEnter={() => onHoverChange?.(item.id)}
       onMouseLeave={() => onHoverChange?.(null)}
-      onClick={() => onNavigate?.(item)}
+      onFocus={() => onHoverChange?.(item.id)}
+      onBlur={() => onHoverChange?.(null)}
+      onClick={(event) => {
+        if (item.disabled) {
+          event.preventDefault()
+          return
+        }
+        onNavigate?.(item)
+      }}
       className={cn(
-        'relative flex shrink-0 items-center justify-center rounded-[var(--radius-pill)] text-[var(--color-ink)] no-underline',
-        !stacked &&
-          'hover:bg-[var(--surface-hover)] hover:[box-shadow:var(--shadow-item-hover)]',
+        'relative flex shrink-0 items-center justify-center rounded-[var(--nav-radius-pill)] text-[var(--color-ink)] no-underline',
+        'hover:bg-[var(--nav-item-surface-hover)] hover:[box-shadow:var(--nav-shadow-item-hover)]',
         'active:scale-[.96]',
-        'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-focus)]',
+        'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--nav-focus-ring)]',
         active &&
-          'bg-[var(--surface-solid)] text-[var(--color-accent)] [box-shadow:var(--shadow-item-active)]',
+          'bg-[var(--nav-item-surface-active)] text-[var(--color-ink)] [box-shadow:var(--nav-shadow-item-active)]',
         hidden && 'pointer-events-none invisible min-w-0 max-w-0 px-0 py-0 opacity-0',
         stacked && 'justify-start gap-3 px-4',
         !stacked && 'justify-start',
         !stacked && labelVisible && 'pr-4',
-        item.disabled && 'pointer-events-none',
+        item.disabled && 'cursor-not-allowed opacity-45',
       )}
       style={{
         ...linkStyle,
@@ -222,14 +253,14 @@ function NavLink({
         )}
         style={{
           transitionProperty: 'max-width, opacity, padding',
-          transitionDuration: `${styles.durationCapsule}, 0.25s, 0.25s`,
-          transitionDelay: `0s, 0.18s, 0s`,
+          transitionDuration: `${styles.durationCapsule}, ${styles.durationBurger}, ${styles.durationBurger}`,
+          transitionDelay: `0s, ${styles.durationBurger}, 0s`,
           transitionTimingFunction: `${styles.easing}, ease, ease`,
         }}
       >
         {item.title}
       </span>
-    </a>
+    </Link>
   )
 }
 
@@ -256,15 +287,31 @@ export function NavPanel({
   onTransitionEnd,
   className,
   ref,
+  containerRef,
+  menuButtonRef,
+  navigationId,
 }: Props) {
+  const generatedId = useId()
+  const resolvedNavigationId = navigationId ?? `primary-navigation-${generatedId}`
   const hideItems = collapsed && !open
   const resolvedWidth = width ?? (hideItems ? collapsedWidth : undefined)
 
   const style: CSSProperties = { width: resolvedWidth }
+  const navigationStyle: CSSProperties = {
+    '--nav-radius-pill': styles.radiusPill,
+    '--nav-radius-panel-stacked': styles.radiusPanelStacked,
+    '--nav-blur': styles.blur,
+    '--nav-shadow-panel': styles.shadowPanel,
+    '--nav-shadow-item-hover': styles.shadowItemHover,
+    '--nav-shadow-item-active': styles.shadowItemActive,
+    '--nav-item-surface-hover': styles.surfaceItemHover,
+    '--nav-item-surface-active': styles.surfaceItemActive,
+    '--nav-focus-ring': styles.focusColor,
+  } as CSSProperties
 
   const panelBase = cn(
-    'pointer-events-auto flex rounded-[var(--radius-pill)] border border-[var(--color-hairline)] bg-[var(--surface)] backdrop-blur-[var(--blur-panel)]',
-    '[box-shadow:var(--shadow-panel)]',
+    'pointer-events-auto flex rounded-[var(--nav-radius-pill)] border border-[var(--color-hairline)] bg-[var(--surface)] backdrop-blur-[var(--nav-blur)]',
+    '[box-shadow:var(--nav-shadow-panel)]',
     className,
   )
 
@@ -280,7 +327,7 @@ export function NavPanel({
     padding: sizes.capsulePadding,
     gap: sizes.capsuleGap,
     transitionProperty: 'width, padding, gap',
-    transitionDuration: `${styles.durationCapsule}, 0.35s, 0.35s`,
+    transitionDuration: `${styles.durationCapsule}, ${styles.durationCapsule}, ${styles.durationCapsule}`,
     transitionTimingFunction: `${styles.easing}, ${styles.easing}, ${styles.easing}`,
     ...(stacked ? { borderRadius: styles.radiusPanelStacked } : null),
   }
@@ -288,7 +335,14 @@ export function NavPanel({
   const content = (
     <>
       {collapsed || open ? (
-        <Burger open={open} onClick={onToggle} sizes={sizes} styles={styles} />
+        <Burger
+          open={open}
+          onClick={onToggle}
+          sizes={sizes}
+          styles={styles}
+          controlsId={`${resolvedNavigationId}-items`}
+          buttonRef={menuButtonRef}
+        />
       ) : null}
       {items.map((item) => (
         <NavLink
@@ -316,7 +370,7 @@ export function NavPanel({
       padding: sizes.capsulePadding,
       gap: sizes.capsuleGap,
       transitionProperty: 'width, padding, gap',
-      transitionDuration: `${styles.durationCapsule}, 0.35s, 0.35s`,
+      transitionDuration: `${styles.durationCapsule}, ${styles.durationCapsule}, ${styles.durationCapsule}`,
       transitionTimingFunction: `${styles.easing}, ${styles.easing}, ${styles.easing}`,
     }
 
@@ -328,17 +382,32 @@ export function NavPanel({
     }
 
     return (
-      <>
+      <nav
+        id={resolvedNavigationId}
+        ref={containerRef}
+        aria-label="Основная навигация"
+        className="pointer-events-auto relative z-[1000] w-max"
+        style={navigationStyle}
+      >
         {skipLink ? <SkipLink {...skipLink} /> : null}
         <div
           ref={ref}
+          id={`${resolvedNavigationId}-items`}
           style={anchorStyle}
           className={cn(panelBase, 'relative z-[2] items-center justify-center')}
         >
-          <Burger open={open} onClick={onToggle} sizes={sizes} styles={styles} />
+          <Burger
+            open={open}
+            onClick={onToggle}
+            sizes={sizes}
+            styles={styles}
+            controlsId={`${resolvedNavigationId}-menu`}
+            buttonRef={menuButtonRef}
+          />
         </div>
         <Position
           position="fixed"
+          id={`${resolvedNavigationId}-menu`}
           top={`calc(var(--header-top) + ${sizes.burgerSize + 2 * sizes.capsulePadding + 12}px)`}
           right={sizes.gutter}
           left={sizes.gutter}
@@ -350,6 +419,7 @@ export function NavPanel({
               ? 'pointer-events-auto scale-100 opacity-100'
               : 'pointer-events-none invisible scale-[.98] opacity-0',
           )}
+          aria-hidden={!open}
           onTransitionEnd={onTransitionEnd}
         >
           {items.map((item) => (
@@ -357,7 +427,7 @@ export function NavPanel({
               key={item.id}
               item={item}
               active={activeId === item.id}
-              labelVisible={hoveredId === item.id}
+              labelVisible={hoveredId === item.id || activeId === item.id}
               hidden={false}
               stacked
               sizes={sizes}
@@ -367,16 +437,28 @@ export function NavPanel({
             />
           ))}
         </Position>
-      </>
+      </nav>
     )
   }
 
   return (
-    <>
+    <nav
+      id={resolvedNavigationId}
+      ref={containerRef}
+      aria-label="Основная навигация"
+      className="pointer-events-auto relative z-[1000] w-max"
+      style={navigationStyle}
+    >
       {skipLink ? <SkipLink {...skipLink} /> : null}
-      <div ref={ref} style={panelStyle} className={panelClassName} onTransitionEnd={onTransitionEnd}>
+      <div
+        ref={ref}
+        id={`${resolvedNavigationId}-items`}
+        style={panelStyle}
+        className={panelClassName}
+        onTransitionEnd={onTransitionEnd}
+      >
         {content}
       </div>
-    </>
+    </nav>
   )
 }

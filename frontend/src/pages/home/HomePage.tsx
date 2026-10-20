@@ -1,15 +1,5 @@
-import { Page } from '@/common'
-import { Counter } from '@/features/counter'
-import { AppHeader } from '@/features/header'
+import { HeroSection } from '@/features/hero'
 
 export function HomePage() {
-  return (
-    <>
-      <AppHeader />
-      <Page centered title="Vitasil" titleSize="xl">
-        <p>React Router + code-split pages</p>
-        <Counter />
-      </Page>
-    </>
-  )
+  return <HeroSection />
 }

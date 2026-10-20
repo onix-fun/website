@@ -8,6 +8,7 @@ export {
   type NavPanelStyleValues,
 } from './ui/navPanel'
 export { Logo, type LogoSizes } from './ui/logo'
+export { OnixMark, type OnixMarkProps } from './ui/onix-mark'
 export { Page, type PageProps } from './ui/page'
 export {
   Stack,

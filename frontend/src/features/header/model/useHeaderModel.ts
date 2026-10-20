@@ -1,21 +1,24 @@
-import { useCallback, useState, useSyncExternalStore } from 'react'
+import { useCallback, useRef, useState, useSyncExternalStore } from 'react'
 import { useLocation } from 'react-router'
 import type { Item } from '@/common'
 import { getHeaderMetrics, type HeaderMetrics } from './header-metrics'
 
 const MOBILE_QUERY = '(max-width: 768px)'
 const COMPACT_QUERY = '(max-width: 1024px)'
-const LARGE_QUERY = '(min-width: 1281px)'
 
 /** Viewport/scroll state comes from external stores, so no effect sync is needed. */
-function useMediaQuery(query: string): boolean {
+function useMediaQuery(query: string, onMatchChange?: (matches: boolean) => void): boolean {
   const subscribe = useCallback(
-    (onChange: () => void) => {
+    (notifySnapshotChange: () => void) => {
       const mediaQueryList = window.matchMedia(query)
-      mediaQueryList.addEventListener('change', onChange)
-      return () => mediaQueryList.removeEventListener('change', onChange)
+      const handleChange = () => {
+        onMatchChange?.(mediaQueryList.matches)
+        notifySnapshotChange()
+      }
+      mediaQueryList.addEventListener('change', handleChange)
+      return () => mediaQueryList.removeEventListener('change', handleChange)
     },
-    [query],
+    [onMatchChange, query],
   )
 
   return useSyncExternalStore(
@@ -85,29 +88,48 @@ export function useHeaderModel({
 }: UseHeaderModelOptions): HeaderModel {
   const location = useLocation()
 
-  const isMobile = useMediaQuery(MOBILE_QUERY)
-  const isCompact = useMediaQuery(COMPACT_QUERY)
-  const isLarge = useMediaQuery(LARGE_QUERY)
-  const isScrolledPast = useScrolledPast(collapseOffset)
-  const isCollapsed = isMobile || isScrolledPast
-  const metrics = getHeaderMetrics({ isMobile, isCompact, isLarge })
-
-  const [hoveredId, setHoveredId] = useState<string | null>(null)
   const [menu, setMenu] = useState<MenuState>(() => ({
     open: false,
     locationKey: location.key,
-    openedOnMobile: isMobile,
+    openedOnMobile: false,
   }))
+  const menuRef = useRef(menu)
+  const [hoveredId, setHoveredId] = useState<string | null>(null)
+
+  const handleMobileQueryChange = useCallback((matches: boolean) => {
+    const currentMenu = menuRef.current
+    if (matches || !currentMenu.open || !currentMenu.openedOnMobile) return
+
+    const closedMenu = {
+      open: false,
+      locationKey: location.key,
+      openedOnMobile: false,
+    }
+    menuRef.current = closedMenu
+    setMenu(closedMenu)
+    onMenuChange?.(false)
+  }, [location.key, onMenuChange])
+
+  const isMobile = useMediaQuery(MOBILE_QUERY, handleMobileQueryChange)
+  const isCompact = useMediaQuery(COMPACT_QUERY)
+  const isScrolledPast = useScrolledPast(collapseOffset)
+  const isCollapsed = isMobile || isScrolledPast
+  const metrics = getHeaderMetrics({ isMobile, isCompact })
 
   // The menu never survives navigation, and it closes when mobile layout goes
   // away after being opened there.
   const menuOpen =
     menu.open && menu.locationKey === location.key && (isMobile || !menu.openedOnMobile)
 
-  const setMenuOpen = (open: boolean) => {
-    setMenu({ open, locationKey: location.key, openedOnMobile: isMobile })
+  const setMenuOpen = useCallback((open: boolean) => {
+    const nextMenu = { open, locationKey: location.key, openedOnMobile: isMobile }
+    menuRef.current = nextMenu
+    setMenu(nextMenu)
     onMenuChange?.(open)
-  }
+  }, [isMobile, location.key, onMenuChange])
+
+  const toggleMenu = useCallback(() => setMenuOpen(!menuOpen), [menuOpen, setMenuOpen])
+  const closeMenu = useCallback(() => setMenuOpen(false), [setMenuOpen])
 
   const activeId = items.find((item) => item.to === location.pathname)?.id ?? null
 
@@ -117,11 +139,11 @@ export function useHeaderModel({
     hoveredId,
     setHoveredId,
     menuOpen,
-    toggleMenu: () => setMenuOpen(!menuOpen),
-    closeMenu: () => setMenuOpen(false),
+    toggleMenu,
+    closeMenu,
     isCollapsed,
     isMobile,
-    stacked: menuOpen && isMobile,
+    stacked: isMobile,
     logoHidden: isCollapsed && !isMobile,
     needsSpacer: location.pathname !== '/',
     metrics,

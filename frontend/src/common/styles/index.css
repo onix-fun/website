@@ -13,14 +13,14 @@
  *   <Button>        uses utilities:  bg-primary  text-primary-foreground
  *   feature CSS     uses the token:  var(--color-accent)
  *
- * Both resolve to `#ff4d00`. Do NOT redefine brand values here — only wire
+ * Both resolve to `#ffbc0e`. Do NOT redefine brand values here — only wire
  * names together. Change the value in `tokens.css`.
  */
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Geist Variable', sans-serif;
 
-    /* Brand (primary == accent, the orange action color) */
+    /* Brand (primary == accent, the golden action color) */
     --color-primary: var(--color-accent);
     --color-primary-foreground: var(--color-on-accent);
     --color-accent: var(--color-accent);
@@ -30,13 +30,13 @@
     /* Content */
     --color-background: var(--surface-solid);
     --color-foreground: var(--color-text);
-    --color-card: var(--surface-solid);
+    --color-card: var(--surface-raised);
     --color-card-foreground: var(--color-text);
-    --color-popover: var(--surface-solid);
+    --color-popover: var(--surface-raised);
     --color-popover-foreground: var(--color-text);
-    --color-muted: var(--surface);
+    --color-muted: var(--surface-raised);
     --color-muted-foreground: var(--color-text-muted);
-    --color-secondary: var(--surface);
+    --color-secondary: var(--surface-raised);
     --color-secondary-foreground: var(--color-text);
 
     /* Lines & focus */

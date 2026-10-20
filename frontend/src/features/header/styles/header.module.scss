@@ -13,6 +13,9 @@
 .header {
   --blur-panel: 24px;
   --radius-panel-stacked: 28px;
+  --nav-surface-hover: color-mix(in srgb, var(--color-accent-soft) 24%, var(--surface));
+  --nav-surface-active: color-mix(in srgb, var(--color-accent-soft) 38%, var(--surface));
+  --nav-focus: #9c701c;
 
   /* Capsule elevation = global shadow + a hairline "stacked" line beneath it. */
   --shadow-panel: var(--shadow-md), 0 4px 0 color-mix(in srgb, var(--color-hairline) 70%, transparent);
@@ -25,7 +28,7 @@
   --duration-burger: var(--duration-base);
 
   /* Fixed-bar placement + spacer height for non-hero routes. */
-  --header-top: 25px;
+  --header-top: 24px;
   --header-spacer: 87px;
 }
 

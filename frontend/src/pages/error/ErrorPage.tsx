@@ -1,7 +1,6 @@
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router'
 import { Page } from '@/common'
 import { Button } from '@/common/ui/button'
-import { AppHeader } from '@/features/header'
 
 interface ErrorView {
   status?: number
@@ -35,13 +34,10 @@ export function ErrorPage() {
   const { status, title, detail } = resolveError(error)
 
   return (
-    <>
-      <AppHeader />
-      <Page centered title={title} titleSize="2xl">
-        {status ? <p>{status}</p> : null}
-        {detail ? <p>{detail}</p> : null}
-        <Button render={<Link to="/" />}>На главную</Button>
-      </Page>
-    </>
+    <Page centered title={title} titleSize="2xl">
+      {status ? <p>{status}</p> : null}
+      {detail ? <p>{detail}</p> : null}
+      <Button render={<Link to="/" />}>На главную</Button>
+    </Page>
   )
 }

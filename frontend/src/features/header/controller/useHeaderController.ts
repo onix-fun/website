@@ -12,6 +12,8 @@ export interface UseHeaderControllerOptions {
   capsuleCollapsedWidth: number
   /** Closes the menu (Escape key) — owned by the model. */
   onCloseMenu: () => void
+  /** Returns focus to the menu toggle after Escape closes an open menu. */
+  onEscape?: () => void
   onCollapseChange?: (collapsed: boolean) => void
 }
 
@@ -34,6 +36,7 @@ export function useHeaderController({
   isMobile,
   capsuleCollapsedWidth,
   onCloseMenu,
+  onEscape,
   onCollapseChange,
 }: UseHeaderControllerOptions): HeaderController {
   const capsuleRef = useRef<HTMLDivElement | null>(null)
@@ -73,12 +76,25 @@ export function useHeaderController({
   }
 
   const closeMenuRef = useRef(onCloseMenu)
+  const menuOpenRef = useRef(menuOpen)
+  const onEscapeRef = useRef(onEscape)
   useEffect(() => {
     closeMenuRef.current = onCloseMenu
   }, [onCloseMenu])
 
+  useEffect(() => {
+    onEscapeRef.current = onEscape
+  }, [onEscape])
+
+  useEffect(() => {
+    menuOpenRef.current = menuOpen
+  }, [menuOpen])
+
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') closeMenuRef.current()
+    if (event.key === 'Escape' && menuOpenRef.current) {
+      closeMenuRef.current()
+      onEscapeRef.current?.()
+    }
   }
 
   // Mount: measure once and keep the full width in sync with the viewport.
