@@ -6,9 +6,6 @@ import { OnixMark } from './onix-mark'
 export interface LogoSizes {
   /** Rendered mark height (px); width follows the mark's own aspect ratio. */
   height: number
-  /** Wordmark font size and mark/wordmark spacing are resolved per breakpoint. */
-  wordmarkSize: number
-  gap: number
 }
 
 export interface Props {
@@ -54,16 +51,8 @@ export function Logo({
         aria-label={label}
         tabIndex={hidden ? -1 : undefined}
         className="flex items-center rounded-[var(--radius-sm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--nav-focus)]"
-        style={{ gap: sizes.gap }}
       >
         <Icon className="h-full w-auto shrink-0 overflow-visible" style={{ height: sizes.height }} />
-        <span
-          aria-hidden="true"
-          className="font-extrabold uppercase leading-none tracking-[-0.06em] text-[var(--color-ink)]"
-          style={{ fontSize: sizes.wordmarkSize }}
-        >
-          ONIX
-        </span>
       </Link>
     </div>
   )

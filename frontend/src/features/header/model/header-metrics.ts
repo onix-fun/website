@@ -10,9 +10,6 @@ export interface HeaderMetrics {
   headerMaxWidth: number
   /** Rendered brand-mark height (px); width follows the mark's aspect ratio. */
   logoHeight: number
-  /** Brand wordmark size and spacing, balanced against the nav capsule. */
-  logoWordmarkSize: number
-  logoGap: number
   itemSize: number
   itemLabelMax: number
   iconSize: number
@@ -51,8 +48,6 @@ export function getHeaderMetrics({ isMobile, isCompact }: HeaderViewport): Heade
       headerHeight: 62,
       headerMaxWidth: 1296,
       logoHeight: 44,
-      logoWordmarkSize: 18,
-      logoGap: 8,
       itemSize: 48,
       itemLabelMax: 260,
       iconSize: 22,
@@ -72,8 +67,6 @@ export function getHeaderMetrics({ isMobile, isCompact }: HeaderViewport): Heade
       headerHeight: 62,
       headerMaxWidth: 1296,
       logoHeight: 48,
-      logoWordmarkSize: 22,
-      logoGap: 9,
       itemSize: 48,
       itemLabelMax: 260,
       iconSize: 22,
@@ -92,8 +85,6 @@ export function getHeaderMetrics({ isMobile, isCompact }: HeaderViewport): Heade
     headerHeight: 62,
     headerMaxWidth: 1296,
     logoHeight: 52,
-    logoWordmarkSize: 24,
-    logoGap: 10,
     itemSize: 56,
     itemLabelMax: 300,
     iconSize: 24,
