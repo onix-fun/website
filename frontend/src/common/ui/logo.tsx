@@ -20,6 +20,7 @@ export interface Props {
   /** Breakpoint-resolved sizes supplied by the caller. */
   sizes: LogoSizes
   className?: string
+  'data-part'?: string
 }
 
 /** Brand link; sits in the header's normal flow. Sizing comes from props. */
@@ -30,9 +31,11 @@ export function Logo({
   hidden = false,
   sizes,
   className,
+  'data-part': dataPart,
 }: Props) {
   return (
     <div
+      data-part={dataPart}
       className={cn(
         'pointer-events-auto flex shrink-0 items-center',
         'hover:scale-[1.05]',

@@ -1,22 +1,25 @@
-.listing {
+import styled from 'styled-components'
+import { BREAKPOINTS } from '@/common/styles/breakpoints'
+
+export const ShowcaseListingStyles = styled.section`& {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
 
-.toolbar {
+& [data-part=toolbar] {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--space-md);
 }
 
-.searchField {
+& [data-part=searchField] {
   position: relative;
   width: min(100%, 28rem);
 }
 
-.searchIcon {
+& [data-part=searchIcon] {
   position: absolute;
   z-index: 1;
   top: 50%;
@@ -27,7 +30,7 @@
   transform: translateY(-50%);
 }
 
-.searchInput {
+& [data-part=searchInput] {
   min-height: var(--onix-hero-action-height);
   border-color: var(--color-hairline);
   border-radius: var(--radius-pill);
@@ -35,14 +38,14 @@
   padding-left: var(--space-2xl);
 }
 
-.filters {
+& [data-part=filters] {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: var(--space-xs);
 }
 
-.resultCount {
+& [data-part=resultCount] {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
@@ -51,13 +54,13 @@
   font-size: var(--font-size-caption);
 }
 
-.grid {
+& [data-part=grid] {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-md);
 }
 
-.empty {
+& [data-part=empty] {
   display: flex;
   align-items: flex-start;
   gap: var(--space-md);
@@ -67,7 +70,7 @@
   padding: var(--space-2xl);
 }
 
-.emptyEyebrow {
+& [data-part=emptyEyebrow] {
   color: var(--color-accent-hover);
   font-size: var(--font-size-caption);
   font-weight: 700;
@@ -75,43 +78,44 @@
   text-transform: uppercase;
 }
 
-.empty h2 {
+& [data-part=empty] h2 {
   margin: 0;
   color: var(--onix-hero-text-primary);
   font-size: var(--font-size-section);
 }
 
-.empty p {
+& [data-part=empty] p {
   max-width: 48ch;
   margin: 0;
   color: var(--color-text-muted);
   line-height: var(--line-height-body);
 }
 
-@media (max-width: 1024px) {
-  .toolbar {
+@media (max-width: ${BREAKPOINTS.xl}) {
+  & [data-part=toolbar] {
     grid-template-columns: 1fr;
   }
 
-  .searchField {
+  & [data-part=searchField] {
     width: 100%;
   }
 
-  .filters {
+  & [data-part=filters] {
     justify-content: flex-start;
   }
 
-  .grid {
+  & [data-part=grid] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 640px) {
-  .grid {
+@media (max-width: ${BREAKPOINTS.sm}) {
+  & [data-part=grid] {
     grid-template-columns: 1fr;
   }
 
-  .empty {
+  & [data-part=empty] {
     padding: var(--space-lg);
   }
 }
+`

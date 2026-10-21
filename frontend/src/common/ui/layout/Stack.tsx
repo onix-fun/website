@@ -3,11 +3,11 @@ import type { CSSProperties, ElementType, ReactNode } from 'react'
 /** Named spacing steps backed by CSS vars (`--space-*`), falling back to px. */
 const SPACE = {
   none: '0',
-  xs: '4px',
-  sm: '8px',
-  md: '16px',
-  lg: '24px',
-  xl: '40px',
+  xs: 'var(--space-xs)',
+  sm: 'var(--space-sm)',
+  md: 'var(--space-md)',
+  lg: 'var(--space-lg)',
+  xl: 'var(--space-xl)',
 } as const
 
 export type Space = keyof typeof SPACE | number | string

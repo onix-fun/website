@@ -9,6 +9,7 @@ export interface PageProps {
   centered?: boolean
   /** Content alignment value passed through to the container. */
   className?: string
+  'data-part'?: string
   /** Heading size; defaults to `lg`. */
   titleSize?: 'lg' | 'xl' | '2xl'
   children?: ReactNode
@@ -19,12 +20,13 @@ export interface PageProps {
  * optional title. All spacing/typography come from the shell so pages carry no
  * styles of their own.
  */
-export function Page({ title, centered = false, titleSize = 'lg', className, children }: PageProps) {
+export function Page({ title, centered = false, titleSize = 'lg', className, children, 'data-part': dataPart }: PageProps) {
   return (
     <Container
       as="main"
       id="main-content"
       className={cn('flex flex-1', !centered && 'py-10', className)}
+      data-part={dataPart}
       innerClassName={cn(
         'flex flex-col',
         centered ? 'items-center justify-center gap-6 text-center' : 'gap-6',

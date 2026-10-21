@@ -1,8 +1,5 @@
 import { Moon, Sun } from 'lucide-react'
 import { useColorTheme } from '@/common/hooks/useColorTheme'
-import { cn } from '@/common/lib/utils'
-import styles from '../styles/header.module.scss'
-
 export function ThemeToggle({ visible }: { visible: boolean }) {
   const { theme, toggleTheme } = useColorTheme()
   const nextThemeLabel = theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему'
@@ -10,12 +7,13 @@ export function ThemeToggle({ visible }: { visible: boolean }) {
 
   return (
     <div
-      className={cn(styles.themeToggleSlot, !visible && styles.themeToggleSlotHidden)}
+      data-part="themeToggleSlot"
+      data-state={visible ? 'visible' : 'hidden'}
       aria-hidden={!visible}
     >
       <button
         type="button"
-        className={styles.themeToggle}
+        data-part="themeToggle"
         aria-label={nextThemeLabel}
         aria-pressed={theme === 'dark'}
         title={nextThemeLabel}

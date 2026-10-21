@@ -22,10 +22,8 @@ export {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from './ui/breadcrumb'
-export { ShowcaseListing } from './ui/showcase-listing'
-export { ShowcaseDetail } from './ui/showcase-detail'
 export { PageIntro } from './ui/page-intro'
-export type { ShowcaseItem, ShowcaseFact, ShowcaseKind } from './ui/showcase-types'
+export type { ShowcaseItem, ShowcaseFact, ShowcaseKind } from './lib/showcase'
 export {
   NavPanel,
   type Item,

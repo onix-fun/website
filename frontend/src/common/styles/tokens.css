@@ -2,20 +2,37 @@
  * Design system — the single global source of truth for every shared value:
  * brand colors, surfaces, text, spacing, radii, motion and the page grid.
  *
- * This is the CANON. All colors/spacing/effects consumed anywhere in the app
- * reference a token from here. Component CSS must never hardcode a color or a
- * size — always reference a token.
+ * This is the CANON. Shared colors, spacing, effects and responsive values
+ * consumed anywhere in the app reference tokens from here.
  *
  * `index.css` bridges these tokens into Tailwind: it maps shadcn-style names
  * (`--color-primary`, `--color-muted-foreground`, …) onto the tokens below, so
  * both `var(--color-accent)` and the `text-accent`/`bg-primary` utilities point
  * at the SAME value.
  *
- * Only header-specific sizes/effects stay scoped to the header root
- * (`features/header/styles/header.module.scss`).
+ * Header-specific values are declared here so styled-components and
+ * presentational primitives share the same responsive design tokens.
  */
 :root {
   color-scheme: light;
+
+  --app-min-height: 100svh;
+
+  /* ---- Header ---- */
+  --header-panel-blur: 24px;
+  --header-panel-stacked-radius: 28px;
+  --header-panel-edge-offset: 4px;
+  --header-fixed-top: 24px;
+  --header-spacer-height: 87px;
+  --header-controls-slot-size: 48px;
+  --header-theme-button-size: 44px;
+  --header-theme-icon-size: 20px;
+  --header-theme-blur: 20px;
+  --header-focus-outline: 2px;
+  --header-focus-offset: 4px;
+  --header-hover-lift: 1px;
+  --header-burger-bar-offset: 7px;
+  --layer-navigation: 1000;
 
   /* ---- Brand (derived from the Onix logo: yellow mark, amber stroke) ---- */
   --color-accent: #ffbc0e;
@@ -81,7 +98,8 @@
 
   /* ---- Borders & focus ---- */
   --color-hairline: rgba(0, 0, 0, 0.08);
-  --color-focus: #ffbc0e;
+  --color-hairline-strong: #d1d1d1;
+  --color-focus: #4a4a4a;
 
   /* ---- Spacing scale ---- */
   --space-xs: 4px;
@@ -136,7 +154,8 @@
   --onix-hero-action-shadow: 0 8px 28px rgba(255, 188, 14, 0.2);
 
   --color-hairline: rgba(255, 255, 255, 0.11);
-  --color-focus: #ffd15c;
+  --color-hairline-strong: #4a4a4a;
+  --color-focus: #e8e5de;
 
   --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.24);
   --shadow-md: 0 14px 36px rgba(0, 0, 0, 0.34);
@@ -162,5 +181,7 @@
     --onix-hero-art-width: clamp(650px, 150vw, 960px);
     --onix-hero-art-left: 14vw;
     --onix-hero-art-top: -35%;
+    --header-fixed-top: 18px;
+    --header-spacer-height: 80px;
   }
 }

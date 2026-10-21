@@ -1,24 +1,16 @@
-/**
- * Header style scope — non-dimensional header styles live here as CSS custom
- * properties on the header root, so they can also reach
- * `common/ui` primitives (nav capsule, logo) that are rendered inside it.
- *
- * Only header-SPECIFIC values live here. Anything shared with the rest of the
- * app (colors, surfaces, motion, elevation) comes from the global design system
- * in `common/styles/tokens.css` and is referenced, never redefined.
- *
- * Sizes that depend on the breakpoint are NOT here — they are computed in
- * `model/header-metrics.ts` and passed to the primitives as props.
- */
-.header {
-  --blur-panel: 24px;
-  --radius-panel-stacked: 28px;
+import styled from 'styled-components'
+import { BREAKPOINTS } from '@/common/styles/breakpoints'
+
+export const HeaderStyles = styled.header`
+& {
+  --blur-panel: var(--header-panel-blur);
+  --radius-panel-stacked: var(--header-panel-stacked-radius);
   --nav-surface-hover: color-mix(in srgb, var(--color-accent-soft) 24%, var(--surface));
   --nav-surface-active: color-mix(in srgb, var(--color-accent-soft) 38%, var(--surface));
   --nav-focus: var(--color-focus);
 
   /* Capsule elevation = global shadow + a hairline "stacked" line beneath it. */
-  --shadow-panel: var(--shadow-md), 0 4px 0 color-mix(in srgb, var(--color-hairline) 70%, transparent);
+  --shadow-panel: var(--shadow-md), var(--header-panel-edge-offset) var(--header-panel-edge-offset) 0 color-mix(in srgb, var(--color-hairline) 70%, transparent);
 
   /* Item states are header-local: they compose the global elevation tokens
      with an inner top highlight bespoke to the capsule. */
@@ -28,21 +20,21 @@
   --duration-burger: var(--duration-base);
 
   /* Fixed-bar placement + spacer height for non-hero routes. */
-  --header-top: 24px;
-  --header-spacer: 87px;
+  --header-top: var(--header-fixed-top);
+  --header-spacer: var(--header-spacer-height);
 }
 
-.navigationControls {
+& [data-part=navigationControls] {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   gap: var(--space-sm);
 }
 
-.themeToggleSlot {
+& [data-part=themeToggleSlot] {
   display: flex;
-  width: 48px;
-  height: 48px;
+  width: var(--header-controls-slot-size);
+  height: var(--header-controls-slot-size);
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
@@ -56,7 +48,7 @@
     visibility 0s;
 }
 
-.themeToggleSlotHidden {
+& [data-state=hidden] {
   width: 0;
   overflow: hidden;
   opacity: 0;
@@ -70,10 +62,10 @@
     visibility 0s;
 }
 
-.themeToggle {
+& [data-part=themeToggle] {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: var(--header-theme-button-size);
+  height: var(--header-theme-button-size);
   flex: 0 0 auto;
   place-items: center;
   border: var(--border-width) solid var(--color-hairline);
@@ -81,7 +73,7 @@
   background: var(--surface);
   color: var(--color-ink);
   box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(var(--header-theme-blur));
   cursor: pointer;
   transition:
     color var(--duration-fast) ease,
@@ -90,25 +82,26 @@
     transform var(--duration-fast) var(--ease-out);
 }
 
-.themeToggle:hover {
-  border-color: color-mix(in srgb, var(--color-accent) 44%, var(--color-hairline));
+& [data-part=themeToggle]:hover {
+  border-color: var(--color-hairline-strong);
   background: var(--surface-hover);
-  transform: translateY(-1px);
+  transform: translateY(calc(-1 * var(--header-hover-lift)));
 }
 
-.themeToggle:focus-visible {
-  outline: 2px solid var(--nav-focus);
-  outline-offset: 4px;
+& [data-part=themeToggle]:focus-visible {
+  outline: var(--header-focus-outline) solid var(--nav-focus);
+  outline-offset: var(--header-focus-offset);
 }
 
-.themeToggle svg {
-  width: 20px;
-  height: 20px;
+& [data-part=themeToggle] svg {
+  width: var(--header-theme-icon-size);
+  height: var(--header-theme-icon-size);
 }
 
-@media (max-width: 768px) {
-  .header {
-    --header-top: 18px;
-    --header-spacer: 80px;
+@media (max-width: ${BREAKPOINTS.md}) {
+  & {
+    --header-top: var(--header-fixed-top);
+    --header-spacer: var(--header-spacer-height);
   }
 }
+`

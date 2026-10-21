@@ -1,6 +1,6 @@
+import { ServicesPageStyles } from './ServicesPage.styles'
 import { ArrowUpRight } from 'lucide-react'
-import { ButtonLink, Card, CardContent, Page, PageIntro, SITE_CONTACT_URL } from '@/common'
-import styles from './ServicesPage.module.scss'
+import { ButtonLink, Card, CardContent, PageIntro, SITE_CONTACT_URL } from '@/common'
 
 const services = [
   {
@@ -34,27 +34,27 @@ const process = [
 
 export function ServicesPage() {
   return (
-    <Page className={styles.page}>
-      <div className={styles.content}>
+    <ServicesPageStyles data-part="page">
+      <div data-part="content">
         <PageIntro
           eyebrow="ОТ ИДЕИ ДО ПРЕДМЕТА"
           title="Проектируем и создаём"
           description="Помогаем пройти путь от идеи до физического предмета: проектируем, моделируем и создаём с помощью 3D-печати."
         />
 
-        <section className={styles.section} aria-labelledby="services-title">
-          <div className={styles.sectionHeading}>
-            <span className={styles.sectionIndex}>01 / ЧТО МЫ ДЕЛАЕМ</span>
+        <section data-part="section" aria-labelledby="services-title">
+          <div data-part="sectionHeading">
+            <span data-part="sectionIndex">01 / ЧТО МЫ ДЕЛАЕМ</span>
             <h2 id="services-title">Услуги студии</h2>
           </div>
-          <ol className={styles.services} aria-label="Услуги студии">
+          <ol data-part="services" aria-label="Услуги студии">
             {services.map((service, index) => (
               <li key={service.title}>
-                <Card className={styles.service}>
-                  <CardContent className={styles.serviceContent}>
-                    <span className={styles.number}>{String(index + 1).padStart(2, '0')}</span>
-                    <h3 className={styles.title}>{service.title}</h3>
-                    <p className={styles.description}>{service.description}</p>
+                <Card data-part="service">
+                  <CardContent data-part="serviceContent">
+                    <span data-part="number">{String(index + 1).padStart(2, '0')}</span>
+                    <h3 data-part="title">{service.title}</h3>
+                    <p data-part="description">{service.description}</p>
                   </CardContent>
                 </Card>
               </li>
@@ -62,15 +62,15 @@ export function ServicesPage() {
           </ol>
         </section>
 
-        <section className={styles.process} aria-labelledby="service-process-title">
-          <div className={styles.sectionHeading}>
-            <span className={styles.sectionIndex}>02 / КАК МЫ РАБОТАЕМ</span>
+        <section data-part="process" aria-labelledby="service-process-title">
+          <div data-part="sectionHeading">
+            <span data-part="sectionIndex">02 / КАК МЫ РАБОТАЕМ</span>
             <h2 id="service-process-title">Четыре шага к результату</h2>
           </div>
-          <ol className={styles.processList}>
+          <ol data-part="processList">
             {process.map((step, index) => (
               <li key={step.title}>
-                <span className={styles.number}>{String(index + 1).padStart(2, '0')}</span>
+                <span data-part="number">{String(index + 1).padStart(2, '0')}</span>
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
               </li>
@@ -78,10 +78,10 @@ export function ServicesPage() {
           </ol>
         </section>
 
-        <Card className={styles.callout}>
-          <CardContent className={styles.calloutContent}>
+        <Card data-part="callout">
+          <CardContent data-part="calloutContent">
             <div>
-              <span className={styles.sectionIndex}>ОБСУДИМ ВАШУ ЗАДАЧУ</span>
+              <span data-part="sectionIndex">ОБСУДИМ ВАШУ ЗАДАЧУ</span>
               <h2>Расскажите, что хотите создать</h2>
             </div>
             <ButtonLink
@@ -93,6 +93,6 @@ export function ServicesPage() {
           </CardContent>
         </Card>
       </div>
-    </Page>
+    </ServicesPageStyles>
   )
 }

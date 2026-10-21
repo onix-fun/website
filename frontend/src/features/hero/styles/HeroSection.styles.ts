@@ -1,4 +1,7 @@
-.hero {
+import styled from 'styled-components'
+import { BREAKPOINTS } from '@/common/styles/breakpoints'
+
+export const HeroSectionStyles = styled.main`& {
   position: relative;
   isolation: isolate;
   min-height: max(100svh, 690px);
@@ -7,7 +10,7 @@
   color: var(--onix-hero-text-primary);
 }
 
-.visual {
+& [data-part=visual] {
   position: absolute;
   z-index: -1;
   inset: 0 0 calc(-1 * var(--onix-hero-stage-extra));
@@ -15,7 +18,7 @@
   pointer-events: none;
 }
 
-.animation {
+& [data-part=animation] {
   position: absolute;
   top: var(--onix-hero-art-top);
   left: var(--onix-hero-art-left);
@@ -23,14 +26,14 @@
   aspect-ratio: 1674 / 1525;
 }
 
-.animation :global(svg) {
+& [data-part=animation] svg {
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
 }
 
-.content {
+& [data-part=content] {
   position: absolute;
   z-index: 1;
   left: max(var(--onix-hero-gutter), calc((100vw - 1296px) / 2));
@@ -42,7 +45,7 @@
   gap: var(--onix-hero-content-gap);
 }
 
-.eyebrow {
+& [data-part=eyebrow] {
   margin: 0;
   color: var(--onix-hero-text-secondary);
   font-size: var(--onix-hero-label-size);
@@ -51,7 +54,7 @@
   letter-spacing: var(--onix-hero-label-tracking);
 }
 
-.title {
+& [data-part=title] {
   margin: 0;
   color: var(--onix-hero-text-primary);
   font-size: var(--onix-hero-display-size);
@@ -60,7 +63,7 @@
   letter-spacing: var(--onix-hero-display-tracking);
 }
 
-.description {
+& [data-part=description] {
   max-width: var(--onix-hero-description-width);
   margin: 0;
   color: var(--onix-hero-text-primary);
@@ -69,15 +72,14 @@
   line-height: var(--onix-hero-body-line-height);
 }
 
-.actions {
+& [data-part=actions] {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--onix-hero-action-gap);
 }
 
-.primaryAction,
-.textAction {
+& [data-part=primaryAction],& [data-part=textAction] {
   display: inline-flex;
   min-height: var(--onix-hero-action-height);
   align-items: center;
@@ -94,21 +96,20 @@
   cursor: pointer;
 }
 
-.primaryAction {
+& [data-part=primaryAction] {
   background: var(--onix-hero-action-background);
   box-shadow: var(--onix-hero-action-shadow);
 }
 
-.textAction {
+& [data-part=textAction] {
   background: transparent;
 }
 
-.primaryAction svg,
-.textAction svg {
+& [data-part=primaryAction] svg,& [data-part=textAction] svg {
   flex: 0 0 auto;
 }
 
-.footer {
+& [data-part=footer] {
   position: absolute;
   z-index: 1;
   right: max(var(--onix-hero-gutter), calc((100vw - 1296px) / 2));
@@ -125,12 +126,11 @@
   line-height: 1.25;
 }
 
-.categories,
-.orbitCaption p {
+& [data-part=categories],& [data-part=orbitCaption] p {
   margin: 0;
 }
 
-.orbitCaption {
+& [data-part=orbitCaption] {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,48 +141,46 @@
   letter-spacing: var(--onix-hero-label-tracking);
 }
 
-.orbitCaption span {
+& [data-part=orbitCaption] span {
   color: var(--onix-hero-text-primary);
   font-size: var(--onix-hero-caption-arrow-size);
   font-weight: 400;
   line-height: 1;
 }
 
-.aboutLink {
+& [data-part=aboutLink] {
   justify-self: end;
   color: inherit;
   text-decoration: none;
 }
 
-.aboutLink:focus-visible,
-.primaryAction:focus-visible,
-.textAction:focus-visible {
+& [data-part=aboutLink]:focus-visible,& [data-part=primaryAction]:focus-visible,& [data-part=textAction]:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 4px;
 }
 
-@media (max-width: 1024px) {
-  .content {
+@media (max-width: ${BREAKPOINTS.xl}) {
+  & [data-part=content] {
     left: var(--onix-hero-gutter);
   }
 
-  .footer {
+  & [data-part=footer] {
     right: var(--onix-hero-gutter);
     left: var(--onix-hero-gutter);
   }
 }
 
-@media (max-width: 768px) {
-  .hero {
+@media (max-width: ${BREAKPOINTS.md}) {
+  & {
     min-height: max(100svh, 760px);
   }
 
-  .visual {
+  & [data-part=visual] {
     inset: 0 0 240px;
     overflow: hidden;
   }
 
-  .visual::after {
+  & [data-part=visual]::after {
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -194,44 +192,44 @@
     content: '';
   }
 
-  .content {
+  & [data-part=content] {
     right: var(--onix-hero-gutter);
     bottom: 140px;
     width: auto;
     gap: var(--onix-hero-content-gap);
   }
 
-  .description {
+  & [data-part=description] {
     max-width: 38rem;
   }
 
-  .footer {
+  & [data-part=footer] {
     grid-template-columns: 1fr auto;
     row-gap: var(--space-md);
     padding-top: var(--space-md);
   }
 
-  .orbitCaption {
+  & [data-part=orbitCaption] {
     grid-column: 1 / -1;
     grid-row: 2;
     justify-content: flex-start;
   }
 
-  .aboutLink {
+  & [data-part=aboutLink] {
     grid-column: 2;
     grid-row: 1;
   }
 }
 
-@media (max-width: 420px) {
-  .actions {
+@media (max-width: ${BREAKPOINTS.xs}) {
+  & [data-part=actions] {
     align-items: flex-start;
     flex-direction: column;
   }
 
-  .primaryAction,
-  .textAction {
+  & [data-part=primaryAction],& [data-part=textAction] {
     min-height: 48px;
     padding-inline: var(--space-md);
   }
 }
+`

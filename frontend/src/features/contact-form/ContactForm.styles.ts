@@ -1,11 +1,13 @@
-.form {
+import styled from 'styled-components'
+
+export const ContactFormStyles = styled.form`& {
   display: flex;
   max-width: 28rem;
   flex-direction: column;
   gap: var(--space-md);
 }
 
-.label {
+& [data-part=label] {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -14,7 +16,7 @@
   color: var(--color-ink);
 }
 
-.field {
+& [data-part=field] {
   width: 100%;
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-sm);
@@ -24,13 +26,14 @@
   outline: none;
 }
 
-.field:focus-visible {
+& [data-part=field]:focus-visible {
   border-color: var(--color-focus);
   box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-focus) 50%, transparent);
 }
 
-.note {
+& [data-part=note] {
   margin: 0;
   font-size: 0.875rem;
   color: var(--color-text-muted);
 }
+`

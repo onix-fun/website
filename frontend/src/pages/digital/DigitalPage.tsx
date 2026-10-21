@@ -1,18 +1,23 @@
-import { Page, PageIntro } from '@/common'
-import { DigitalListing } from '@/features/digital'
-import styles from './DigitalPage.module.scss'
+import { DigitalPageStyles } from './DigitalPage.styles'
+import { PageIntro } from '@/common'
+import { digitalItems } from '@/features/digital'
+import { ShowcaseListing } from '@/features/showcase'
 
 export function DigitalPage() {
   return (
-    <Page className={styles.page}>
-      <div className={styles.content}>
+    <DigitalPageStyles data-part="page">
+      <div data-part="content">
         <PageIntro
           eyebrow="ЦИФРОВОЕ / ONIX"
           title="Форма в цифровом пространстве"
           description="Демонстрационная витрина цифровых продуктов. Состав, форматы и описание появятся в карточках."
         />
-        <DigitalListing />
+        <ShowcaseListing
+          items={digitalItems}
+          basePath="/digital"
+          sectionLabel="Цифровые продукты"
+        />
       </div>
-    </Page>
+    </DigitalPageStyles>
   )
 }

@@ -9,9 +9,12 @@ export interface ContainerProps {
   /** Inline padding (gutter); defaults to the header grid gutter. */
   paddingInline?: number | string
   id?: string
+  'data-part'?: string
   className?: string
   /** Classes for the inner max-width wrapper. */
   innerClassName?: string
+  /** Semantic selector for the content wrapper, used by composed styled components. */
+  innerDataPart?: string
   style?: CSSProperties
   children?: ReactNode
 }
@@ -29,6 +32,7 @@ export function Container({
   paddingInline = 'var(--page-inline)',
   className,
   innerClassName,
+  innerDataPart,
   style,
   children,
   ...rest
@@ -47,7 +51,7 @@ export function Container({
 
   return (
     <Tag className={cn(className)} style={outer} {...rest}>
-      <div className={cn(innerClassName)} style={inner}>
+      <div data-part={innerDataPart} className={cn(innerClassName)} style={inner}>
         {children}
       </div>
     </Tag>

@@ -1,5 +1,5 @@
-import type { Item } from '@/common'
 import { Info, MonitorSmartphone, ShoppingBag, Wrench } from 'lucide-react'
+import type { Item } from '@/common'
 
 export const navItems: readonly Item[] = [
   { id: 'about', to: '/about', title: 'О нас', icon: Info },

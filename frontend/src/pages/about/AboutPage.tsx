@@ -1,7 +1,7 @@
+import { AboutPageStyles } from './AboutPage.styles'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
-import { ButtonLink, Card, CardContent, Page, PageIntro } from '@/common'
-import styles from './AboutPage.module.scss'
+import { ButtonLink, Card, CardContent, PageIntro } from '@/common'
 
 const principles = [
   {
@@ -25,24 +25,24 @@ const process = ['Идея и задача', 'Форма и модель', 'Пр
 
 export function AboutPage() {
   return (
-    <Page className={styles.page}>
-      <div className={styles.content}>
+    <AboutPageStyles data-part="page">
+      <div data-part="content">
         <PageIntro
           eyebrow="СТУДИЯ ONIX"
           title="Идея становится предметом"
           description="Мы соединяем предметный дизайн, моделирование и 3D-печать — чтобы пройти путь от замысла до объекта."
         />
 
-        <section className={styles.section} aria-labelledby="approach-title">
-          <div className={styles.sectionHeading}>
-            <span className={styles.sectionIndex}>01 / ПОДХОД</span>
+        <section data-part="section" aria-labelledby="approach-title">
+          <div data-part="sectionHeading">
+            <span data-part="sectionIndex">01 / ПОДХОД</span>
             <h2 id="approach-title">Сначала смысл. Затем форма.</h2>
           </div>
-          <div className={styles.principles}>
+          <div data-part="principles">
             {principles.map((principle) => (
-              <Card key={principle.number} className={styles.principle}>
-                <CardContent className={styles.principleContent}>
-                  <span className={styles.number}>{principle.number}</span>
+              <Card key={principle.number} data-part="principle">
+                <CardContent data-part="principleContent">
+                  <span data-part="number">{principle.number}</span>
                   <h3>{principle.title}</h3>
                   <p>{principle.description}</p>
                 </CardContent>
@@ -51,13 +51,13 @@ export function AboutPage() {
           </div>
         </section>
 
-        <section className={styles.process} aria-labelledby="process-title">
-          <div className={styles.processIntro}>
-            <span className={styles.sectionIndex}>02 / ПРОЦЕСС</span>
+        <section data-part="process" aria-labelledby="process-title">
+          <div data-part="processIntro">
+            <span data-part="sectionIndex">02 / ПРОЦЕСС</span>
             <h2 id="process-title">От первого разговора до результата</h2>
             <p>Этапы и состав работ подбираются под задачу конкретного проекта.</p>
           </div>
-          <ol className={styles.steps}>
+          <ol data-part="steps">
             {process.map((step, index) => (
               <li key={step}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
@@ -67,10 +67,10 @@ export function AboutPage() {
           </ol>
         </section>
 
-        <Card className={styles.callout}>
-          <CardContent className={styles.calloutContent}>
+        <Card data-part="callout">
+          <CardContent data-part="calloutContent">
             <div>
-              <span className={styles.sectionIndex}>ЕСТЬ ИДЕЯ?</span>
+              <span data-part="sectionIndex">ЕСТЬ ИДЕЯ?</span>
               <h2>Давайте найдём ей форму</h2>
             </div>
             <ButtonLink render={<Link to="/services" />} size="lg">
@@ -79,6 +79,6 @@ export function AboutPage() {
           </CardContent>
         </Card>
       </div>
-    </Page>
+    </AboutPageStyles>
   )
 }

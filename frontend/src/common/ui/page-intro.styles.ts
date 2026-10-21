@@ -1,4 +1,7 @@
-.intro {
+import styled from 'styled-components'
+import { BREAKPOINTS } from '@/common/styles/breakpoints'
+
+export const PageIntroStyles = styled.header`& {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
   align-items: end;
@@ -7,14 +10,14 @@
   padding-bottom: var(--space-2xl);
 }
 
-.heading {
+& [data-part=heading] {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-lg);
 }
 
-.heading h1 {
+& [data-part=heading] h1 {
   max-width: 15ch;
   margin: 0;
   color: var(--onix-hero-text-primary);
@@ -23,7 +26,7 @@
   letter-spacing: var(--letter-spacing-display);
 }
 
-.intro > p {
+& > p {
   max-width: 54ch;
   margin: 0 0 var(--space-xs);
   color: var(--color-text-muted);
@@ -31,10 +34,11 @@
   line-height: var(--line-height-body);
 }
 
-@media (max-width: 768px) {
-  .intro {
+@media (max-width: ${BREAKPOINTS.md}) {
+  & {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
     padding-bottom: var(--space-xl);
   }
 }
+`

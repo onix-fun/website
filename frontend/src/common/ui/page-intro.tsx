@@ -1,5 +1,5 @@
+import { PageIntroStyles } from './page-intro.styles'
 import { Badge } from './badge'
-import styles from './page-intro.module.scss'
 
 export function PageIntro({
   eyebrow,
@@ -11,12 +11,12 @@ export function PageIntro({
   description: string
 }) {
   return (
-    <header className={styles.intro}>
-      <div className={styles.heading}>
+    <PageIntroStyles data-part="intro">
+      <div data-part="heading">
         <Badge variant="outline">{eyebrow}</Badge>
         <h1>{title}</h1>
       </div>
       <p>{description}</p>
-    </header>
+    </PageIntroStyles>
   )
 }

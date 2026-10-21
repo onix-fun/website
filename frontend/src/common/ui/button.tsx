@@ -56,8 +56,9 @@ function Button({
 }
 
 type ButtonLinkProps = VariantProps<typeof buttonVariants> & {
-  render: ReactElement<{ className?: string; children?: ReactNode }>
+  render: ReactElement<{ className?: string; children?: ReactNode; 'data-part'?: string }>
   className?: string
+  'data-part'?: string
   children: ReactNode
 }
 
@@ -67,9 +68,11 @@ function ButtonLink({
   variant = "default",
   size = "default",
   children,
+  'data-part': dataPart,
 }: ButtonLinkProps) {
   return cloneElement(render, {
     className: cn(buttonVariants({ variant, size }), render.props.className, className),
+    'data-part': dataPart,
     children,
   })
 }

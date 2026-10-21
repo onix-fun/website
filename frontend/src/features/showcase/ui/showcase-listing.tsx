@@ -1,13 +1,9 @@
+import { ShowcaseListingStyles } from './showcase-listing.styles'
 import { useId, useMemo, useState } from 'react'
 import { Search } from 'lucide-react'
-import { Badge } from './badge'
-import { Button } from './button'
-import { Card } from './card'
-import { Input } from './input'
-import { Label } from './label'
+import { Badge, Button, Card, Input, Label } from '@/common'
 import { ShowcaseCard } from './showcase-card'
-import type { ShowcaseItem } from './showcase-types'
-import styles from './showcase-listing.module.scss'
+import type { ShowcaseItem } from '@/common'
 
 export function ShowcaseListing({
   items,
@@ -35,23 +31,23 @@ export function ShowcaseListing({
   }
 
   return (
-    <section className={styles.listing} aria-label={sectionLabel}>
-      <div className={styles.toolbar}>
-        <div className={styles.searchField}>
-          <Label className="sr-only" htmlFor={searchId}>Поиск по названию или категории</Label>
-          <Search className={styles.searchIcon} aria-hidden="true" />
+    <ShowcaseListingStyles data-part="listing" aria-label={sectionLabel}>
+      <div data-part="toolbar">
+        <div data-part="searchField">
+          <Label visuallyHidden htmlFor={searchId}>Поиск по названию или категории</Label>
+          <Search data-part="searchIcon" aria-hidden="true" />
           <Input
             id={searchId}
             type="search"
             value={query}
             onChange={(event) => setQuery(event.currentTarget.value)}
             placeholder="Название или категория"
-            className={styles.searchInput}
+            data-part="searchInput"
             data-testid="showcase-search"
           />
         </div>
 
-        <div className={styles.filters} role="group" aria-label="Фильтр по категории">
+        <div data-part="filters" role="group" aria-label="Фильтр по категории">
           <Button
             type="button"
             size="sm"
@@ -78,13 +74,13 @@ export function ShowcaseListing({
         </div>
       </div>
 
-      <p className={styles.resultCount} role="status" aria-live="polite">
+      <p data-part="resultCount" role="status" aria-live="polite">
         <Badge variant="outline">{visibleItems.length} из {items.length}</Badge>
         <span>Демо-карточки, наполнение будет обновлено</span>
       </p>
 
       {visibleItems.length > 0 ? (
-        <div className={styles.grid} data-testid="showcase-grid">
+        <div data-part="grid" data-testid="showcase-grid">
           {visibleItems.map((item) => (
             <ShowcaseCard
               key={item.id}
@@ -95,8 +91,8 @@ export function ShowcaseListing({
           ))}
         </div>
       ) : (
-        <Card className={styles.empty} role="status" data-testid="showcase-empty">
-          <span className={styles.emptyEyebrow}>Ничего не найдено</span>
+        <Card data-part="empty" role="status" data-testid="showcase-empty">
+          <span data-part="emptyEyebrow">Ничего не найдено</span>
           <h2>Попробуйте изменить запрос</h2>
           <p>В демо-наборе пока нет карточек, подходящих под выбранные условия.</p>
           <Button type="button" variant="outline" onClick={resetFilters}>
@@ -104,6 +100,6 @@ export function ShowcaseListing({
           </Button>
         </Card>
       )}
-    </section>
+    </ShowcaseListingStyles>
   )
 }

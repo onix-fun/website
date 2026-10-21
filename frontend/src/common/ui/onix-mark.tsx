@@ -25,7 +25,7 @@ export function OnixMark({ className, style }: OnixMarkProps) {
       <g filter="url(#onix-mark-shadow)">
         <path
           d="M98.2363 57.9556L71.4503 44L69.0785 46.8889C59.9522 58.0222 62.9299 72.6556 75.4076 80.9889L58.3152 72.0889C48.467 84.1 52.695 100.189 67.7637 108.044L94.5497 122C103.676 110.867 100.698 96.2333 88.2206 87.9L105.313 96.8L107.685 93.9111C117.533 81.9 113.305 65.8111 98.2363 57.9556Z"
-          fill="#FFC93C"
+          fill="var(--color-accent-soft)"
         />
         <path
           d="M98.2363 57.9556L71.4503 44L69.0785 46.8889C59.9522 58.0222 62.9299 72.6556 75.4076 80.9889L58.3152 72.0889C48.467 84.1 52.695 100.189 67.7637 108.044L94.5497 122C103.676 110.867 100.698 96.2333 88.2206 87.9L105.313 96.8L107.685 93.9111C117.533 81.9 113.305 65.8111 98.2363 57.9556Z"
@@ -106,8 +106,8 @@ export function OnixMark({ className, style }: OnixMarkProps) {
           y2="98.1994"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFE08E" />
-          <stop offset="1" stopColor="#FFBC0E" />
+          <stop stopColor="var(--color-accent-soft)" />
+          <stop offset="1" stopColor="var(--color-accent)" />
         </linearGradient>
         <linearGradient
           id="onix-mark-gloss"
@@ -118,7 +118,7 @@ export function OnixMark({ className, style }: OnixMarkProps) {
           gradientUnits="userSpaceOnUse"
         >
           <stop offset="0.3" stopColor="white" stopOpacity="0" />
-          <stop offset="1" stopColor="white" />
+          <stop offset="1" stopColor="var(--surface-raised)" />
         </linearGradient>
       </defs>
     </svg>

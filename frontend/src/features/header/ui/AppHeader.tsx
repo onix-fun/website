@@ -1,11 +1,11 @@
+import { HeaderStyles } from '../styles/header.styles'
 import { useCallback, useEffect, useRef } from "react";
-import { Container, Logo, NavPanel, Position, Spacer, Stack } from "@/common";
-import type { Item, NavPanelSizes, NavPanelStyleValues } from "@/common";
+import { Container, Logo, NavPanel, Position, Spacer, Stack } from '@/common'
+import type { Item, NavPanelSizes, NavPanelStyleValues } from '@/common'
 import { navItems } from "../model/nav-items";
 import { useHeaderModel } from "../model/useHeaderModel";
 import { useHeaderController } from "../controller/useHeaderController";
 import { ThemeToggle } from "./ThemeToggle";
-import headerStyles from "../styles/header.module.scss";
 
 export interface AppHeaderProps {
     /** Defaults to the shared nav config from `nav-items`. */
@@ -90,7 +90,7 @@ export function AppHeader({
     const allowNavHover = !model.isCollapsed && capsuleWidth === null;
 
     return (
-        <header className={headerStyles.header}>
+        <HeaderStyles data-part="header">
             <Position
                 position="fixed"
                 top="var(--header-top)"
@@ -106,7 +106,7 @@ export function AppHeader({
                         justify="between"
                         style={{ minHeight: metrics.headerHeight, position: "relative" }}
                     >
-                        <div className={headerStyles.navigationControls}>
+                        <div data-part="navigationControls">
                             <NavPanel
                                 ref={capsuleRef}
                                 containerRef={navigationRef}
@@ -141,6 +141,6 @@ export function AppHeader({
             </Position>
 
             {model.needsSpacer ? <Spacer size="var(--header-spacer)" axis="y" /> : null}
-        </header>
+        </HeaderStyles>
     );
 }

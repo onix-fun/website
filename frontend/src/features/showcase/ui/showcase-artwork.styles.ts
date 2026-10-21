@@ -1,4 +1,7 @@
-.artwork {
+import styled from 'styled-components'
+import { BREAKPOINTS } from '@/common/styles/breakpoints'
+
+export const ShowcaseArtworkStyles = styled.div`& {
   position: relative;
   display: grid;
   aspect-ratio: 1.28;
@@ -9,13 +12,13 @@
     linear-gradient(145deg, var(--surface-solid), color-mix(in srgb, var(--surface-solid) 54%, var(--surface-raised)));
 }
 
-.large {
+&[data-size=large] {
   aspect-ratio: 1;
   border: var(--border-width) solid var(--color-hairline);
   border-radius: var(--radius-panel);
 }
 
-.orbit {
+& [data-part=orbit] {
   position: absolute;
   width: 66%;
   aspect-ratio: 1;
@@ -24,7 +27,7 @@
   transform: rotate(-22deg) scaleY(0.42);
 }
 
-.object {
+& [data-part=object] {
   position: absolute;
   width: 28%;
   aspect-ratio: 0.76;
@@ -35,7 +38,7 @@
   transform: rotate(-14deg) translateY(-4%);
 }
 
-.artwork[data-kind='digital'] .object {
+&[data-kind='digital'] [data-part=object] {
   width: 32%;
   aspect-ratio: 1;
   border-radius: 28% 56% 32% 52%;
@@ -43,13 +46,12 @@
   transform: rotate(18deg);
 }
 
-.artwork[data-kind='digital'] .orbit {
+&[data-kind='digital'] [data-part=orbit] {
   width: 76%;
   transform: rotate(24deg) scaleY(0.74);
 }
 
-.index,
-.caption {
+& [data-part=index],& [data-part=caption] {
   position: absolute;
   z-index: 1;
   color: var(--color-text-muted);
@@ -57,21 +59,21 @@
   letter-spacing: var(--letter-spacing-label);
 }
 
-.index {
+& [data-part=index] {
   top: var(--space-md);
   left: var(--space-md);
   font-weight: 600;
 }
 
-.caption {
+& [data-part=caption] {
   right: var(--space-md);
   bottom: var(--space-md);
   letter-spacing: normal;
 }
 
-@media (max-width: 640px) {
-  .index,
-  .caption {
+@media (max-width: ${BREAKPOINTS.sm}) {
+  & [data-part=index],& [data-part=caption] {
     font-size: 0.625rem;
   }
 }
+`

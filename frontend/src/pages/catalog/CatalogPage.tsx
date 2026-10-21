@@ -1,18 +1,23 @@
-import { Page, PageIntro } from '@/common'
-import { Catalog } from '@/features/catalog'
-import styles from './CatalogPage.module.scss'
+import { CatalogPageStyles } from './CatalogPage.styles'
+import { PageIntro } from '@/common'
+import { catalogItems } from '@/features/catalog'
+import { ShowcaseListing } from '@/features/showcase'
 
 export function CatalogPage() {
   return (
-    <Page className={styles.page}>
-      <div className={styles.content}>
+    <CatalogPageStyles data-part="page">
+      <div data-part="content">
         <PageIntro
           eyebrow="ПРЕДМЕТЫ · МЕРЧ · ПРОТОТИПЫ"
           title="Объекты, созданные слой за слоем"
           description="Демонстрационный каталог студии. Карточки и категории показывают структуру будущего раздела."
         />
-        <Catalog />
+        <ShowcaseListing
+          items={catalogItems}
+          basePath="/catalog"
+          sectionLabel="Каталог объектов и предметов"
+        />
       </div>
-    </Page>
+    </CatalogPageStyles>
   )
 }

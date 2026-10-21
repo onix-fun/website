@@ -1,6 +1,6 @@
+import { ContactFormStyles } from './ContactForm.styles'
 import { useState, type FormEvent } from 'react'
 import { Button } from '@/common/ui/button'
-import styles from './ContactForm.module.scss'
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState<string | null>(null)
@@ -12,17 +12,17 @@ export function ContactForm() {
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <label className={styles.label}>
+    <ContactFormStyles data-part="form" onSubmit={handleSubmit}>
+      <label data-part="label">
         Имя
-        <input name="name" required className={styles.field} />
+        <input name="name" required data-part="field" />
       </label>
-      <label className={styles.label}>
+      <label data-part="label">
         Почта
-        <input name="email" type="email" required className={styles.field} />
+        <input name="email" type="email" required data-part="field" />
       </label>
       <Button type="submit">Отправить</Button>
-      {submitted ? <p className={styles.note}>Спасибо, {submitted}!</p> : null}
-    </form>
+      {submitted ? <p data-part="note">Спасибо, {submitted}!</p> : null}
+    </ContactFormStyles>
   )
 }

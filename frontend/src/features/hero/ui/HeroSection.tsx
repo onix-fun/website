@@ -1,9 +1,9 @@
+import { HeroSectionStyles } from '../styles/HeroSection.styles'
 import { useEffect, useRef } from 'react'
 import type { AnimationItem } from 'lottie-web'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
 import { ButtonLink, SITE_CONTACT_URL } from '@/common'
-import styles from '../styles/HeroSection.module.scss'
 
 const INTRO_END_FRAME = 150
 const LOOP_END_FRAME = 2510
@@ -68,27 +68,27 @@ export function HeroSection() {
   }, [])
 
   return (
-    <main id="main-content" className={styles.hero}>
-      <div className={styles.visual} aria-hidden="true">
-        <div ref={animationContainerRef} className={styles.animation} />
+    <HeroSectionStyles id="main-content" data-part="hero">
+      <div data-part="visual" aria-hidden="true">
+        <div ref={animationContainerRef} data-part="animation" />
       </div>
 
-      <section className={styles.content} aria-labelledby="hero-title">
-        <p className={styles.eyebrow}>СТУДИЯ ПРЕДМЕТНОГО ДИЗАЙНА И 3D-ПЕЧАТИ</p>
-        <h1 id="hero-title" className={styles.title}>
+      <section data-part="content" aria-labelledby="hero-title">
+        <p data-part="eyebrow">СТУДИЯ ПРЕДМЕТНОГО ДИЗАЙНА И 3D-ПЕЧАТИ</p>
+        <h1 id="hero-title" data-part="title">
           Рождённый
           <br />
           слой за слоем
         </h1>
-        <p className={styles.description}>
+        <p data-part="description">
           Превращаем идеи в предметы. Разрабатываем объекты и мерч, моделируем и
           создаём их с помощью 3D-печати.
         </p>
-        <div className={styles.actions}>
+        <div data-part="actions">
           <ButtonLink
             render={<a href={SITE_CONTACT_URL} target="_blank" rel="noreferrer noopener" />}
             size="lg"
-            className={styles.primaryAction}
+            data-part="primaryAction"
           >
             Обсудить проект <ArrowUpRight aria-hidden="true" size={18} />
           </ButtonLink>
@@ -96,23 +96,23 @@ export function HeroSection() {
             render={<Link to="/catalog" />}
             size="lg"
             variant="ghost"
-            className={styles.textAction}
+            data-part="textAction"
           >
             Что можно создать <ArrowUpRight aria-hidden="true" size={18} />
           </ButtonLink>
         </div>
       </section>
 
-      <footer className={styles.footer}>
-        <p className={styles.categories}>Предметы · Мерч · Прототипы</p>
-        <div className={styles.orbitCaption}>
+      <footer data-part="footer">
+        <p data-part="categories">Предметы · Мерч · Прототипы</p>
+        <div data-part="orbitCaption">
           <p>У КАЖДОЙ ИДЕИ СВОЯ ОРБИТА</p>
           <span aria-hidden="true">↗</span>
         </div>
-        <Link className={styles.aboutLink} to="/about">
+        <Link data-part="aboutLink" to="/about">
           Познакомиться со студией <span aria-hidden="true">↓</span>
         </Link>
       </footer>
-    </main>
+    </HeroSectionStyles>
   )
 }
