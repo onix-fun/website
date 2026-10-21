@@ -4,7 +4,12 @@ import { AppHeader } from '@/features/header'
 import { Footer } from '@/features/footer'
 
 export function RootLayout() {
-  const isHomePage = useLocation().pathname === '/'
+  const { pathname } = useLocation()
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
+  const routePath = basePath && pathname.startsWith(basePath)
+    ? pathname.slice(basePath.length) || '/'
+    : pathname
+  const isHomePage = routePath === '/'
 
   return (
     <Stack direction="column" style={{ minHeight: '100svh' }}>
