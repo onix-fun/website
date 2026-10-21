@@ -4,6 +4,7 @@ import type { Item, NavPanelSizes, NavPanelStyleValues } from "@/common";
 import { navItems } from "../model/nav-items";
 import { useHeaderModel } from "../model/useHeaderModel";
 import { useHeaderController } from "../controller/useHeaderController";
+import { ThemeToggle } from "./ThemeToggle";
 import headerStyles from "../styles/header.module.scss";
 
 export interface AppHeaderProps {
@@ -45,7 +46,7 @@ export function AppHeader({
     className,
 }: AppHeaderProps) {
     const model = useHeaderModel({ items, collapseOffset, onMenuChange });
-    const { closeMenu, isMobile, menuOpen, metrics } = model;
+    const { closeMenu, hasScrolled, isMobile, menuOpen, metrics } = model;
     const navigationRef = useRef<HTMLElement | null>(null);
     const menuButtonRef = useRef<HTMLButtonElement | null>(null);
     const { capsuleRef, capsuleWidth, handleCapsuleTransitionEnd } = useHeaderController({
@@ -105,28 +106,31 @@ export function AppHeader({
                         justify="between"
                         style={{ minHeight: metrics.headerHeight, position: "relative" }}
                     >
-                        <NavPanel
-                            ref={capsuleRef}
-                            containerRef={navigationRef}
-                            menuButtonRef={menuButtonRef}
-                            navigationId="primary-navigation"
-                            items={model.items}
-                            activeId={model.activeId}
-                            collapsed={model.isCollapsed}
-                            open={model.menuOpen}
-                            stacked={model.stacked}
-                            clipContent={model.isCollapsed || capsuleWidth !== null}
-                            width={capsuleWidth ?? undefined}
-                            hoveredId={allowNavHover ? model.hoveredId : null}
-                            sizes={sizes}
-                            styles={NAV_STYLE_VALUES}
-                            collapsedWidth={metrics.capsuleCollapsedWidth}
-                            skipLink={{ targetId: "main-content" }}
-                            onToggle={model.toggleMenu}
-                            onHoverChange={allowNavHover ? model.setHoveredId : undefined}
-                            onNavigate={handleNavigate}
-                            onTransitionEnd={handleCapsuleTransitionEnd}
-                        />
+                        <div className={headerStyles.navigationControls}>
+                            <NavPanel
+                                ref={capsuleRef}
+                                containerRef={navigationRef}
+                                menuButtonRef={menuButtonRef}
+                                navigationId="primary-navigation"
+                                items={model.items}
+                                activeId={model.activeId}
+                                collapsed={model.isCollapsed}
+                                open={model.menuOpen}
+                                stacked={model.stacked}
+                                clipContent={model.isCollapsed || capsuleWidth !== null}
+                                width={capsuleWidth ?? undefined}
+                                hoveredId={allowNavHover ? model.hoveredId : null}
+                                sizes={sizes}
+                                styles={NAV_STYLE_VALUES}
+                                collapsedWidth={metrics.capsuleCollapsedWidth}
+                                skipLink={{ targetId: "main-content" }}
+                                onToggle={model.toggleMenu}
+                                onHoverChange={allowNavHover ? model.setHoveredId : undefined}
+                                onNavigate={handleNavigate}
+                                onTransitionEnd={handleCapsuleTransitionEnd}
+                            />
+                            <ThemeToggle visible={!hasScrolled} />
+                        </div>
 
                         <Logo
                             hidden={model.logoHidden}

@@ -1,15 +1,41 @@
+.page {
+  padding-block: var(--space-2xl);
+}
+
 .content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+}
+
+.section,
+.process {
   display: flex;
   flex-direction: column;
   gap: var(--space-xl);
 }
 
-.intro {
-  max-width: 62ch;
-  margin: 0;
+.sectionHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.sectionIndex {
   color: var(--color-text-muted);
-  font-size: var(--font-size-lead);
-  line-height: var(--line-height-body);
+  font-size: var(--font-size-caption);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.sectionHeading h2,
+.callout h2 {
+  max-width: 20ch;
+  margin: 0;
+  color: var(--onix-hero-text-primary);
+  font-size: var(--font-size-section);
+  line-height: var(--line-height-tight);
 }
 
 .services {
@@ -22,25 +48,29 @@
 }
 
 .service {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border: 1px solid var(--color-hairline);
+  height: 100%;
+  border: var(--border-width) solid var(--color-hairline);
   border-radius: var(--radius-panel);
-  background: var(--surface);
-  padding: var(--space-lg);
+  background: color-mix(in srgb, var(--surface-raised) 84%, transparent);
   transition:
     border-color var(--duration-fast) var(--ease-out),
-    background-color var(--duration-fast) var(--ease-out),
     transform var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .service:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--color-accent) 42%, var(--color-hairline));
-  background-color: var(--surface-raised);
+  border-color: color-mix(in srgb, var(--color-accent) 46%, var(--color-hairline));
   box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.serviceContent {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-xl);
 }
 
 .number {
@@ -51,8 +81,8 @@
 }
 
 .title {
-  margin: var(--space-lg) 0 var(--space-sm);
-  color: var(--color-ink);
+  margin: var(--space-lg) 0 0;
+  color: var(--onix-hero-text-primary);
   font-size: var(--font-size-title);
   font-weight: 600;
 }
@@ -61,20 +91,91 @@
   max-width: 52ch;
   margin: 0;
   color: var(--color-text-muted);
-  font-size: var(--font-size-body);
   line-height: var(--line-height-body);
 }
 
+.process {
+  border-block: var(--border-width) solid var(--onix-hero-divider);
+  padding-block: var(--space-2xl);
+}
+
+.processList {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.processList li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  border-top: var(--border-width) solid var(--color-hairline);
+  padding-top: var(--space-md);
+}
+
+.processList h3 {
+  margin: 0;
+  color: var(--onix-hero-text-primary);
+  font-size: var(--font-size-title);
+}
+
+.processList p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: var(--line-height-body);
+}
+
+.callout {
+  border: var(--border-width) solid color-mix(in srgb, var(--color-accent) 32%, var(--color-hairline));
+  border-radius: var(--radius-panel);
+  background: color-mix(in srgb, var(--color-accent-soft) 28%, var(--surface-raised));
+}
+
+.calloutContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+}
+
+.calloutContent > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+@media (max-width: 1024px) {
+  .processList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 640px) {
-  .content {
-    gap: var(--space-lg);
+  .page {
+    padding-block: var(--space-xl);
   }
 
-  .services {
+  .content {
+    gap: var(--space-2xl);
+  }
+
+  .services,
+  .processList {
     grid-template-columns: 1fr;
   }
 
-  .service {
-    padding: var(--space-md);
+  .serviceContent,
+  .calloutContent {
+    padding: var(--space-lg);
+  }
+
+  .calloutContent {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

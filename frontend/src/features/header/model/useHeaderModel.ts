@@ -73,6 +73,8 @@ export interface HeaderModel {
   closeMenu: () => void
   /** Capsule is collapsed (scrolled past the offset, or on mobile). */
   isCollapsed: boolean
+  /** True after leaving the very top of the document; used by the theme toggle. */
+  hasScrolled: boolean
   isMobile: boolean
   /** Mobile menu laid out vertically. */
   stacked: boolean
@@ -143,6 +145,7 @@ export function useHeaderModel({
   const isMobile = useMediaQuery(MOBILE_QUERY, handleMobileQueryChange)
   const isCompact = useMediaQuery(COMPACT_QUERY)
   const isScrolledPast = useScrolledPast(collapseOffset, closeMenuOnScrollUp, clearHoveredId)
+  const hasScrolled = useScrolledPast(0)
   const isCollapsed = isMobile || isScrolledPast
   const metrics = getHeaderMetrics({ isMobile, isCompact })
 
@@ -172,6 +175,7 @@ export function useHeaderModel({
     toggleMenu,
     closeMenu,
     isCollapsed,
+    hasScrolled,
     isMobile,
     stacked: isMobile,
     logoHidden: isCollapsed && !isMobile,

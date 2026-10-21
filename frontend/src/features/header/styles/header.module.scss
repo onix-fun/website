@@ -15,7 +15,7 @@
   --radius-panel-stacked: 28px;
   --nav-surface-hover: color-mix(in srgb, var(--color-accent-soft) 24%, var(--surface));
   --nav-surface-active: color-mix(in srgb, var(--color-accent-soft) 38%, var(--surface));
-  --nav-focus: #9c701c;
+  --nav-focus: var(--color-focus);
 
   /* Capsule elevation = global shadow + a hairline "stacked" line beneath it. */
   --shadow-panel: var(--shadow-md), 0 4px 0 color-mix(in srgb, var(--color-hairline) 70%, transparent);
@@ -23,13 +23,87 @@
   /* Item states are header-local: they compose the global elevation tokens
      with an inner top highlight bespoke to the capsule. */
   --shadow-item-hover: var(--shadow-inset-top), var(--shadow-sm);
-  --shadow-item-active: inset 0 1px rgba(255, 255, 255, 0.8), var(--shadow-sm);
+  --shadow-item-active: var(--shadow-inset-top), var(--shadow-sm);
 
   --duration-burger: var(--duration-base);
 
   /* Fixed-bar placement + spacer height for non-hero routes. */
   --header-top: 24px;
   --header-spacer: 87px;
+}
+
+.navigationControls {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.themeToggleSlot {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    width var(--duration-base) var(--ease-out),
+    opacity var(--duration-fast) ease,
+    transform var(--duration-base) var(--ease-out),
+    visibility 0s;
+}
+
+.themeToggleSlotHidden {
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.78);
+  visibility: hidden;
+  transition:
+    width var(--duration-base) var(--ease-out),
+    opacity var(--duration-fast) ease,
+    transform var(--duration-base) var(--ease-out),
+    visibility 0s;
+}
+
+.themeToggle {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: var(--border-width) solid var(--color-hairline);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(20px);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.themeToggle:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 44%, var(--color-hairline));
+  background: var(--surface-hover);
+  transform: translateY(-1px);
+}
+
+.themeToggle:focus-visible {
+  outline: 2px solid var(--nav-focus);
+  outline-offset: 4px;
+}
+
+.themeToggle svg {
+  width: 20px;
+  height: 20px;
 }
 
 @media (max-width: 768px) {

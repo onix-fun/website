@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router'
 import { Stack } from '@/common'
 import { AppHeader } from '@/features/header'
+import { Footer } from '@/features/footer'
 
 export function RootLayout() {
   return (
@@ -9,6 +10,7 @@ export function RootLayout() {
       <Stack direction="column" style={{ flex: 1 }}>
         <Outlet />
       </Stack>
+      <Footer />
     </Stack>
   )
 }

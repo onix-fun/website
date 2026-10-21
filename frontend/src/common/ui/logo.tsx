@@ -4,8 +4,8 @@ import { cn } from '@/common/lib/utils'
 import { OnixMark } from './onix-mark'
 
 export interface LogoSizes {
-  /** Rendered mark height (px); width follows the mark's own aspect ratio. */
-  height: number
+  /** Rendered mark height; width follows the mark's own aspect ratio. */
+  height: number | string
 }
 
 export interface Props {

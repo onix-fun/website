@@ -1,0 +1,136 @@
+.footer {
+  margin-top: auto;
+  padding-block: var(--space-2xl) var(--space-lg);
+  background: color-mix(in srgb, var(--surface-raised) 72%, transparent);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.separator {
+  background: var(--onix-hero-divider);
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto;
+  align-items: center;
+  gap: var(--space-xl);
+  padding-block: var(--space-md);
+}
+
+.brand {
+  --footer-logo-height: var(--space-xl);
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.brand p,
+.bottom p {
+  margin: 0;
+}
+
+.brand p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-body);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a,
+.contact,
+.bottom a {
+  color: var(--onix-hero-text-primary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.links a:hover,
+.contact:hover,
+.bottom a:hover {
+  color: var(--color-accent-hover);
+}
+
+.contact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.contact svg {
+  width: var(--font-size-title);
+  height: var(--font-size-title);
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+}
+
+.links a:focus-visible,
+.contact:focus-visible,
+.bottom a:focus-visible {
+  border-radius: var(--radius-sm);
+  outline: var(--border-width) solid var(--color-focus);
+  outline-offset: var(--space-xs);
+}
+
+@media (max-width: 900px) {
+  .top {
+    grid-template-columns: 1fr auto;
+  }
+
+  .top nav {
+    grid-row: 2;
+  }
+
+  .contact {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding-block: var(--space-xl) var(--space-md);
+  }
+
+  .top {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .top nav,
+  .contact {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .links {
+    gap: var(--space-sm) var(--space-lg);
+  }
+
+  .bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

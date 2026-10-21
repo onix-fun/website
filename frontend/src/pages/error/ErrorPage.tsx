@@ -1,6 +1,6 @@
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router'
 import { Page } from '@/common'
-import { Button } from '@/common/ui/button'
+import { ButtonLink } from '@/common/ui/button'
 
 interface ErrorView {
   status?: number
@@ -37,7 +37,7 @@ export function ErrorPage() {
     <Page centered title={title} titleSize="2xl">
       {status ? <p>{status}</p> : null}
       {detail ? <p>{detail}</p> : null}
-      <Button render={<Link to="/" />}>На главную</Button>
+      <ButtonLink render={<Link to="/" />}>На главную</ButtonLink>
     </Page>
   )
 }

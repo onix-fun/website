@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import type { AnimationItem } from 'lottie-web'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
+import { ButtonLink, SITE_CONTACT_URL } from '@/common'
 import styles from '../styles/HeroSection.module.scss'
 
 const INTRO_END_FRAME = 150
@@ -84,12 +85,21 @@ export function HeroSection() {
           создаём их с помощью 3D-печати.
         </p>
         <div className={styles.actions}>
-          <button className={styles.primaryAction} type="button">
+          <ButtonLink
+            render={<a href={SITE_CONTACT_URL} target="_blank" rel="noreferrer noopener" />}
+            size="lg"
+            className={styles.primaryAction}
+          >
             Обсудить проект <ArrowUpRight aria-hidden="true" size={18} />
-          </button>
-          <button className={styles.textAction} type="button">
+          </ButtonLink>
+          <ButtonLink
+            render={<Link to="/catalog" />}
+            size="lg"
+            variant="ghost"
+            className={styles.textAction}
+          >
             Что можно создать <ArrowUpRight aria-hidden="true" size={18} />
-          </button>
+          </ButtonLink>
         </div>
       </section>
 
