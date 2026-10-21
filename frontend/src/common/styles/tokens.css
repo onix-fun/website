@@ -21,7 +21,6 @@
   /* ---- Header ---- */
   --header-panel-blur: 24px;
   --header-panel-stacked-radius: 28px;
-  --header-panel-edge-offset: 4px;
   --header-fixed-top: 24px;
   --header-spacer-height: 87px;
   --header-controls-slot-size: 48px;
@@ -131,6 +130,23 @@
   --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08);
   --shadow-inset-top: inset 0 1px rgba(255, 255, 255, 0.55);
 
+  /* Capsule elevation: the Onix mark's shadow — black, layered and falling
+     down-left, scaled to the panel. */
+  --shadow-capsule: -1px 2px 4px rgba(0, 0, 0, 0.08),
+    -6px 9px 11px rgba(0, 0, 0, 0.07),
+    -16px 24px 24px rgba(0, 0, 0, 0.035);
+
+  /* ---- Strokes ---- */
+  /* Gradient hairline for translucent panels, taken from the panel's own ink:
+     a barely-there edge at the lit side that deepens towards the contact
+     edge, so the capsule reads as glass in the surface colour. */
+  --stroke-panel-gradient: linear-gradient(
+    225deg,
+    color-mix(in srgb, var(--color-ink) 6%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 9%, transparent) 46%,
+    color-mix(in srgb, var(--color-ink) 15%, transparent) 100%
+  );
+
   /* ---- Page grid (shared by header and page content) ---- */
   --page-max-width: 1296px;
   --page-inline: 72px;
@@ -160,6 +176,17 @@
   --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.24);
   --shadow-md: 0 14px 36px rgba(0, 0, 0, 0.34);
   --shadow-inset-top: inset 0 1px rgba(255, 255, 255, 0.09);
+
+  --shadow-capsule: -1px 2px 4px rgba(0, 0, 0, 0.45),
+    -6px 9px 11px rgba(0, 0, 0, 0.38),
+    -16px 24px 24px rgba(0, 0, 0, 0.28);
+
+  --stroke-panel-gradient: linear-gradient(
+    225deg,
+    color-mix(in srgb, var(--color-ink) 26%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 13%, transparent) 44%,
+    color-mix(in srgb, var(--color-ink) 6%, transparent) 100%
+  );
 }
 
 @media (max-width: 1024px) {

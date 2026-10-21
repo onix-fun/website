@@ -9,8 +9,11 @@ export const HeaderStyles = styled.header`
   --nav-surface-active: color-mix(in srgb, var(--color-accent-soft) 38%, var(--surface));
   --nav-focus: var(--color-focus);
 
-  /* Capsule elevation = global shadow + a hairline "stacked" line beneath it. */
-  --shadow-panel: var(--shadow-md), var(--header-panel-edge-offset) var(--header-panel-edge-offset) 0 color-mix(in srgb, var(--color-hairline) 70%, transparent);
+  /* Capsule elevation = the Onix mark's black, down-left shadow. */
+  --shadow-panel: var(--shadow-capsule);
+
+  /* Capsule hairline = the brand's gradient stroke (bright at the lit edge). */
+  --stroke-panel: var(--stroke-panel-gradient);
 
   /* Item states are header-local: they compose the global elevation tokens
      with an inner top highlight bespoke to the capsule. */

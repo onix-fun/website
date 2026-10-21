@@ -23,6 +23,7 @@ const NAV_STYLE_VALUES: NavPanelStyleValues = {
     radiusPanelStacked: "var(--radius-panel-stacked)",
     blur: "var(--blur-panel)",
     shadowPanel: "var(--shadow-panel)",
+    stroke: "var(--stroke-panel)",
     shadowItemHover: "var(--shadow-item-hover)",
     shadowItemActive: "var(--shadow-item-active)",
     surfaceItemHover: "var(--nav-surface-hover)",

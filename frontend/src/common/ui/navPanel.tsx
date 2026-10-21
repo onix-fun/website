@@ -2,7 +2,7 @@ import { useId } from 'react'
 import type { CSSProperties, ComponentType, Ref, TransitionEvent } from 'react'
 import { Link } from 'react-router'
 import { cn } from '@/common/lib/utils'
-import { Position } from './layout'
+import { NavPanelDropdown, NavPanelSurface } from './navPanel.styles'
 
 export interface Item {
   id: string
@@ -44,6 +44,8 @@ export interface NavPanelStyleValues {
   radiusPanelStacked: string
   blur: string
   shadowPanel: string
+  /** Gradient hairline painted around the capsule. */
+  stroke: string
   shadowItemHover: string
   shadowItemActive: string
   surfaceItemHover: string
@@ -305,6 +307,7 @@ export function NavPanel({
     '--nav-radius-panel-stacked': styles.radiusPanelStacked,
     '--nav-blur': styles.blur,
     '--nav-shadow-panel': styles.shadowPanel,
+    '--nav-stroke': styles.stroke,
     '--nav-shadow-item-hover': styles.shadowItemHover,
     '--nav-shadow-item-active': styles.shadowItemActive,
     '--nav-item-surface-hover': styles.surfaceItemHover,
@@ -313,8 +316,7 @@ export function NavPanel({
   } as CSSProperties
 
   const panelBase = cn(
-    'pointer-events-auto flex rounded-[var(--nav-radius-pill)] border border-[var(--color-hairline)] bg-[var(--surface)] backdrop-blur-[var(--nav-blur)]',
-    '[box-shadow:var(--nav-shadow-panel)]',
+    'pointer-events-auto flex rounded-[var(--nav-radius-pill)] backdrop-blur-[var(--nav-blur)]',
     className,
   )
 
@@ -394,7 +396,7 @@ export function NavPanel({
         style={navigationStyle}
       >
         {skipLink ? <SkipLink {...skipLink} /> : null}
-        <div
+        <NavPanelSurface
           ref={ref}
           id={`${resolvedNavigationId}-items`}
           style={anchorStyle}
@@ -408,8 +410,8 @@ export function NavPanel({
             controlsId={`${resolvedNavigationId}-menu`}
             buttonRef={menuButtonRef}
           />
-        </div>
-        <Position
+        </NavPanelSurface>
+        <NavPanelDropdown
           position="fixed"
           id={`${resolvedNavigationId}-menu`}
           top={`calc(var(--header-top) + ${sizes.burgerSize + 2 * sizes.capsulePadding + 12}px)`}
@@ -440,7 +442,7 @@ export function NavPanel({
               onNavigate={onNavigate}
             />
           ))}
-        </Position>
+        </NavPanelDropdown>
       </nav>
     )
   }
@@ -454,7 +456,7 @@ export function NavPanel({
       style={navigationStyle}
     >
       {skipLink ? <SkipLink {...skipLink} /> : null}
-      <div
+      <NavPanelSurface
         ref={ref}
         id={`${resolvedNavigationId}-items`}
         style={panelStyle}
@@ -462,7 +464,7 @@ export function NavPanel({
         onTransitionEnd={onTransitionEnd}
       >
         {content}
-      </div>
+      </NavPanelSurface>
     </nav>
   )
 }
