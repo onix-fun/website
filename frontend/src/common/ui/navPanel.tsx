@@ -72,6 +72,8 @@ export interface Props {
   styles: NavPanelStyleValues
   /** Collapsed capsule width (px) used when no explicit `width` is given. */
   collapsedWidth?: number
+  /** Clips links while the capsule changes between compact and expanded widths. */
+  clipContent?: boolean
   /** Renders a keyboard "skip to content" link as the first focusable element. */
   skipLink?: SkipLinkConfig
   onToggle?: () => void
@@ -280,6 +282,7 @@ export function NavPanel({
   sizes,
   styles,
   collapsedWidth,
+  clipContent = false,
   skipLink,
   onToggle,
   onHoverChange,
@@ -318,7 +321,8 @@ export function NavPanel({
   const panelClassName = cn(
     panelBase,
     'items-center',
-    hideItems && 'justify-center gap-0! overflow-hidden',
+    hideItems && 'justify-center gap-0!',
+    clipContent && 'overflow-hidden',
     stacked && 'flex-col items-stretch',
   )
 

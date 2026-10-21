@@ -64,7 +64,7 @@ export function AppHeader({
     }, [closeMenu, isMobile]);
 
     useEffect(() => {
-        if (!isMobile || !menuOpen) return;
+        if (!menuOpen) return;
 
         const handleOutsidePointerDown = (event: PointerEvent) => {
             if (event.target instanceof Node && !navigationRef.current?.contains(event.target)) {
@@ -74,7 +74,7 @@ export function AppHeader({
 
         document.addEventListener("pointerdown", handleOutsidePointerDown);
         return () => document.removeEventListener("pointerdown", handleOutsidePointerDown);
-    }, [closeMenu, isMobile, menuOpen]);
+    }, [closeMenu, menuOpen]);
 
     const sizes: NavPanelSizes = {
         itemSize: metrics.itemSize,
@@ -86,6 +86,7 @@ export function AppHeader({
         capsuleGap: metrics.capsuleGap,
         gutter: metrics.headerInline,
     };
+    const allowNavHover = !model.isCollapsed && capsuleWidth === null;
 
     return (
         <header className={headerStyles.header}>
@@ -114,14 +115,15 @@ export function AppHeader({
                             collapsed={model.isCollapsed}
                             open={model.menuOpen}
                             stacked={model.stacked}
+                            clipContent={model.isCollapsed || capsuleWidth !== null}
                             width={capsuleWidth ?? undefined}
-                            hoveredId={model.hoveredId}
+                            hoveredId={allowNavHover ? model.hoveredId : null}
                             sizes={sizes}
                             styles={NAV_STYLE_VALUES}
                             collapsedWidth={metrics.capsuleCollapsedWidth}
                             skipLink={{ targetId: "main-content" }}
                             onToggle={model.toggleMenu}
-                            onHoverChange={model.setHoveredId}
+                            onHoverChange={allowNavHover ? model.setHoveredId : undefined}
                             onNavigate={handleNavigate}
                             onTransitionEnd={handleCapsuleTransitionEnd}
                         />

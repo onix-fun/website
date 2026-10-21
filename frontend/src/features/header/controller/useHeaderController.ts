@@ -46,12 +46,16 @@ export function useHeaderController({
   const fullWidthRef = useRef(0)
   const initializedRef = useRef(false)
   const prevCapsuleStateRef = useRef({ collapsed: false, open: false })
+  const resizeFrameRef = useRef(0)
 
-  // Latest value for the resize listener, which is registered once on mount.
+  // The resize listener is registered once, so keep its layout inputs current.
+  const layoutStateRef = useRef({ isCollapsed, isMobile, menuOpen })
   const collapsedWidthRef = useRef(capsuleCollapsedWidth)
-  useEffect(() => {
+
+  useLayoutEffect(() => {
+    layoutStateRef.current = { isCollapsed, isMobile, menuOpen }
     collapsedWidthRef.current = capsuleCollapsedWidth
-  }, [capsuleCollapsedWidth])
+  }, [capsuleCollapsedWidth, isCollapsed, isMobile, menuOpen])
 
   const setCapsuleWidth = (width: number | null) => {
     capsuleWidthRef.current = width
@@ -59,17 +63,44 @@ export function useHeaderController({
   }
 
   const measure = () => {
+    const { isCollapsed: collapsed, isMobile: mobile, menuOpen: open } = layoutStateRef.current
+    // Hidden links have zero layout width. Never replace the remembered full
+    // width with the compact button width while measuring a collapsed panel.
+    if (mobile || (collapsed && !open)) return
+
     const el = capsuleRef.current
     if (!el) return
     const restoreWidth = el.style.width
+    const restoreTransitionProperty = el.style.transitionProperty
+    // Read the natural width synchronously. Otherwise clearing an explicit
+    // compact width starts a CSS transition and offsetWidth captures one of
+    // its intermediate frames as the full-width target.
+    el.style.transitionProperty = 'none'
     el.style.width = ''
+    void el.offsetWidth
     fullWidthRef.current = el.offsetWidth
     el.style.width = restoreWidth
+    el.style.transitionProperty = restoreTransitionProperty
   }
 
   const handleResize = () => {
-    // Let the browser apply layout changes before re-measuring.
-    requestAnimationFrame(() => {
+    cancelAnimationFrame(resizeFrameRef.current)
+    // Let the browser and breakpoint-specific nav metrics settle first.
+    resizeFrameRef.current = requestAnimationFrame(() => {
+      const { isCollapsed: collapsed, isMobile: mobile, menuOpen: open } = layoutStateRef.current
+
+      if (mobile) {
+        setCapsuleWidth(null)
+        return
+      }
+
+      if (collapsed && !open) {
+        // Keep an explicit compact width so opening the menu can still animate
+        // from the button, including when crossing the tablet breakpoint.
+        setCapsuleWidth(collapsedWidthRef.current)
+        return
+      }
+
       measure()
       setCapsuleWidth(null)
     })
@@ -99,7 +130,8 @@ export function useHeaderController({
 
   // Mount: measure once and keep the full width in sync with the viewport.
   useLayoutEffect(() => {
-    measure()
+    if (!isMobile && (!isCollapsed || menuOpen)) measure()
+    else fullWidthRef.current = 0
     initializedRef.current = true
 
     window.addEventListener('resize', handleResize, { passive: true })
@@ -107,6 +139,7 @@ export function useHeaderController({
 
     return () => {
       initializedRef.current = false
+      cancelAnimationFrame(resizeFrameRef.current)
       window.removeEventListener('resize', handleResize)
       window.removeEventListener('keydown', handleKeyDown)
     }
@@ -134,6 +167,12 @@ export function useHeaderController({
     const changed = prev.collapsed !== isCollapsed || prev.open !== menuOpen
     prevCapsuleStateRef.current = { collapsed: isCollapsed, open: menuOpen }
     if (!changed || !initializedRef.current) return undefined
+
+    if (isMobile) return undefined
+
+    // On menu open/scroll-up the full links are visible in the DOM, so measure
+    // their natural width even if the previous viewport was compact.
+    if (!isCollapsed || menuOpen) measure()
 
     let secondFrame = 0
 
@@ -169,7 +208,7 @@ export function useHeaderController({
       cancelAnimationFrame(firstFrame)
       cancelAnimationFrame(secondFrame)
     }
-  }, [isCollapsed, menuOpen])
+  }, [isCollapsed, isMobile, menuOpen])
 
   const handleCapsuleTransitionEnd = (event: TransitionEvent<HTMLElement>) => {
     if (event.propertyName !== 'width') return

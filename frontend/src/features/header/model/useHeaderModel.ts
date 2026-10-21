@@ -28,11 +28,26 @@ function useMediaQuery(query: string, onMatchChange?: (matches: boolean) => void
   )
 }
 
-function useScrolledPast(offset: number): boolean {
+function useScrolledPast(
+  offset: number,
+  onExpandedScroll?: () => void,
+  onCollapsedScroll?: () => void,
+): boolean {
   const subscribe = useCallback((onChange: () => void) => {
-    window.addEventListener('scroll', onChange, { passive: true })
-    return () => window.removeEventListener('scroll', onChange)
-  }, [])
+    let wasScrolledPast = window.scrollY > offset
+    const handleScroll = () => {
+      const isScrolledPast = window.scrollY > offset
+      if (isScrolledPast !== wasScrolledPast) {
+        wasScrolledPast = isScrolledPast
+        if (isScrolledPast) onCollapsedScroll?.()
+        else onExpandedScroll?.()
+      }
+      onChange()
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [offset, onCollapsedScroll, onExpandedScroll])
 
   const getSnapshot = useCallback(() => window.scrollY > offset, [offset])
 
@@ -73,7 +88,7 @@ interface MenuState {
   open: boolean
   /** Navigation key the state belongs to — a route change resets the menu. */
   locationKey: string
-  /** The menu closes when leaving mobile if it was opened there. */
+  /** Whether leaving mobile should close this menu. */
   openedOnMobile: boolean
 }
 
@@ -95,6 +110,21 @@ export function useHeaderModel({
   }))
   const menuRef = useRef(menu)
   const [hoveredId, setHoveredId] = useState<string | null>(null)
+  const clearHoveredId = useCallback(() => setHoveredId(null), [])
+
+  const closeMenuOnScrollUp = useCallback(() => {
+    const currentMenu = menuRef.current
+    if (!currentMenu.open || currentMenu.openedOnMobile) return
+
+    const closedMenu = {
+      open: false,
+      locationKey: location.key,
+      openedOnMobile: false,
+    }
+    menuRef.current = closedMenu
+    setMenu(closedMenu)
+    onMenuChange?.(false)
+  }, [location.key, onMenuChange])
 
   const handleMobileQueryChange = useCallback((matches: boolean) => {
     const currentMenu = menuRef.current
@@ -112,7 +142,7 @@ export function useHeaderModel({
 
   const isMobile = useMediaQuery(MOBILE_QUERY, handleMobileQueryChange)
   const isCompact = useMediaQuery(COMPACT_QUERY)
-  const isScrolledPast = useScrolledPast(collapseOffset)
+  const isScrolledPast = useScrolledPast(collapseOffset, closeMenuOnScrollUp, clearHoveredId)
   const isCollapsed = isMobile || isScrolledPast
   const metrics = getHeaderMetrics({ isMobile, isCompact })
 
