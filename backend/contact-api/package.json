@@ -1,0 +1,11 @@
+{
+  "name": "onix-contact-api",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sesv2": "^3.1171.0"
+  }
+}

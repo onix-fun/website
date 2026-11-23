@@ -6,8 +6,14 @@ import { Container, Logo, Separator, SITE_CONTACT_URL } from '@/common'
 const links = [
   { to: '/about', label: 'О нас' },
   { to: '/services', label: 'Услуги' },
-  { to: '/catalog', label: 'Каталог' },
+  { to: '/catalog', label: 'Прототипы и мерч' },
   { to: '/digital', label: 'Цифровые продукты' },
+]
+
+const legalLinks = [
+  { to: '/privacy', label: 'Политика конфиденциальности' },
+  { to: '/personal-data', label: 'Согласие на обработку данных' },
+  { to: '/cookies', label: 'Политика cookie' },
 ]
 
 export function Footer() {
@@ -18,7 +24,7 @@ export function Footer() {
         <div data-part="top">
           <div data-part="brand">
             <Logo data-part="logo" sizes={{ height: 'var(--footer-logo-height)' }} />
-            <p>Предметный дизайн<br />и 3D-печать</p>
+            <p>Open-source системы<br />и прототипы</p>
           </div>
           <nav aria-label="Навигация в подвале">
             <ul data-part="links">
@@ -34,7 +40,14 @@ export function Footer() {
         </div>
         <Separator data-part="separator" />
         <div data-part="bottom">
-          <p>ONIX · Студия предметного дизайна</p>
+          <p>ONIX · Цифровые продукты и светильники</p>
+          <nav data-part="legal" aria-label="Правовая информация">
+            <ul data-part="legalLinks">
+              {legalLinks.map((link) => (
+                <li key={link.to}><Link to={link.to}>{link.label}</Link></li>
+              ))}
+            </ul>
+          </nav>
           <a href={SITE_CONTACT_URL} target="_blank" rel="noreferrer noopener">@doc_up</a>
         </div>
       </Container>

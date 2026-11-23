@@ -84,6 +84,15 @@ export const FooterStyles = styled.footer`& {
   font-size: var(--font-size-caption);
 }
 
+& [data-part=legalLinks] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 & [data-part=links] a:focus-visible,& [data-part=contact]:focus-visible,& [data-part=bottom] a:focus-visible {
   border-radius: var(--radius-sm);
   outline: var(--border-width) solid var(--color-focus);

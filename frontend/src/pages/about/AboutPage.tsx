@@ -6,22 +6,22 @@ import { ButtonLink, Card, CardContent, PageIntro } from '@/common'
 const principles = [
   {
     number: '01',
-    title: 'Разобраться в задаче',
-    description: 'Начинаем с идеи, контекста и того, какую роль предмет должен выполнять.',
+    title: 'Понять процесс',
+    description: 'Разбираемся, кто будет пользоваться продуктом и какую задачу он должен решать.',
   },
   {
     number: '02',
-    title: 'Продумать форму',
-    description: 'Проектируем объект и проверяем его в цифровой модели.',
+    title: 'Собрать систему',
+    description: 'Используем собственные open-source low-code системы как основу цифрового продукта.',
   },
   {
     number: '03',
-    title: 'Проверить в материале',
-    description: 'Используем прототипирование и 3D-печать, чтобы перейти от модели к предмету.',
+    title: 'Проверить прототипом',
+    description: 'Тестируем сценарий в интерфейсе или проверяем форму физического объекта.',
   },
 ]
 
-const process = ['Идея и задача', 'Форма и модель', 'Прототип', 'Готовый предмет']
+const process = ['Задача и сценарий', 'Модель продукта', 'Рабочий прототип', 'Развитие системы']
 
 export function AboutPage() {
   return (
@@ -29,14 +29,14 @@ export function AboutPage() {
       <div data-part="content">
         <PageIntro
           eyebrow="СТУДИЯ ONIX"
-          title="Идея становится предметом"
-          description="Мы соединяем предметный дизайн, моделирование и 3D-печать — чтобы пройти путь от замысла до объекта."
+          title="Цифровой продукт начинается с задачи"
+          description="Разрабатываем цифровые продукты на собственных open-source low-code системах. Проверяем идеи прототипами — от интерфейса до предмета."
         />
 
         <section data-part="section" aria-labelledby="approach-title">
           <div data-part="sectionHeading">
             <span data-part="sectionIndex">01 / ПОДХОД</span>
-            <h2 id="approach-title">Сначала смысл. Затем форма.</h2>
+            <h2 id="approach-title">Система должна помогать делу</h2>
           </div>
           <div data-part="principles">
             {principles.map((principle) => (
@@ -54,8 +54,8 @@ export function AboutPage() {
         <section data-part="process" aria-labelledby="process-title">
           <div data-part="processIntro">
             <span data-part="sectionIndex">02 / ПРОЦЕСС</span>
-            <h2 id="process-title">От первого разговора до результата</h2>
-            <p>Этапы и состав работ подбираются под задачу конкретного проекта.</p>
+            <h2 id="process-title">От сценария к работающему продукту</h2>
+            <p>Сначала проверяем ход решения, затем развиваем систему по мере использования.</p>
           </div>
           <ol data-part="steps">
             {process.map((step, index) => (
@@ -70,8 +70,8 @@ export function AboutPage() {
         <Card data-part="callout">
           <CardContent data-part="calloutContent">
             <div>
-              <span data-part="sectionIndex">ЕСТЬ ИДЕЯ?</span>
-              <h2>Давайте найдём ей форму</h2>
+              <span data-part="sectionIndex">ЕСТЬ ЗАДАЧА?</span>
+              <h2>Обсудим цифровой продукт или прототип</h2>
             </div>
             <ButtonLink render={<Link to="/services" />} size="lg">
               Услуги студии <ArrowUpRight aria-hidden="true" />

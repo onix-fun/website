@@ -13,7 +13,7 @@ export function ProductPage() {
         item={item}
         items={catalogItems}
         basePath="/catalog"
-        sectionTitle="Каталог"
+        sectionTitle="Прототипы и мерч"
       />
     </ProductPageStyles>
   )

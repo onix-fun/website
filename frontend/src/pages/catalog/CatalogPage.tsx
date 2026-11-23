@@ -8,14 +8,14 @@ export function CatalogPage() {
     <CatalogPageStyles data-part="page">
       <div data-part="content">
         <PageIntro
-          eyebrow="ПРЕДМЕТЫ · МЕРЧ · ПРОТОТИПЫ"
-          title="Объекты, созданные слой за слоем"
-          description="Демонстрационный каталог студии. Карточки и категории показывают структуру будущего раздела."
+          eyebrow="ПРОТОТИПЫ · СВЕТИЛЬНИКИ · МЕРЧ"
+          title="От цифровой модели к предмету"
+          description="Создаём физические макеты для проверки формы и компоновки, а в собственном мерче развиваем светильники с плафонами, напечатанными на 3D-принтере."
         />
         <ShowcaseListing
           items={catalogItems}
           basePath="/catalog"
-          sectionLabel="Каталог объектов и предметов"
+          sectionLabel="Прототипы, светильники и мерч"
         />
       </div>
     </CatalogPageStyles>

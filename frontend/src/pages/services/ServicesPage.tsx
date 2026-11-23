@@ -1,35 +1,36 @@
 import { ServicesPageStyles } from './ServicesPage.styles'
 import { ArrowUpRight } from 'lucide-react'
-import { ButtonLink, Card, CardContent, PageIntro, SITE_CONTACT_URL } from '@/common'
+import { Link } from 'react-router'
+import { ButtonLink, Card, CardContent, PageIntro } from '@/common'
 
 const services = [
   {
-    title: 'Предметный дизайн',
+    title: 'Цифровые продукты',
     description:
-      'Разрабатываем форму и конструкцию предмета — от первых эскизов до готовой цифровой модели.',
+      'Проектируем продукт вокруг реального сценария: определяем логику, данные и интерфейс, затем собираем рабочую версию.',
   },
   {
-    title: '3D-моделирование',
+    title: 'Open-source low-code системы',
     description:
-      'Создаём точные модели объектов и подготавливаем их к визуализации и производству.',
+      'Развиваем собственные открытые low-code системы и используем их как основу прикладных цифровых решений.',
   },
   {
-    title: '3D-печать и прототипы',
+    title: 'Прототипирование',
     description:
-      'Проверяем идеи в материале и изготавливаем прототипы и готовые предметы на 3D-принтере.',
+      'Проверяем интерфейсы и физическую форму до следующего этапа разработки — от кликабельного макета до детали.',
   },
   {
-    title: 'Мерч и малые серии',
+    title: 'Светильники и мерч',
     description:
-      'Превращаем идею и фирменный стиль в предметы и небольшие серии авторского мерча.',
+      'Создаём собственные светильники с плафонами, напечатанными на 3D-принтере.',
   },
 ]
 
 const process = [
-  { title: 'Задача', description: 'Уточняем идею, назначение объекта и рамки проекта.' },
-  { title: 'Проектирование', description: 'Продумываем форму и готовим цифровую модель.' },
-  { title: 'Прототип', description: 'Проверяем решение в материале и уточняем детали.' },
-  { title: 'Результат', description: 'Подготавливаем предмет или небольшую серию.' },
+  { title: 'Контекст', description: 'Фиксируем пользователей, процесс и нужный результат.' },
+  { title: 'Система', description: 'Продумываем данные, логику и интерфейсы продукта.' },
+  { title: 'Прототип', description: 'Проверяем цифровой сценарий или физическую форму.' },
+  { title: 'Развитие', description: 'Уточняем решение по итогам проверки и использования.' },
 ]
 
 export function ServicesPage() {
@@ -37,9 +38,9 @@ export function ServicesPage() {
     <ServicesPageStyles data-part="page">
       <div data-part="content">
         <PageIntro
-          eyebrow="ОТ ИДЕИ ДО ПРЕДМЕТА"
-          title="Проектируем и создаём"
-          description="Помогаем пройти путь от идеи до физического предмета: проектируем, моделируем и создаём с помощью 3D-печати."
+          eyebrow="ЦИФРОВЫЕ ПРОДУКТЫ И ПРОТОТИПЫ"
+          title="От low-code системы к своему продукту"
+          description="Строим цифровые продукты на собственных open-source low-code системах. Для проверки идей создаём прототипы, а в собственном мерче — светильники с 3D-печатными плафонами."
         />
 
         <section data-part="section" aria-labelledby="services-title">
@@ -65,7 +66,7 @@ export function ServicesPage() {
         <section data-part="process" aria-labelledby="service-process-title">
           <div data-part="sectionHeading">
             <span data-part="sectionIndex">02 / КАК МЫ РАБОТАЕМ</span>
-            <h2 id="service-process-title">Четыре шага к результату</h2>
+            <h2 id="service-process-title">От задачи до рабочей версии</h2>
           </div>
           <ol data-part="processList">
             {process.map((step, index) => (
@@ -82,13 +83,13 @@ export function ServicesPage() {
           <CardContent data-part="calloutContent">
             <div>
               <span data-part="sectionIndex">ОБСУДИМ ВАШУ ЗАДАЧУ</span>
-              <h2>Расскажите, что хотите создать</h2>
+              <h2>Цифровой продукт, прототип или светильник</h2>
             </div>
             <ButtonLink
-              render={<a href={SITE_CONTACT_URL} target="_blank" rel="noreferrer noopener" />}
+              render={<Link to="/form" />}
               size="lg"
             >
-              Написать в Telegram <ArrowUpRight aria-hidden="true" />
+              Обсудить задачу <ArrowUpRight aria-hidden="true" />
             </ButtonLink>
           </CardContent>
         </Card>

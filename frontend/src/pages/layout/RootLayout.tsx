@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from 'react-router'
 import { AppHeader } from '@/features/header'
 import { Footer } from '@/features/footer'
+import { CookieNotice } from '@/features/cookie-notice'
 import { RootFrame, RouteFrame } from './RootLayout.styles'
 
 export function RootLayout() {
@@ -18,6 +19,7 @@ export function RootLayout() {
         <Outlet />
       </RouteFrame>
       {!isHomePage && <Footer />}
+      <CookieNotice />
     </RootFrame>
   )
 }

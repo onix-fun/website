@@ -32,6 +32,7 @@
   --header-hover-lift: 1px;
   --header-burger-bar-offset: 7px;
   --layer-navigation: 1000;
+  --layer-cookie-notice: 1100;
 
   /* ---- Brand (derived from the Onix logo: yellow mark, amber stroke) ---- */
   --color-accent: #ffbc0e;

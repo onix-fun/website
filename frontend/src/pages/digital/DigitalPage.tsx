@@ -8,14 +8,14 @@ export function DigitalPage() {
     <DigitalPageStyles data-part="page">
       <div data-part="content">
         <PageIntro
-          eyebrow="ЦИФРОВОЕ / ONIX"
-          title="Форма в цифровом пространстве"
-          description="Демонстрационная витрина цифровых продуктов. Состав, форматы и описание появятся в карточках."
+          eyebrow="СОБСТВЕННЫЕ OPEN-SOURCE СИСТЕМЫ"
+          title="Цифровые продукты на открытой основе"
+          description="Развиваем свои low-code системы и создаём на их базе цифровые продукты. Начинаем с процесса, проверяем логику прототипом и развиваем решение по мере использования."
         />
         <ShowcaseListing
           items={digitalItems}
           basePath="/digital"
-          sectionLabel="Цифровые продукты"
+          sectionLabel="Направления цифровых решений"
         />
       </div>
     </DigitalPageStyles>

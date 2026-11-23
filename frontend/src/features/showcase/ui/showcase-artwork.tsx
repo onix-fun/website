@@ -9,13 +9,13 @@ export function ShowcaseArtwork({ item, large = false }: { item: ShowcaseItem; l
       data-part="artwork"
       data-size={large ? 'large' : undefined}
       data-kind={item.kind}
-      aria-label={`Демонстрационная графика: ${item.title}`}
+      aria-label={`Иллюстрация направления: ${item.title}`}
       role="img"
     >
       <div data-part="orbit" aria-hidden="true" />
       <div data-part="object" aria-hidden="true" />
       <span data-part="index" aria-hidden="true">ONIX / {index}</span>
-      <span data-part="caption">Визуал добавится позже</span>
+      <span data-part="caption">Концепция направления</span>
     </ShowcaseArtworkStyles>
   )
 }

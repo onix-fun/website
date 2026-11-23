@@ -76,7 +76,7 @@ export function ShowcaseListing({
 
       <p data-part="resultCount" role="status" aria-live="polite">
         <Badge variant="outline">{visibleItems.length} из {items.length}</Badge>
-        <span>Демо-карточки, наполнение будет обновлено</span>
+        <span>Направления работы</span>
       </p>
 
       {visibleItems.length > 0 ? (
@@ -94,7 +94,7 @@ export function ShowcaseListing({
         <Card data-part="empty" role="status" data-testid="showcase-empty">
           <span data-part="emptyEyebrow">Ничего не найдено</span>
           <h2>Попробуйте изменить запрос</h2>
-          <p>В демо-наборе пока нет карточек, подходящих под выбранные условия.</p>
+          <p>В витрине нет совпадений. Измените запрос или сбросьте фильтр.</p>
           <Button type="button" variant="outline" onClick={resetFilters}>
             Сбросить фильтры
           </Button>

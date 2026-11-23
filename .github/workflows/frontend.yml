@@ -47,6 +47,7 @@ jobs:
         run: npm run build
         env:
           VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL }}
 
       - name: Prepare SPA fallback
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -99,6 +100,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL }}
 
       - name: Package dist
         run: zip -r frontend-dist.zip dist

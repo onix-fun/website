@@ -11,7 +11,6 @@ import {
   Badge,
   ButtonLink,
   Separator,
-  SITE_CONTACT_URL,
 } from '@/common'
 import { ShowcaseArtwork } from './showcase-artwork'
 import { ShowcaseCard } from './showcase-card'
@@ -31,9 +30,9 @@ export function ShowcaseDetail({
   if (!item) {
     return (
       <ShowcaseDetailStyles as="section" data-part="missing" role="status" data-testid="showcase-not-found">
-        <Badge variant="outline">Демо-карточка</Badge>
-        <h1>Пока такой страницы нет</h1>
-        <p>Этот элемент не входит в демонстрационный каталог.</p>
+        <Badge variant="outline">ONIX</Badge>
+        <h1>Материал не найден</h1>
+        <p>Этой позиции нет в текущей витрине. Вернитесь в раздел и выберите другое направление.</p>
         <ButtonLink render={<Link to={basePath} />} variant="outline">
           Вернуться: {sectionTitle.toLocaleLowerCase('ru')}
         </ButtonLink>
@@ -42,6 +41,8 @@ export function ShowcaseDetail({
   }
 
   const relatedItems = items.filter((candidate) => candidate.id !== item.id).slice(0, 2)
+  const requestType = item.kind === 'digital' ? 'demo' : 'order'
+  const requestPath = `/form?type=${requestType}&item=${encodeURIComponent(item.title)}`
 
   return (
     <ShowcaseDetailStyles data-part="detail">
@@ -65,15 +66,15 @@ export function ShowcaseDetail({
         <ShowcaseArtwork item={item} large />
         <div data-part="copy">
           <Badge variant="outline">{item.category}</Badge>
-          <span data-part="eyebrow">ONIX / {item.kind === 'digital' ? 'DIGITAL' : 'OBJECT'}</span>
+          <span data-part="eyebrow">ONIX / {item.kind === 'digital' ? 'ПРОДУКТ' : 'ПРОТОТИП'}</span>
           <h1 id="showcase-title">{item.title}</h1>
           <p data-part="summary">{item.summary}</p>
           <ButtonLink
-            render={<a href={SITE_CONTACT_URL} target="_blank" rel="noreferrer noopener" />}
+            render={<Link to={requestPath} />}
             size="lg"
             data-part="contactButton"
           >
-            Обсудить проект <ArrowUpRight aria-hidden="true" />
+            {item.kind === 'digital' ? 'Запросить демонстрацию' : 'Обсудить заказ'} <ArrowUpRight aria-hidden="true" />
           </ButtonLink>
           <ButtonLink render={<Link to={basePath} />} variant="link" data-part="backButton">
             К разделу «{sectionTitle}»
@@ -84,13 +85,13 @@ export function ShowcaseDetail({
       <section data-part="information" aria-labelledby="showcase-description-title">
         <div data-part="description">
           <span data-part="sectionIndex">01 / ОПИСАНИЕ</span>
-          <h2 id="showcase-description-title">Детали объекта</h2>
+          <h2 id="showcase-description-title">О направлении</h2>
           <p>{item.description}</p>
         </div>
         <Separator orientation="vertical" data-part="verticalSeparator" />
         <div data-part="facts">
           <span data-part="sectionIndex">02 / ИНФОРМАЦИЯ</span>
-          <h2>Характеристики</h2>
+          <h2>Подробности</h2>
           <dl>
             {item.facts.map((fact) => (
               <div key={fact.label} data-part="fact">
@@ -105,8 +106,8 @@ export function ShowcaseDetail({
       {relatedItems.length > 0 ? (
         <section data-part="related" aria-labelledby="related-title">
           <div data-part="relatedHeading">
-            <span data-part="sectionIndex">03 / ЕЩЁ В РАЗДЕЛЕ</span>
-            <h2 id="related-title">Другие карточки</h2>
+            <span data-part="sectionIndex">03 / РЯДОМ</span>
+            <h2 id="related-title">Другие направления</h2>
           </div>
           <div data-part="relatedGrid">
             {relatedItems.map((related, index) => (
