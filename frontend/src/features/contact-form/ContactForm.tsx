@@ -1,31 +1,26 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { ArrowUpRight } from 'lucide-react'
-import { SITE_CONTACT_URL } from '@/common'
-import { Button } from '@/common/ui/button'
+import { SITE_CONTACT_URL } from '@onix/ui-kit'
+import { Button } from '@onix/ui-kit'
 import { ContactFormStyles } from './ContactForm.styles'
 
 type RequestType = 'order' | 'quote' | 'demo'
 type SubmitState = 'success' | 'error' | null
 
 const requestTypes: { id: RequestType; label: string }[] = [
-  { id: 'order', label: 'Обсудить заказ' },
-  { id: 'quote', label: 'Запросить коммерческое предложение' },
+  { id: 'order', label: 'Обсудить проект' },
+  { id: 'quote', label: 'Запросить предложение' },
   { id: 'demo', label: 'Запросить демонстрацию' },
 ]
 
 const consentVersion = 'onix-personal-data-2026-11-18'
+const messagePlaceholder = 'Что вы хотите сделать, для кого и какой результат ожидаете?'
 
 function getInitialType(value: string | null): RequestType {
   return requestTypes.some((request) => request.id === value)
     ? (value as RequestType)
     : 'order'
-}
-
-function getMessagePlaceholder(type: RequestType) {
-  if (type === 'quote') return 'Опишите процесс, продукт или объём работ, который хотите обсудить.'
-  if (type === 'demo') return 'Напишите, какой продукт или сценарий хотите увидеть.'
-  return 'Расскажите, что хотите заказать и какие детали уже известны.'
 }
 
 export function ContactForm() {
@@ -76,9 +71,9 @@ export function ContactForm() {
   }
 
   return (
-    <ContactFormStyles data-part="form" onSubmit={handleSubmit}>
+    <ContactFormStyles data-part="form" onSubmit={handleSubmit} noValidate={false}>
       <fieldset data-part="types">
-        <legend>С чем помочь?</legend>
+        <legend>Тип запроса</legend>
         <div data-part="typeOptions">
           {requestTypes.map((request) => (
             <label key={request.id} data-part="typeOption" data-selected={requestType === request.id}>
@@ -100,7 +95,7 @@ export function ContactForm() {
 
       <div data-part="fieldGrid">
         <label data-part="label">
-          Как к вам обращаться
+          Ваше имя
           <input name="name" autoComplete="name" required maxLength={100} data-part="field" />
         </label>
         <label data-part="label">
@@ -109,31 +104,25 @@ export function ContactForm() {
         </label>
       </div>
 
-      {requestType === 'quote' ? (
-        <label data-part="label">
-          Компания <span data-part="optional">необязательно</span>
-          <input name="company" autoComplete="organization" maxLength={160} data-part="field" />
-        </label>
-      ) : null}
+      <label data-part="label">
+        Компания <span data-part="optional">необязательно</span>
+        <input name="company" autoComplete="organization" maxLength={160} data-part="field" />
+      </label>
 
       <label data-part="label">
-        {requestType === 'demo'
-          ? 'Продукт или сценарий'
-          : requestType === 'quote'
-            ? 'Продукт или направление'
-            : 'Что хотите заказать'}
+        Продукт или направление
         <input name="item" defaultValue={item} maxLength={160} data-part="field" />
       </label>
 
       <label data-part="label">
-        Коротко о задаче
+        Опишите задачу
         <textarea
           name="message"
           required
           minLength={3}
           maxLength={5000}
           rows={5}
-          placeholder={getMessagePlaceholder(requestType)}
+          placeholder={messagePlaceholder}
           data-part="field"
         />
       </label>
@@ -153,7 +142,7 @@ export function ContactForm() {
 
       <div data-part="submitRow">
         <Button type="submit" size="lg" disabled={isSubmitting || !endpoint}>
-          {isSubmitting ? 'Отправляем…' : endpoint ? 'Отправить заявку' : 'Email ещё не подключён'}
+          {isSubmitting ? 'Отправляем…' : endpoint ? 'Отправить запрос' : 'Email ещё не подключён'}
           {!isSubmitting && endpoint ? <ArrowUpRight aria-hidden="true" /> : null}
         </Button>
         <p data-part="formNote">
@@ -169,10 +158,10 @@ export function ContactForm() {
         </p>
       ) : null}
       {submitState === 'success' ? (
-        <p data-part="status" role="status">Заявка принята. Спасибо — ответим по указанному email.</p>
+        <p data-part="status" role="status">Сообщение отправлено. Ответим на указанный email</p>
       ) : null}
       {submitState === 'error' ? (
-        <p data-part="status" role="alert">Не удалось отправить заявку. Попробуйте ещё раз или напишите в Telegram.</p>
+        <p data-part="status" role="alert">Не удалось отправить сообщение. Попробуйте ещё раз или свяжитесь с нами через Telegram</p>
       ) : null}
     </ContactFormStyles>
   )

@@ -1,5 +1,5 @@
 import { ShowcaseArtworkStyles } from './showcase-artwork.styles'
-import type { ShowcaseItem } from '@/common'
+import type { ShowcaseItem } from '@onix/ui-kit'
 
 export function ShowcaseArtwork({ item, large = false }: { item: ShowcaseItem; large?: boolean }) {
   const index = item.id.split('-').at(-1) ?? '01'

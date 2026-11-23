@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { BREAKPOINTS } from '@/common/styles/breakpoints'
+import { BREAKPOINTS } from '@onix/ui-kit'
 
 export const ShowcaseListingStyles = styled.section`& {
   display: flex;
@@ -71,7 +71,7 @@ export const ShowcaseListingStyles = styled.section`& {
 }
 
 & [data-part=emptyEyebrow] {
-  color: var(--color-accent-hover);
+  color: var(--color-accent-text);
   font-size: var(--font-size-caption);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-label);

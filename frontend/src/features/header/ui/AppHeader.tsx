@@ -1,7 +1,7 @@
 import { HeaderStyles } from '../styles/header.styles'
 import { useCallback, useEffect, useRef } from "react";
-import { Container, Logo, NavPanel, Position, Spacer, Stack } from '@/common'
-import type { Item, NavPanelSizes, NavPanelStyleValues } from '@/common'
+import { Container, Logo, NavPanel, Position, Spacer, Stack } from '@onix/ui-kit'
+import type { Item, NavPanelSizes, NavPanelStyleValues } from '@onix/ui-kit'
 import { navItems } from "../model/nav-items";
 import { useHeaderModel } from "../model/useHeaderModel";
 import { useHeaderController } from "../controller/useHeaderController";

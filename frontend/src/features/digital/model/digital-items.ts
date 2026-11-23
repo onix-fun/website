@@ -1,4 +1,4 @@
-import type { ShowcaseItem } from '@/common'
+import type { ShowcaseItem } from '@onix/ui-kit'
 
 export const digitalItems = [
   {

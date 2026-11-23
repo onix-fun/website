@@ -11,10 +11,10 @@ import {
   Badge,
   ButtonLink,
   Separator,
-} from '@/common'
+} from '@onix/ui-kit'
 import { ShowcaseArtwork } from './showcase-artwork'
 import { ShowcaseCard } from './showcase-card'
-import type { ShowcaseItem } from '@/common'
+import type { ShowcaseItem } from '@onix/ui-kit'
 
 export function ShowcaseDetail({
   item,
@@ -85,13 +85,15 @@ export function ShowcaseDetail({
       <section data-part="information" aria-labelledby="showcase-description-title">
         <div data-part="description">
           <span data-part="sectionIndex">01 / ОПИСАНИЕ</span>
-          <h2 id="showcase-description-title">О направлении</h2>
+          <h2 id="showcase-description-title">
+            {item.kind === 'digital' ? 'О решении' : 'О продукте'}
+          </h2>
           <p>{item.description}</p>
         </div>
         <Separator orientation="vertical" data-part="verticalSeparator" />
         <div data-part="facts">
           <span data-part="sectionIndex">02 / ИНФОРМАЦИЯ</span>
-          <h2>Подробности</h2>
+          <h2>Основная информация</h2>
           <dl>
             {item.facts.map((fact) => (
               <div key={fact.label} data-part="fact">
@@ -107,7 +109,7 @@ export function ShowcaseDetail({
         <section data-part="related" aria-labelledby="related-title">
           <div data-part="relatedHeading">
             <span data-part="sectionIndex">03 / РЯДОМ</span>
-            <h2 id="related-title">Другие направления</h2>
+            <h2 id="related-title">Смотрите также</h2>
           </div>
           <div data-part="relatedGrid">
             {relatedItems.map((related, index) => (

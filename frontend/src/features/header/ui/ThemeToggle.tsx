@@ -1,5 +1,5 @@
 import { Moon, Sun } from 'lucide-react'
-import { useColorTheme } from '@/common/hooks/useColorTheme'
+import { useColorTheme } from '@onix/ui-kit'
 export function ThemeToggle({ visible }: { visible: boolean }) {
   const { theme, toggleTheme } = useColorTheme()
   const nextThemeLabel = theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему'

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
-import { Button } from '@/common/ui/button'
+import { Button } from '@onix/ui-kit'
 import { CookieNoticeStyles } from './CookieNotice.styles'
 import { hasAcceptedCookieNotice, rememberCookieNoticeAcceptance } from './lib/consent-cookie'
 

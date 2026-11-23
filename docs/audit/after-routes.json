@@ -1,0 +1,218 @@
+[
+  {
+    "route": "/",
+    "title": "ONIX — цифровые продукты, прототипы и светильники",
+    "description": "ONIX создаёт цифровые продукты на собственных open-source low-code системах, прототипы и светильники с 3D-печатными плафонами.",
+    "canonical": "http://localhost:4173/",
+    "robots": "index, follow",
+    "ogTitle": "ONIX — цифровые продукты, прототипы и светильники",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Собираем системы.Проверяем в деле."
+    ],
+    "h2Count": 0,
+    "overflow": 0,
+    "height": 812,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/about",
+    "title": "О нас — ONIX",
+    "description": "Разрабатываем цифровые продукты и физические прототипы. Разбираемся в задаче, проектируем решение и проверяем его на практике",
+    "canonical": "http://localhost:4173/about",
+    "robots": "index, follow",
+    "ogTitle": "О нас — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "От идеи к работающему решению"
+    ],
+    "h2Count": 3,
+    "overflow": 0,
+    "height": 3096,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/services",
+    "title": "Услуги — ONIX",
+    "description": "Проектируем цифровые сервисы, создаём инструменты для рабочих процессов и проверяем идеи с помощью программных и физических прототипов",
+    "canonical": "http://localhost:4173/services",
+    "robots": "index, follow",
+    "ogTitle": "Услуги — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Разработка и прототипирование"
+    ],
+    "h2Count": 3,
+    "overflow": 0,
+    "height": 3346,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/catalog",
+    "title": "Прототипы и предметы — ONIX",
+    "description": "Создаём физические макеты для проверки конструкции, размеров и эргономики. Развиваем собственные светильники с деталями, изготовленными на 3D-принтере",
+    "canonical": "http://localhost:4173/catalog",
+    "robots": "index, follow",
+    "ogTitle": "Прототипы и предметы — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Идеи, которые обретают форму"
+    ],
+    "h2Count": 6,
+    "overflow": 0,
+    "height": 4154,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/catalog/object-01",
+    "title": "Корпус для проверки компоновки — ONIX",
+    "description": "Физический макет помогает проверить габариты, сборку и доступ к компонентам.",
+    "canonical": "http://localhost:4173/catalog/object-01",
+    "robots": "index, follow",
+    "ogTitle": "Корпус для проверки компоновки — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Корпус для проверки компоновки"
+    ],
+    "h2Count": 5,
+    "overflow": 0,
+    "height": 3167,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/digital",
+    "title": "Цифровые решения — ONIX",
+    "description": "Развиваем открытые программные платформы и создаём цифровые инструменты вокруг конкретных процессов, данных и пользовательских сценариев",
+    "canonical": "http://localhost:4173/digital",
+    "robots": "index, follow",
+    "ogTitle": "Цифровые решения — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Системы под реальные задачи"
+    ],
+    "h2Count": 3,
+    "overflow": 0,
+    "height": 2648,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/digital/digital-01",
+    "title": "Собственная low-code система — ONIX",
+    "description": "Открытая основа, на которой можно собирать и развивать цифровые продукты.",
+    "canonical": "http://localhost:4173/digital/digital-01",
+    "robots": "index, follow",
+    "ogTitle": "Собственная low-code система — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Собственная low-code система"
+    ],
+    "h2Count": 5,
+    "overflow": 0,
+    "height": 3082,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/form",
+    "title": "Связаться с ONIX",
+    "description": "Опишите идею, продукт или вопрос, который хотите обсудить. Мы рассмотрим обращение и ответим по указанному email",
+    "canonical": "http://localhost:4173/form",
+    "robots": "index, follow",
+    "ogTitle": "Связаться с ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Расскажите о своей задаче"
+    ],
+    "h2Count": 1,
+    "overflow": 0,
+    "height": 2534,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/privacy",
+    "title": "Политика конфиденциальности — ONIX",
+    "description": "Как ONIX обрабатывает сведения, которые вы отправляете через сайт.",
+    "canonical": "http://localhost:4173/privacy",
+    "robots": "noindex, nofollow",
+    "ogTitle": "Политика конфиденциальности — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Политика конфиденциальности"
+    ],
+    "h2Count": 6,
+    "overflow": 0,
+    "height": 3619,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/personal-data",
+    "title": "Согласие на обработку персональных данных — ONIX",
+    "description": "Текст отдельного согласия, которое пользователь отмечает перед отправкой заявки.",
+    "canonical": "http://localhost:4173/personal-data",
+    "robots": "noindex, nofollow",
+    "ogTitle": "Согласие на обработку персональных данных — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Согласие на обработку персональных данных"
+    ],
+    "h2Count": 4,
+    "overflow": 0,
+    "height": 2943,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/cookies",
+    "title": "Политика cookie — ONIX",
+    "description": "Какие браузерные данные использует сайт ONIX и зачем.",
+    "canonical": "http://localhost:4173/cookies",
+    "robots": "noindex, nofollow",
+    "ogTitle": "Политика cookie — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Политика cookie"
+    ],
+    "h2Count": 4,
+    "overflow": 0,
+    "height": 2419,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  },
+  {
+    "route": "/does-not-exist",
+    "title": "Страница не найдена — ONIX",
+    "description": "Страница недоступна или была перемещена.",
+    "canonical": "http://localhost:4173/404",
+    "robots": "noindex, nofollow",
+    "ogTitle": "Страница не найдена — ONIX",
+    "ogImage": "http://localhost:4173/og-image.svg",
+    "h1": [
+      "Страница не найдена"
+    ],
+    "h2Count": 0,
+    "overflow": 0,
+    "height": 1096,
+    "favicon": "http://localhost:4173/favicon.svg",
+    "lang": "ru",
+    "errors": []
+  }
+]

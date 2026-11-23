@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ONIX — загрузка страницы</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <script>
+      // GitHub Pages fallback for SPA deep links. Keep the base path aligned
+      // with VITE_BASE_PATH in the deployment workflow and vite.config.ts.
+      (function () {
+        var base = '/website';
+        var path = window.location.pathname;
+        var relative = path.indexOf(base + '/') === 0 ? path.slice(base.length) : path;
+        var suffix = window.location.search + window.location.hash;
+        try {
+          window.sessionStorage.setItem('onix-deep-link', relative + suffix);
+        } catch (error) {
+          // The query parameter below is a fallback when storage is disabled.
+        }
+        window.location.replace(base + '/?p=' + encodeURIComponent(relative + suffix));
+      })();
+    </script>
+  </body>
+</html>

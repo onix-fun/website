@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="ONIX">
+  <rect width="1200" height="630" fill="#1b1a18" />
+  <circle cx="925" cy="310" r="250" fill="none" stroke="#ffbc0e" stroke-opacity="0.28" stroke-width="2" />
+  <circle cx="925" cy="310" r="180" fill="none" stroke="#ffbc0e" stroke-opacity="0.5" stroke-width="2" transform="rotate(-22 925 310) scale(1 0.45)" />
+  <path d="M925 170 1050 310 925 450 800 310Z" fill="#ffc93c" opacity="0.9" />
+  <text x="90" y="290" fill="#f0ede6" font-family="Arial, sans-serif" font-size="130" font-weight="700" letter-spacing="-6">ONIX</text>
+  <text x="94" y="360" fill="#b8b2a8" font-family="Arial, sans-serif" font-size="34">Цифровые продукты · прототипы · светильники</text>
+</svg>

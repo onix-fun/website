@@ -1,0 +1,1126 @@
+[
+  {
+    "theme": "light",
+    "width": 320,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 45,
+        "right": 695
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 45,
+        "right": 695
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 45,
+        "right": 610
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 121,
+        "right": 453
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 121,
+        "right": 453
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 320,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 320,
+    "route": "/privacy",
+    "overflow": 85,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "heading",
+        "cls": "",
+        "left": 24,
+        "right": 405
+      },
+      {
+        "tag": "H1",
+        "part": null,
+        "cls": "",
+        "left": 24,
+        "right": 405
+      },
+      {
+        "tag": "P",
+        "part": null,
+        "cls": "",
+        "left": 24,
+        "right": 405
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 375,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 53,
+        "right": 703
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 53,
+        "right": 703
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 53,
+        "right": 617
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 129,
+        "right": 461
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 129,
+        "right": 461
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 375,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 375,
+    "route": "/privacy",
+    "overflow": 30,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "heading",
+        "cls": "",
+        "left": 24,
+        "right": 405
+      },
+      {
+        "tag": "H1",
+        "part": null,
+        "cls": "",
+        "left": 24,
+        "right": 405
+      },
+      {
+        "tag": "P",
+        "part": null,
+        "cls": "",
+        "left": 24,
+        "right": 405
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 430,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 60,
+        "right": 710
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 60,
+        "right": 710
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 60,
+        "right": 625
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 137,
+        "right": 468
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 137,
+        "right": 468
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 430,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 768,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 108,
+        "right": 1068
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 108,
+        "right": 1068
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 108,
+        "right": 942
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 309,
+        "right": 942
+      },
+      {
+        "tag": "image",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 309,
+        "right": 942
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 768,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 1024,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 82,
+        "right": 1618
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 82,
+        "right": 1618
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 82,
+        "right": 1417
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 263,
+        "right": 1046
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 263,
+        "right": 1046
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 1024,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 1440,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 138,
+        "right": 2231
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 138,
+        "right": 2231
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 139,
+        "right": 1957
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 384,
+        "right": 1452
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 384,
+        "right": 1452
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 1440,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 1920,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 184,
+        "right": 2277
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 184,
+        "right": 2277
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 185,
+        "right": 2003
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 623,
+        "right": 2003
+      },
+      {
+        "tag": "image",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 623,
+        "right": 2003
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "width": 1920,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 320,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 45,
+        "right": 695
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 45,
+        "right": 695
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 45,
+        "right": 610
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 121,
+        "right": 453
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 121,
+        "right": 453
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 320,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 320,
+    "route": "/privacy",
+    "overflow": 85,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "heading",
+        "cls": "",
+        "left": 24,
+        "right": 405
+      },
+      {
+        "tag": "H1",
+        "part": null,
+        "cls": "",
+        "left": 24,
+        "right": 405
+      },
+      {
+        "tag": "P",
+        "part": null,
+        "cls": "",
+        "left": 24,
+        "right": 405
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 53,
+        "right": 703
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 53,
+        "right": 703
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 53,
+        "right": 617
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 129,
+        "right": 461
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 129,
+        "right": 461
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "route": "/privacy",
+    "overflow": 30,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "heading",
+        "cls": "",
+        "left": 24,
+        "right": 405
+      },
+      {
+        "tag": "H1",
+        "part": null,
+        "cls": "",
+        "left": 24,
+        "right": 405
+      },
+      {
+        "tag": "P",
+        "part": null,
+        "cls": "",
+        "left": 24,
+        "right": 405
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 430,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 60,
+        "right": 710
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 60,
+        "right": 710
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 60,
+        "right": 625
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 137,
+        "right": 468
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 137,
+        "right": 468
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 430,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 768,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 108,
+        "right": 1068
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 108,
+        "right": 1068
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 108,
+        "right": 942
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 309,
+        "right": 942
+      },
+      {
+        "tag": "image",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 309,
+        "right": 942
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 768,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 1024,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 82,
+        "right": 1618
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 82,
+        "right": 1618
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 82,
+        "right": 1417
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 263,
+        "right": 1046
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 263,
+        "right": 1046
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 1024,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 1440,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 138,
+        "right": 2231
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 138,
+        "right": 2231
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 139,
+        "right": 1957
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 384,
+        "right": 1452
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 384,
+        "right": 1452
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 1440,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 1920,
+    "route": "/",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "animation",
+        "cls": "",
+        "left": 184,
+        "right": 2277
+      },
+      {
+        "tag": "svg",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 184,
+        "right": 2277
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 185,
+        "right": 2003
+      },
+      {
+        "tag": "g",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 623,
+        "right": 2003
+      },
+      {
+        "tag": "image",
+        "part": null,
+        "cls": "[object SVGAnimatedString]",
+        "left": 623,
+        "right": 2003
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "width": 1920,
+    "route": "/form",
+    "overflow": 0,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "part": "honeypot",
+        "cls": "",
+        "left": -10000,
+        "right": -9999
+      },
+      {
+        "tag": "LABEL",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9941
+      },
+      {
+        "tag": "INPUT",
+        "part": null,
+        "cls": "",
+        "left": -10000,
+        "right": -9806
+      }
+    ]
+  }
+]

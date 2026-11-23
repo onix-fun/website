@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Page } from '@/common/ui/page'
-import { BREAKPOINTS } from '@/common/styles/breakpoints'
+import { Page } from '@onix/ui-kit'
+import { BREAKPOINTS } from '@onix/ui-kit'
 
 export const LegalPageStyles = styled(Page)`& {
   padding-block: var(--space-2xl);
@@ -89,7 +89,7 @@ export const LegalPageStyles = styled(Page)`& {
 }
 
 & [data-part=sectionIndex] {
-  color: var(--color-accent-hover);
+  color: var(--color-accent-text);
   font-size: var(--font-size-caption);
   font-weight: 700;
 }

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /?p=
+
+Sitemap: https://onix-fun.github.io/website/sitemap.xml

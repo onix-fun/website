@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Page } from '@/common/ui/page'
-import { BREAKPOINTS } from '@/common/styles/breakpoints'
+import { Page } from '@onix/ui-kit'
+import { BREAKPOINTS } from '@onix/ui-kit'
 
 export const DigitalProductPageStyles = styled(Page)`& {
   padding-block: var(--space-xl);

@@ -1,8 +1,8 @@
 import { ShowcaseCardStyles } from './showcase-card.styles'
 import { ArrowUpRight } from 'lucide-react'
-import { Badge, Card, CardContent } from '@/common'
+import { Badge, Card, CardContent } from '@onix/ui-kit'
 import { ShowcaseArtwork } from './showcase-artwork'
-import type { ShowcaseItem } from '@/common'
+import type { ShowcaseItem } from '@onix/ui-kit'
 
 export function ShowcaseCard({
   item,

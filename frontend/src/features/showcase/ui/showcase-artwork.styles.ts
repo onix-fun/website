@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { BREAKPOINTS } from '@/common/styles/breakpoints'
+import { BREAKPOINTS } from '@onix/ui-kit'
 
 export const ShowcaseArtworkStyles = styled.div`& {
   position: relative;

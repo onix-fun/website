@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Page } from '@/common/ui/page'
-import { BREAKPOINTS } from '@/common/styles/breakpoints'
+import { Page } from '@onix/ui-kit'
+import { BREAKPOINTS } from '@onix/ui-kit'
 
 export const AboutPageStyles = styled(Page)`& {
   padding-block: var(--space-2xl);
@@ -62,7 +62,7 @@ export const AboutPageStyles = styled(Page)`& {
 }
 
 & [data-part=number] {
-  color: var(--color-accent-hover);
+  color: var(--color-accent-text);
   font-size: var(--font-size-caption);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-label);
@@ -107,17 +107,23 @@ export const AboutPageStyles = styled(Page)`& {
 }
 
 & [data-part=steps] li span {
-  color: var(--color-accent-hover);
+  color: var(--color-accent-text);
   font-size: var(--font-size-caption);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-label);
 }
 
-& [data-part=steps] li p {
+& [data-part=steps] li h3 {
   margin: 0;
   color: var(--onix-hero-text-primary);
   font-size: var(--font-size-title);
   font-weight: 600;
+}
+
+& [data-part=steps] li p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: var(--line-height-body);
 }
 
 & [data-part=callout] {

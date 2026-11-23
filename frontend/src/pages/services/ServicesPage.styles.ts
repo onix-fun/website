@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Page } from '@/common/ui/page'
-import { BREAKPOINTS } from '@/common/styles/breakpoints'
+import { Page } from '@onix/ui-kit'
+import { BREAKPOINTS } from '@onix/ui-kit'
 
 export const ServicesPageStyles = styled(Page)`& {
   padding-block: var(--space-2xl);
@@ -75,8 +75,34 @@ export const ServicesPageStyles = styled(Page)`& {
   padding: var(--space-xl);
 }
 
+& [data-part=serviceLink] {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: auto;
+  color: var(--color-accent-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+& [data-part=serviceLink] svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+& [data-part=serviceLink]:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+& [data-part=serviceLink]:focus-visible {
+  border-radius: var(--radius-sm);
+  outline: var(--border-width) solid var(--color-focus);
+  outline-offset: var(--space-xs);
+}
+
 & [data-part=number] {
-  color: var(--color-accent-hover);
+  color: var(--color-accent-text);
   font-size: var(--font-size-caption);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-label);

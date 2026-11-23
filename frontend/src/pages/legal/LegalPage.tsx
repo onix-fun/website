@@ -1,9 +1,24 @@
 import { Link } from 'react-router'
-import { PageIntro } from '@/common'
+import { PageIntro, useDocumentMeta } from '@onix/ui-kit'
 import { LegalPageStyles } from './LegalPage.styles'
 import type { LegalDocument } from './legal-documents'
 
-export function LegalPage({ document }: { document: LegalDocument }) {
+export function LegalPage({
+  document,
+  path,
+}: {
+  document: LegalDocument
+  path: string
+}) {
+  // Most legal texts are still drafts; keep them out of the index until the
+  // operator details and actual service list are confirmed.
+  useDocumentMeta({
+    title: document.title,
+    description: document.description,
+    path,
+    noindex: true,
+  })
+
   return (
     <LegalPageStyles data-part="page">
       <div data-part="content">

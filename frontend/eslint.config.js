@@ -5,39 +5,10 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import boundaries from 'eslint-plugin-boundaries'
+import { uiKitColorPlugin } from '@onix/ui-kit/eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 const root = import.meta.dirname
-
-const colorLiteralPattern = /#(?:[\da-f]{3,4}|[\da-f]{6}|[\da-f]{8})\b|\b(?:rgba?|hsla?)\s*\(/i
-const architecturePlugin = {
-  rules: {
-    'no-hardcoded-colors': {
-      meta: {
-        type: 'problem',
-        docs: { description: 'Use the shared design tokens for colors in common UI primitives.' },
-        schema: [],
-        messages: { token: 'Use a semantic design token instead of a literal color in common/ui.' },
-      },
-      create(context) {
-        const reportIfColorLiteral = (node, value) => {
-          if (typeof value === 'string' && colorLiteralPattern.test(value)) {
-            context.report({ node, messageId: 'token' })
-          }
-        }
-
-        return {
-          Literal(node) {
-            reportIfColorLiteral(node, node.value)
-          },
-          TemplateLiteral(node) {
-            for (const quasi of node.quasis) reportIfColorLiteral(quasi, quasi.value.raw)
-          },
-        }
-      },
-    },
-  },
-}
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -60,13 +31,12 @@ export default defineConfig([
     },
   },
 
-  // shadcn/ui primitives co-export variants (e.g. buttonVariants)
+  // The color-token rule lives in the UI kit so both repositories share it.
   {
-    files: ['src/common/ui/**/*.{ts,tsx}'],
-    plugins: { architecture: architecturePlugin },
+    files: ['src/**/*.{ts,tsx}'],
+    plugins: { 'onix-ui': uiKitColorPlugin },
     rules: {
-      'react-refresh/only-export-components': 'off',
-      'architecture/no-hardcoded-colors': 'error',
+      'onix-ui/no-hardcoded-colors': 'error',
     },
   },
 
@@ -83,7 +53,7 @@ export default defineConfig([
   },
 
   // Styling policy: product and page styling is composed with styled-components.
-  // Tailwind utility classes belong to shadcn primitives in `common/ui`.
+  // Tailwind utility classes are compiled inside @onix/ui-kit primitives.
   {
     files: ['src/features/**/*.{ts,tsx}', 'src/pages/**/*.{ts,tsx}', 'src/app/**/*.{ts,tsx}'],
     rules: {
@@ -93,25 +63,25 @@ export default defineConfig([
           selector:
             'JSXAttribute[name.name="className"] > Literal',
           message:
-            'Raw utility class strings are restricted to common/ui primitives. Use styled-components and semantic data-part selectors.',
+            'Raw utility class strings are restricted to @onix/ui-kit primitives. Use styled-components and semantic data-part selectors.',
         },
         {
           selector:
             'JSXAttribute[name.name="className"] > JSXExpressionContainer > TemplateLiteral',
           message:
-            'Raw utility class strings are restricted to common/ui primitives. Use styled-components and semantic data-part selectors.',
+            'Raw utility class strings are restricted to @onix/ui-kit primitives. Use styled-components and semantic data-part selectors.',
         },
         {
           selector:
             'JSXAttribute[name.name="className"] > JSXExpressionContainer > Literal',
           message:
-            'Raw utility class strings are restricted to common/ui primitives. Use styled-components and semantic data-part selectors.',
+            'Raw utility class strings are restricted to @onix/ui-kit primitives. Use styled-components and semantic data-part selectors.',
         },
       ],
     },
   },
 
-  // Architecture: app -> pages -> features -> common
+  // Architecture: app -> pages -> features -> @onix/ui-kit
   {
     files: ['src/**/*.{ts,tsx}'],
     plugins: { boundaries },
@@ -124,7 +94,6 @@ export default defineConfig([
         { type: 'app', pattern: 'app' },
         { type: 'pages', pattern: 'pages/*', capture: ['page'] },
         { type: 'features', pattern: 'features/*', capture: ['feature'] },
-        { type: 'common', pattern: 'common' },
       ],
       'boundaries/ignore': ['**/*.css'],
     },
@@ -132,22 +101,36 @@ export default defineConfig([
       'boundaries/dependencies': [
         'error',
         {
+          checkAllOrigins: true,
           default: 'disallow',
           policies: [
             {
               from: { element: { type: 'app' } },
-              allow: { to: { element: { types: { anyOf: ['pages', 'common'] } } } },
-              message: 'app may only depend on pages and common',
+              allow: { to: { element: { type: 'pages' } } },
+              message: 'app may only depend on pages and @onix/ui-kit',
+            },
+            {
+              from: { element: { type: 'app' } },
+              allow: { to: { module: { origin: 'external', source: '@onix/ui-kit' } } },
+              message: 'app may only depend on pages and @onix/ui-kit',
             },
             {
               from: { element: { type: 'pages' } },
-              allow: { to: { element: { types: { anyOf: ['features', 'common'] } } } },
-              message: 'pages may only depend on features and common',
+              allow: { to: { element: { type: 'features' } } },
+              message: 'pages may only depend on features and @onix/ui-kit',
+            },
+            {
+              from: { element: { type: 'pages' } },
+              allow: { to: { module: { origin: 'external', source: '@onix/ui-kit' } } },
+              message: 'pages may only depend on features and @onix/ui-kit',
             },
             {
               from: { element: { type: 'features' } },
-              allow: { to: { element: { type: 'common' } } },
-              message: 'features are isolated: they may only depend on common',
+              allow: { to: { module: { origin: 'external', source: '@onix/ui-kit' } } },
+              message: 'features are isolated: they may only depend on @onix/ui-kit',
+            },
+            {
+              allow: { to: { module: { origin: ['external', 'core'] } } },
             },
           ],
         },

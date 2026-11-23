@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { BREAKPOINTS } from '@/common/styles/breakpoints'
+import { BREAKPOINTS } from '@onix/ui-kit'
 
 export const ContactFormStyles = styled.form`& {
   display: flex;
@@ -137,6 +137,8 @@ export const ContactFormStyles = styled.form`& {
 
 & [data-part=consent] a,& [data-part=status] a {
   color: var(--onix-hero-text-primary);
+  font-weight: 600;
+  text-decoration-line: underline;
   text-decoration-color: var(--color-accent-hover);
   text-underline-offset: 0.2em;
 }

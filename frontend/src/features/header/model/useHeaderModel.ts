@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState, useSyncExternalStore } from 'react'
 import { useLocation } from 'react-router'
-import type { Item } from '@/common'
+import type { Item } from '@onix/ui-kit'
 import { getHeaderMetrics, type HeaderMetrics } from './header-metrics'
 
 const MOBILE_QUERY = '(max-width: 768px)'

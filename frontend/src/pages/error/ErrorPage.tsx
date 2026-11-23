@@ -1,6 +1,6 @@
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router'
-import { Page } from '@/common'
-import { ButtonLink } from '@/common/ui/button'
+import { ButtonLink, useDocumentMeta } from '@onix/ui-kit'
+import { ErrorPageStyles } from './ErrorPage.styles'
 
 interface ErrorView {
   status?: number
@@ -33,11 +33,25 @@ export function ErrorPage() {
   const error = useRouteError()
   const { status, title, detail } = resolveError(error)
 
+  useDocumentMeta({
+    title,
+    description: 'Страница недоступна или была перемещена.',
+    path: '/404',
+    noindex: true,
+  })
+
   return (
-    <Page centered title={title} titleSize="2xl">
-      {status ? <p>{status}</p> : null}
-      {detail ? <p>{detail}</p> : null}
-      <ButtonLink render={<Link to="/" />}>На главную</ButtonLink>
-    </Page>
+    <ErrorPageStyles data-part="error" centered title={title} titleSize="2xl">
+      <div data-part="card">
+        <span data-part="code">{status ? `ОШИБКА ${status}` : 'ОШИБКА'}</span>
+        <p data-part="lead">
+          {detail ?? 'Такой страницы нет или она была перемещена. Вернитесь на главную или расскажите о задаче через форму.'}
+        </p>
+        <div data-part="actions">
+          <ButtonLink render={<Link to="/" />}>На главную</ButtonLink>
+          <ButtonLink render={<Link to="/form" />} variant="outline">Обсудить задачу</ButtonLink>
+        </div>
+      </div>
+    </ErrorPageStyles>
   )
 }

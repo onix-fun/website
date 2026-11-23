@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import type { AnimationItem } from "lottie-web";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router";
-import { ButtonLink } from "@/common";
+import { ButtonLink } from "@onix/ui-kit";
 
 const INTRO_END_FRAME = 150;
 const LOOP_END_FRAME = 2510;
@@ -20,7 +20,12 @@ export function HeroSection() {
         let playIntro: (() => void) | null = null;
         let playLoop: (() => void) | null = null;
 
-        void Promise.all([import("lottie-web"), import("../assets/onix-orbit.json")]).then(
+        // The orbit uses the SVG renderer only; the light build omits canvas
+        // and HTML renderers without changing the rendered animation.
+        void Promise.all([
+            import("lottie-web/build/player/lottie_light"),
+            import("../assets/onix-orbit.json"),
+        ]).then(
             ([{ default: lottie }, { default: orbitAnimation }]) => {
                 if (disposed) return;
 

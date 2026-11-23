@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router'
-import { BREAKPOINTS } from '@/common/styles/breakpoints'
+import { BREAKPOINTS } from '@onix/ui-kit'
 
 export const ShowcaseCardStyles = styled(Link)`& {
   display: block;

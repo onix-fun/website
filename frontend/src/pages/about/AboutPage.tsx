@@ -1,48 +1,62 @@
 import { AboutPageStyles } from './AboutPage.styles'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
-import { ButtonLink, Card, CardContent, PageIntro } from '@/common'
+import { ButtonLink, Card, CardContent, PageIntro, useDocumentMeta } from '@onix/ui-kit'
+
+const introDescription =
+  'Разрабатываем цифровые продукты и физические прототипы. Разбираемся в задаче, проектируем решение и проверяем его на практике'
 
 const principles = [
   {
-    number: '01',
-    title: 'Понять процесс',
-    description: 'Разбираемся, кто будет пользоваться продуктом и какую задачу он должен решать.',
+    step: '01. Разобраться',
+    title: 'Сначала задача',
+    description: 'Изучаем задачу, сценарий и контекст, чтобы предложить решение под конкретную ситуацию.',
   },
   {
-    number: '02',
-    title: 'Собрать систему',
-    description: 'Используем собственные open-source low-code системы как основу цифрового продукта.',
+    step: '02. Спроектировать',
+    title: 'Затем решение',
+    description: 'Проектируем цифровой продукт или физическую форму и выбираем подходящие технологии.',
   },
   {
-    number: '03',
-    title: 'Проверить прототипом',
-    description: 'Тестируем сценарий в интерфейсе или проверяем форму физического объекта.',
+    step: '03. Проверить',
+    title: 'Проверяем в деле',
+    description: 'Смотрим, как решение работает в интерфейсе, программном или физическом прототипе.',
   },
 ]
 
-const process = ['Задача и сценарий', 'Модель продукта', 'Рабочий прототип', 'Развитие системы']
+const stages = [
+  { number: '01', title: 'Идея', description: 'Фиксируем замысел и то, что нужно проверить.' },
+  { number: '02', title: 'Задача', description: 'Определяем пользователя, процесс и ожидаемый результат.' },
+  { number: '03', title: 'Прототип', description: 'Собираем рабочую версию или физический макет.' },
+  { number: '04', title: 'Проверка', description: 'Оцениваем решение и уточняем следующие шаги.' },
+]
 
 export function AboutPage() {
+  useDocumentMeta({
+    title: 'О нас',
+    description: introDescription,
+    path: '/about',
+  })
+
   return (
     <AboutPageStyles data-part="page">
       <div data-part="content">
         <PageIntro
           eyebrow="СТУДИЯ ONIX"
-          title="Цифровой продукт начинается с задачи"
-          description="Разрабатываем цифровые продукты на собственных open-source low-code системах. Проверяем идеи прототипами — от интерфейса до предмета."
+          title="От идеи к работающему решению"
+          description={introDescription}
         />
 
         <section data-part="section" aria-labelledby="approach-title">
           <div data-part="sectionHeading">
             <span data-part="sectionIndex">01 / ПОДХОД</span>
-            <h2 id="approach-title">Система должна помогать делу</h2>
+            <h2 id="approach-title">Сначала задача. Затем технология.</h2>
           </div>
           <div data-part="principles">
             {principles.map((principle) => (
-              <Card key={principle.number} data-part="principle">
+              <Card key={principle.step} data-part="principle">
                 <CardContent data-part="principleContent">
-                  <span data-part="number">{principle.number}</span>
+                  <span data-part="number">{principle.step}</span>
                   <h3>{principle.title}</h3>
                   <p>{principle.description}</p>
                 </CardContent>
@@ -53,15 +67,16 @@ export function AboutPage() {
 
         <section data-part="process" aria-labelledby="process-title">
           <div data-part="processIntro">
-            <span data-part="sectionIndex">02 / ПРОЦЕСС</span>
-            <h2 id="process-title">От сценария к работающему продукту</h2>
-            <p>Сначала проверяем ход решения, затем развиваем систему по мере использования.</p>
+            <span data-part="sectionIndex">02 / ПУТЬ</span>
+            <h2 id="process-title">От замысла до проверки</h2>
+            <p>Короткая последовательность, которая помогает не потерять задачу за деталями решения.</p>
           </div>
           <ol data-part="steps">
-            {process.map((step, index) => (
-              <li key={step}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <p>{step}</p>
+            {stages.map((stage) => (
+              <li key={stage.number}>
+                <span>{stage.number}</span>
+                <h3>{stage.title}</h3>
+                <p>{stage.description}</p>
               </li>
             ))}
           </ol>
@@ -70,11 +85,11 @@ export function AboutPage() {
         <Card data-part="callout">
           <CardContent data-part="calloutContent">
             <div>
-              <span data-part="sectionIndex">ЕСТЬ ЗАДАЧА?</span>
-              <h2>Обсудим цифровой продукт или прототип</h2>
+              <span data-part="sectionIndex">ЕСТЬ ИДЕЯ?</span>
+              <h2>Есть идея, которую стоит проверить?</h2>
             </div>
-            <ButtonLink render={<Link to="/services" />} size="lg">
-              Услуги студии <ArrowUpRight aria-hidden="true" />
+            <ButtonLink render={<Link to="/form" />} size="lg">
+              Обсудить задачу <ArrowUpRight aria-hidden="true" />
             </ButtonLink>
           </CardContent>
         </Card>

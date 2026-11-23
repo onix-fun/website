@@ -1,18 +1,20 @@
 import { ShowcaseListingStyles } from './showcase-listing.styles'
 import { useId, useMemo, useState } from 'react'
 import { Search } from 'lucide-react'
-import { Badge, Button, Card, Input, Label } from '@/common'
+import { Badge, Button, Card, Input, Label } from '@onix/ui-kit'
 import { ShowcaseCard } from './showcase-card'
-import type { ShowcaseItem } from '@/common'
+import type { ShowcaseItem } from '@onix/ui-kit'
 
 export function ShowcaseListing({
   items,
   basePath,
   sectionLabel,
+  countLabel,
 }: {
   items: readonly ShowcaseItem[]
   basePath: string
   sectionLabel: string
+  countLabel: string
 }) {
   const searchId = useId()
   const [query, setQuery] = useState('')
@@ -76,7 +78,7 @@ export function ShowcaseListing({
 
       <p data-part="resultCount" role="status" aria-live="polite">
         <Badge variant="outline">{visibleItems.length} из {items.length}</Badge>
-        <span>Направления работы</span>
+        <span>{countLabel}</span>
       </p>
 
       {visibleItems.length > 0 ? (

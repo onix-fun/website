@@ -1,7 +1,7 @@
 import { FooterStyles } from './Footer.styles'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
-import { Container, Logo, Separator, SITE_CONTACT_URL } from '@/common'
+import { Container, Logo, Separator, SITE_CONTACT_URL } from '@onix/ui-kit'
 
 const links = [
   { to: '/about', label: 'О нас' },

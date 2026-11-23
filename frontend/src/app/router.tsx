@@ -19,28 +19,30 @@ const DigitalProductPage = lazy(() =>
 );
 const ErrorPage = lazy(() => import("@/pages/error").then((m) => ({ default: m.ErrorPage })));
 
-export const router = createBrowserRouter(
-    [
+export function createAppRouter() {
+    return createBrowserRouter(
+        [
+            {
+                element: <RootLayout />,
+                errorElement: <ErrorPage />,
+                children: [
+                    { index: true, element: <HomePage /> },
+                    { path: "about", element: <AboutPage /> },
+                    { path: "services", element: <ServicesPage /> },
+                    { path: "catalog", element: <CatalogPage /> },
+                    { path: "catalog/:id", element: <ProductPage /> },
+                    { path: "digital", element: <DigitalPage /> },
+                    { path: "digital/:id", element: <DigitalProductPage /> },
+                    { path: "form", element: <FormPage /> },
+                    { path: "privacy", element: <PrivacyPage /> },
+                    { path: "personal-data", element: <PersonalDataPage /> },
+                    { path: "cookies", element: <CookiesPage /> },
+                    { path: "*", element: <ErrorPage /> },
+                ],
+            },
+        ],
         {
-            element: <RootLayout />,
-            errorElement: <ErrorPage />,
-            children: [
-                { index: true, element: <HomePage /> },
-                { path: "about", element: <AboutPage /> },
-                { path: "services", element: <ServicesPage /> },
-                { path: "catalog", element: <CatalogPage /> },
-                { path: "catalog/:id", element: <ProductPage /> },
-                { path: "digital", element: <DigitalPage /> },
-                { path: "digital/:id", element: <DigitalProductPage /> },
-                { path: "form", element: <FormPage /> },
-                { path: "privacy", element: <PrivacyPage /> },
-                { path: "personal-data", element: <PersonalDataPage /> },
-                { path: "cookies", element: <CookiesPage /> },
-                { path: "*", element: <ErrorPage /> },
-            ],
+            basename: import.meta.env.BASE_URL.replace(/\/$/, "") || "/",
         },
-    ],
-    {
-        basename: import.meta.env.BASE_URL.replace(/\/$/, "") || "/",
-    },
-);
+    );
+}

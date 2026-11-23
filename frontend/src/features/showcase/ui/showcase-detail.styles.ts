@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { BREAKPOINTS } from '@/common/styles/breakpoints'
+import { BREAKPOINTS } from '@onix/ui-kit'
 
 export const ShowcaseDetailStyles = styled.div`& {
   display: flex;
@@ -56,6 +56,9 @@ export const ShowcaseDetailStyles = styled.div`& {
 
 & [data-part=backButton] {
   padding-inline: 0;
+  color: var(--color-accent-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 & [data-part=information] {
@@ -135,14 +138,11 @@ export const ShowcaseDetailStyles = styled.div`& {
   gap: var(--space-md);
 }
 
-& {
-  display: flex;
+&[data-part=missing] {
   max-width: 48rem;
   min-height: 48svh;
-  flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: var(--space-md);
 }
 
 & p {
